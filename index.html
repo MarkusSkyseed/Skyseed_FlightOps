@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Wetter</title>
+    <meta name="description" content="Aktuelle Wetterdaten für Berlin mit Brightsky API.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- html2canvas for Export Feature -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- New Overview Banner -->
+        <div id="statusBanner" class="status-banner status-loading">
+            <h2>Wetterdaten werden geladen...</h2>
+            <p>Standortermittlung läuft</p>
+        </div>
+
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>UAV Flight Forecast</h1>
+                    <p id="locationText">Ermittle aktuellen Standort...</p>
+                </div>
+                <div style="display:flex; gap: 0.75rem; align-items:center;">
+                    <button id="refreshBtn" class="btn btn-icon" title="Standort und Wetterdaten aktualisieren">🔄<span
+                            class="desktop-only">&nbsp;Aktualisieren</span></button>
+                    <button id="exportBtn" class="btn btn-icon" title="Als Bild exportieren">📤<span
+                            class="desktop-only">&nbsp;Teilen</span></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="weather-grid" id="weatherGrid">
+            <!-- Tiles will be injected here via JavaScript -->
+            <div class="loader">Wetterdaten werden geladen...</div>
+        </main>
+
+        <!-- Metadata Footer -->
+        <div class="app-metadata">
+            <p id="dateTime" class="log-date">Log vom: --</p>
+            <div class="gps-badge" id="geoCoords">GPS: --.--° N, --.--° E</div>
+            <p class="app-version">App Version: 1.1.1</p>
+        </div>
+    </div>
+
+    <!-- Configuration Modal -->
+    <dialog id="configModal" class="config-modal">
+        <form id="configForm" method="dialog">
+            <h3 id="modalTitle">Konfiguration</h3>
+            <p>Lege die Schwellenwerte für <strong id="modalMetricName"></strong> fest:</p>
+
+            <div class="input-group">
+                <label for="greenThreshold"><span class="dot green"></span> Grün (%UNIT%):</label>
+                <div class="threshold-inputs">
+                    <input type="number" id="greenMin" step="any" placeholder="Min" class="threshold-input">
+                    <span>bis</span>
+                    <input type="number" id="greenMax" step="any" placeholder="Max" class="threshold-input">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="yellowThreshold"><span class="dot yellow"></span> Gelb (%UNIT%):</label>
+                <div class="threshold-inputs">
+                    <input type="number" id="yellowMin" step="any" placeholder="Min" class="threshold-input">
+                    <span>bis</span>
+                    <input type="number" id="yellowMax" step="any" placeholder="Max" class="threshold-input">
+                </div>
+            </div>
+
+            <small class="hint">Alles außerhalb dieser Bereiche wird als <span
+                    style="color:var(--danger-color)">Rot</span> gewertet.</small>
+
+            <div class="modal-actions">
+                <button type="button" id="cancelBtn" class="btn btn-secondary">Abbrechen</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Speichern</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
