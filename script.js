@@ -80,7 +80,8 @@ async function initApp() {
                 let errMsg = "Standort konnte nicht ermittelt werden.";
                 if (error.code === 1) errMsg = "Bitte erlaube den Standortzugriff im Browser.";
                 updateLocationText(errMsg);
-            }
+            },
+            { maximumAge: 15 * 60 * 1000 } // Cached position up to 15 minutes is fine
         );
     } else {
         updateLocationText("Dein Browser unterstützt keine Standorterfassung.");
