@@ -4,49 +4,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berlin Wetter</title>
-    <meta name="description" content="Aktuelle Wetterdaten für Berlin mit Brightsky API.">
+    <title>UAV Weather & Logbook</title>
+    <meta name="description" content="Flugwettervorhersage, Logbuch & ERP für Drohnenpiloten.">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/@tmcw/togeojson@5.8.1/dist/togeojson.umd.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- html2canvas for Export Feature -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- localForage for easy IndexedDB offline caching -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
 </head>
 
 <body>
     <div class="app-container">
-        <!-- New Overview Banner -->
-        <div id="statusBanner" class="status-banner status-loading">
-            <h2>Wetterdaten werden geladen...</h2>
-            <p>Standortermittlung läuft</p>
-        </div>
+
 
         <header>
             <div class="header-content">
                 <div>
-                    <h1>UAV Flight Forecast</h1>
-                    <p id="locationText">Ermittle aktuellen Standort...</p>
+                    <h1><span id="locationText">Standort wird gesucht...</span></h1>
+                    <p id="locationSourceLabel" style="font-size: 0.75rem; opacity: 0.7; margin-top: -0.25rem;">Ermittle
+                        Datenquelle...</p>
+                    <div id="projectContainer"
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                        <p id="projectNameDisplay"
+                            style="font-weight: 600; font-size: 0.9rem; opacity: 0.8; margin: 0;">Kein Projekt geladen
+                        </p>
+                        <button id="clearProjectBtn" class="btn btn-icon"
+                            style="padding: 0.2rem 0.4rem; font-size: 0.7rem; display: none;"
+                            title="Projekt löschen">✖</button>
+                    </div>
                 </div>
-                <div style="display:flex; gap: 0.75rem; align-items:center;">
-                    <button id="refreshBtn" class="btn btn-icon" title="Standort und Wetterdaten aktualisieren">🔄<span
-                            class="desktop-only">&nbsp;Aktualisieren</span></button>
-                    <button id="exportBtn" class="btn btn-icon" title="Als Bild exportieren">📤<span
-                            class="desktop-only">&nbsp;Teilen</span></button>
+                <div style="display:flex; gap: 0.5rem; align-items:center;">
+                    <button id="erpWarnBtn" class="btn"
+                        style="background-color: var(--danger-color); color: white; display: none;">🚨 Notfall</button>
+
+                    <button id="refreshBtn" class="btn btn-icon" title="Aktualisieren">🔄</button>
+
+                    <button id="exportBtn" class="btn btn-icon" title="Speichern/Teilen"
+                        style="font-size: 0.85rem; padding: 0.5rem 0.8rem;">
+                        📤 <span class="btn-text" style="margin-left: 0.25rem;">Teilen/Export</span>
+                    </button>
+
+                    <label class="btn btn-icon" title=".plan Importieren"
+                        style="cursor: pointer; margin: 0; font-size: 0.85rem; padding: 0.5rem 0.8rem;">
+                        🗺️ <span class="btn-text" style="margin-left: 0.25rem;">.Plan Import</span>
+                        <input type="file" id="planFileInput" accept=".plan" style="display: none;">
+                    </label>
                 </div>
+            </div>
+
+            <!-- Manual Coordinate Entry -->
+            <div id="manualInputContainer" style="margin-top: 1rem; display: block;">
+                <input type="text" id="manualCoordsInput" placeholder="Lat, Lon (z.B. 48.35, 11.73)"
+                    style="width: 100%; padding: 0.7rem; border-radius: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: white; text-align: center; font-family: inherit;">
             </div>
         </header>
 
-        <main class="weather-grid" id="weatherGrid">
-            <!-- Tiles will be injected here via JavaScript -->
-            <div class="loader">Wetterdaten werden geladen...</div>
-        </main>
+        <!-- VIEWS CONTAINER -->
+        <div id="views-container" style="padding-bottom: 80px;">
+            <!-- DASHBOARD VIEW -->
+            <div id="dashboard-view" class="view-section active">
+                <div id="flight-status" class="status-banner status-loading"
+                    style="margin-bottom: 1.5rem; text-align: center;">
+                    <h2>Wetterdaten werden geladen...</h2>
+                    <p id="flight-status-sub">Warte auf Standort-Priorisierung</p>
+                </div>
+
+                <div class="weather-grid" id="weatherGrid">
+                    <!-- Tiles will be injected here via JavaScript -->
+                </div>
+
+                <!-- Map Section -->
+                <div id="map"
+                    style="height: 350px; width: 100%; border-radius: 1rem; margin-top: 1.5rem; border: 1px solid var(--card-border); z-index: 1;">
+                </div>
+            </div>
+
+            <!-- LOGBOOK VIEW -->
+            <div id="logbook-view" class="view-section" style="display: none;">
+                <div class="status-banner good" style="text-align: left; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h2 style="font-size: 1.5rem;">Technisches Logbuch</h2>
+                    <p>Dokumentation der Flugdaten gemäß Betriebsbestimmungen.</p>
+                </div>
+
+                <form id="logbookForm" class="logbook-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="input-group">
+                            <label for="lb_rpic1">RPIC 1:</label>
+                            <input type="text" id="lb_rpic1" class="log-input" list="pilot-list-1" placeholder="Pilot 1"
+                                required>
+                            <datalist id="pilot-list-1">
+                                <option value="Markus">
+                                <option value="Daniel">
+                                <option value="Raphael">
+                                <option value="Leonard">
+                            </datalist>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_rpic2">RPIC 2:</label>
+                            <input type="text" id="lb_rpic2" class="log-input" list="pilot-list-2" placeholder="Pilot 2"
+                                disabled>
+                            <datalist id="pilot-list-2">
+                                <option value="Markus">
+                                <option value="Daniel">
+                                <option value="Raphael">
+                                <option value="Leonard">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="lb_copter">Copter Name:</label>
+                            <input type="text" id="lb_copter" class="log-input" list="copter-list" required>
+                            <datalist id="copter-list">
+                                <option value="Alta X - Iron Man">
+                                <option value="Alta X - Hulk">
+                                <option value="Skyseed X8 - Thor">
+                            </datalist>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_date">Datum:</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="date" id="lb_date" class="log-input" required>
+                                <button type="button" class="btn btn-secondary btn-small"
+                                    onclick="setNow('lb_date')">🕒</button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="lb_customer">Kunde:</label>
+                            <input type="text" id="lb_customer" class="log-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_location">Ort / Fläche:</label>
+                            <input type="text" id="lb_location" class="log-input" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="lb_setup_time">Aufbau Checkliste um:</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="time" id="lb_setup_time" class="log-input" required>
+                                <button type="button" class="btn btn-secondary btn-small"
+                                    onclick="setNow('lb_setup_time')">🕒</button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_flights">Anzahl Flüge:</label>
+                            <input type="number" id="lb_flights" class="log-input" min="0" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="lb_teardown_time">Abbau Checkliste um:</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="time" id="lb_teardown_time" class="log-input" required>
+                                <button type="button" class="btn btn-secondary btn-small"
+                                    onclick="setNow('lb_teardown_time')">🕒</button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_total_time">Gesamte Flugzeit (in Minuten):</label>
+                            <input type="text" id="lb_total_time" class="log-input" placeholder="z.B. 25" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 1.5rem;">
+                        <label for="lb_events">Besondere Ereignisse (Schäden / Defekte):</label>
+                        <textarea id="lb_events" class="log-input" rows="3" placeholder="Keine"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lb_operation">Besondere Betriebsform (BVLOS / DUAL Operator):</label>
+                        <textarea id="lb_operation" class="log-input" rows="2" placeholder="Keine"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lb_reactions">Reaktionen, Reparaturen, Workarounds:</label>
+                        <textarea id="lb_reactions" class="log-input" rows="3" placeholder="Keine"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lb_weather">Wetter und andere externe Einflüsse:</label>
+                        <textarea id="lb_weather" class="log-input" rows="3"
+                            placeholder="Wird beim Speichern automatisch ergänzt..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lb_misc">Sonstiges:</label>
+                        <textarea id="lb_misc" class="log-input" rows="2" placeholder="Keine"></textarea>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 2rem;">
+                        <label>Name / Unterschrift RPIC 1</label>
+                        <div class="signature-container">
+                            <canvas id="signaturePad1" width="600" height="150" class="signature-canvas"></canvas>
+                            <div class="signature-tools">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="clearSignature(1)">Löschen</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-top: 1.5rem;">
+                        <label>Name / Unterschrift RPIC 2</label>
+                        <div class="signature-container">
+                            <canvas id="signaturePad2" width="600" height="150" class="signature-canvas"></canvas>
+                            <div class="signature-tools">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="clearSignature(2)">Löschen</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; display: flex; justify-content: center; padding-bottom: 2rem;">
+                        <button type="button" class="btn btn-primary"
+                            style="width: 100%; max-width: 400px; padding: 1.25rem;" onclick="saveLogbook()">
+                            💾 Logbuch Speichern & Sync
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ERP VIEW -->
+            <div id="erp-view" class="view-section" style="display: none;">
+                <div class="status-banner danger"
+                    style="text-align: left; padding: 1.5rem; background: rgba(239, 68, 68, 0.15);">
+                    <h2 style="font-size: 1.5rem; color: #fca5a5;">Notfallplan bei "Fly-away"</h2>
+                    <p>Das UAS fliegt trotz ausgelöster Terminierung weiter.</p>
+                </div>
+
+                <div class="erp-content logbook-form">
+                    <h3 style="text-align:center; color: var(--danger-color); margin-bottom: 1.5rem;">Ruhe bewahren!
+                        Menschenrettung vor Objektrettung!</h3>
+
+                    <div class="erp-section">
+                        <h4>Standort & Kontaktdaten</h4>
+                        <div class="table-responsive">
+                            <table class="erp-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Typ</th>
+                                        <th>Telefon</th>
+                                        <th>Entfernung</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="erpPoiList">
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;">Standort wird ermittelt und
+                                            Kliniken/Airports im Umkreis von 50km werden gesucht...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Name und Telefonnummer des nächsten
+                                Fluglotsens/ATM Betreibers:</strong><br>
+                            Kein kontrollierter Flughafen: Allg. Kontakt DFS (FIS Langen) / (AIS-Centre)<br>
+                            Telefon: +49 6103 707-0 / 06103 707-5500 / Alternativ: 112</p>
+                    </div>
+
+                    <div class="erp-checklist">
+                        <div class="checklist-step">
+                            <div class="step-icon">📡</div>
+                            <div class="step-content">
+                                <strong>1. Bei C2-Link Problem</strong>
+                                <ul>
+                                    <li>Verbindungsversuch mehrfach wiederholen</li>
+                                    <li>Positionsänderung der Fernsteuerung oder Antenne am Boden (wenn möglich)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">📱</div>
+                            <div class="step-content">
+                                <strong>2. Meldung an Flughafen/Flugplatz in der Nähe (siehe oben)</strong>
+                                <ul>
+                                    <li>Wer meldet?</li>
+                                    <li>Wo ist es passiert?</li>
+                                    <li>Was ist passiert?</li>
+                                    <li>Größe und Konfiguration des UAS</li>
+                                    <li>Letzte bekannte Flugrichtung</li>
+                                    <li>Geschätzte maximale Flugzeit</li>
+                                    <li>Geschätzte maximal erreichte Flughöhe</li>
+                                    <li>Rückfragen beantworten</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">🎧</div>
+                            <div class="step-content">
+                                <strong>3. Meldung an Fluglotsen/ATM Betreiber (siehe oben)</strong>
+                                <ul>
+                                    <li>Gleiche Angaben wie bei Schritt 2 bereithalten</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">🚓</div>
+                            <div class="step-content">
+                                <strong>4. Polizei informieren (Tel.: 110)</strong>
+                                <ul>
+                                    <li>Telefonische Meldung des Fly-aways und Warnung über möglichen Absturz</li>
+                                    <li>Gleiche Angaben wie bei Schritt 2 & 3 bereithalten</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Metadata Footer -->
-        <div class="app-metadata">
+        <div class="app-metadata" style="margin-bottom: 2rem;">
             <p id="dateTime" class="log-date">Log vom: --</p>
             <div class="gps-badge" id="geoCoords">GPS: --.--° N, --.--° E</div>
             <p class="app-version">App Version: 1.1.1</p>
         </div>
     </div>
+
+    <!-- Bottom Navigation Layer -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('dashboard-view')">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Wetter</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('logbook-view')">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">Logbuch</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('erp-view')" style="color: #fca5a5;">
+            <span class="nav-icon">🚨</span>
+            <span class="nav-label">ERP Notfall</span>
+        </button>
+    </nav>
 
     <!-- Configuration Modal -->
     <dialog id="configModal" class="config-modal">
