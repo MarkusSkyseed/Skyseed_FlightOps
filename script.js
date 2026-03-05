@@ -933,6 +933,10 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 
 // --- Export Logic ---
 document.getElementById('exportBtn').addEventListener('click', async () => {
+    exportAppAsImage();
+});
+
+async function exportAppAsImage() {
     const exportBtn = document.getElementById('exportBtn');
     const originalText = exportBtn.innerHTML;
     exportBtn.innerHTML = '⏳...';
@@ -940,7 +944,7 @@ document.getElementById('exportBtn').addEventListener('click', async () => {
 
     window.getSelection().removeAllRanges();
 
-    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
+    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, #historyBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
     buttonsToHide.forEach(b => b.style.opacity = '0');
 
     const exportCSS = document.createElement('style');
@@ -1105,7 +1109,7 @@ document.getElementById('exportBtn').addEventListener('click', async () => {
         exportBtn.innerHTML = originalText;
         exportBtn.disabled = false;
     }
-});
+}
 
 function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
@@ -1133,6 +1137,11 @@ function switchTab(viewId) {
         targetView.style.display = 'block';
         // Small timeout to allow display:block to apply before adding active class for animation
         setTimeout(() => targetView.classList.add('active'), 10);
+
+        // Refresh History list if switching to history view
+        if (viewId === 'history-view') {
+            renderHistory();
+        }
     }
 
     // Update bottom nav buttons state
@@ -1458,7 +1467,7 @@ function updateProjectBanner() {
 }
 
 // --- Sync & Drive Export Logic ---
-const GOOGLE_SCRIPT_URL = ""; // Hier kommt die URL des Google Apps Scripts hin
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwHs37H7b-l8aoTyKV6vfQeos94K_cZOplMvGc1eZTthEcngZlCQum0BOr57gKatf9/exec"; // Hier kommt die URL des Google Apps Scripts hin
 
 async function saveLogbook() {
     const form = document.getElementById('logbookForm');
@@ -1489,6 +1498,16 @@ async function saveLogbook() {
         signature2: document.getElementById('signaturePad2').toDataURL(),
         timestamp: new Date().toISOString()
     };
+
+    // Always save to persistent history
+    try {
+        const historyLogs = await localforage.getItem('uav_history_logs') || [];
+        historyLogs.unshift(formData); // Add to beginning of history
+        await localforage.setItem('uav_history_logs', historyLogs);
+        console.log("Log added to history.");
+    } catch (hErr) {
+        console.error("Failed to save to history", hErr);
+    }
 
     try {
         if (!navigator.onLine) {
@@ -1557,8 +1576,194 @@ async function checkPendingLogs() {
     }
 }
 
+// --- History Management ---
+async function renderHistory() {
+    const historyList = document.getElementById('historyList');
+    if (!historyList) return;
+
+    try {
+        const historyLogs = await localforage.getItem('uav_history_logs') || [];
+        
+        if (historyLogs.length === 0) {
+            historyList.innerHTML = '<p style="text-align: center; opacity: 0.6; padding: 2rem;">Keine Einträge im Verlauf gefunden.</p>';
+            return;
+        }
+
+        historyList.innerHTML = historyLogs.map((log, index) => {
+            const dateStr = new Date(log.timestamp).toLocaleString('de-DE');
+            return `
+                <div class="history-card">
+                    <div class="history-header">
+                        <div class="history-info">
+                            <h3>${log.project || 'Unbenanntes Projekt'}</h3>
+                            <p>${log.location || 'Kein Standort'}</p>
+                        </div>
+                        <div class="history-date">${dateStr}</div>
+                    </div>
+                    <div class="history-details">
+                        <div class="detail-item"><span class="detail-label">RPIC:</span> ${log.rpic1}</div>
+                        <div class="detail-item"><span class="detail-label">Copter:</span> ${log.copter}</div>
+                        <div class="detail-item"><span class="detail-label">Dauer:</span> ${log.totalTime || '0'} min</div>
+                    </div>
+                    <div class="history-actions">
+                        <button class="btn btn-primary btn-history" onclick="loadHistoricalData(${index})">
+                            👁️ Anzeigen
+                        </button>
+                        <button class="btn btn-secondary btn-history" onclick="exportHistoricalLog(${index})">
+                            📤 Exportieren
+                        </button>
+                        <button class="btn btn-secondary btn-history" onclick="reUploadHistoricalLog(${index})">
+                            ☁️ Hochladen
+                        </button>
+                        <button class="btn btn-icon btn-history" style="background-color:rgba(239, 68, 68, 0.1); color:#fca5a5;" onclick="deleteHistoricalLog(${index})">
+                            🗑️ Löschen
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+    } catch (err) {
+        console.error("Failed to render history", err);
+        historyList.innerHTML = '<p style="text-align: center; color: var(--danger-color);">Fehler beim Laden des Verlaufs.</p>';
+    }
+}
+
+async function loadHistoricalData(index) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const historyLogs = await localforage.getItem('uav_history_logs') || [];
+            const log = historyLogs[index];
+            if (!log) return resolve();
+
+            // Map data back to form fields
+            document.getElementById('lb_rpic1').value = log.rpic1 || '';
+            document.getElementById('lb_rpic2').value = log.rpic2 || '';
+            document.getElementById('lb_copter').value = log.copter || '';
+            document.getElementById('lb_date').value = log.date || '';
+            document.getElementById('lb_customer').value = log.customer || '';
+            document.getElementById('lb_location').value = log.location || '';
+            document.getElementById('lb_setup_time').value = log.setupTime || '';
+            document.getElementById('lb_flights').value = log.flights || '';
+            document.getElementById('lb_teardown_time').value = log.teardownTime || '';
+            document.getElementById('lb_total_time').value = log.totalTime || '';
+            document.getElementById('lb_events').value = log.events || '';
+            document.getElementById('lb_operation').value = log.operation || '';
+            document.getElementById('lb_reactions').value = log.reactions || '';
+            document.getElementById('lb_weather').value = log.weather || '';
+            document.getElementById('lb_misc').value = log.misc || '';
+
+            // Switch tab first so canvases are visible and have proper dimensions
+            switchTab('logbook-view');
+
+            let sigsToLoad = 0;
+            if (log.signature1) sigsToLoad++;
+            if (log.signature2) sigsToLoad++;
+
+            if (sigsToLoad === 0) {
+                console.log("Daten aus dem Verlauf geladen (keine Signaturen).");
+                return resolve();
+            }
+
+            let loaded = 0;
+            const checkDone = () => {
+                loaded++;
+                if (loaded >= sigsToLoad) {
+                    console.log("Daten aus dem Verlauf geladen (mit Signaturen).");
+                    resolve();
+                }
+            };
+
+            // Handle signatures if possible (this requires redrawing on the canvas)
+            if (log.signature1) {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.getElementById('signaturePad1');
+                    if (canvas) {
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                    }
+                    checkDone();
+                };
+                img.onerror = checkDone;
+                img.src = log.signature1;
+            }
+            
+            if (log.signature2) {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.getElementById('signaturePad2');
+                    if (canvas) {
+                        const ctx = canvas.getContext('2d');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                        document.getElementById('lb_rpic2').disabled = false;
+                    }
+                    checkDone();
+                };
+                img.onerror = checkDone;
+                img.src = log.signature2;
+            }
+
+        } catch (err) {
+            console.error("Failed to load historical data", err);
+            reject(err);
+        }
+    });
+}
+
+async function exportHistoricalLog(index) {
+    try {
+        await loadHistoricalData(index);
+        // Wait a small moment for layout and signatures to fully stabilize
+        setTimeout(() => {
+            exportAppAsImage();
+        }, 500);
+    } catch (err) {
+        console.error("Historical export failed", err);
+    }
+}
+
+async function reUploadHistoricalLog(index) {
+    try {
+        const historyLogs = await localforage.getItem('uav_history_logs') || [];
+        const log = historyLogs[index];
+        if (!log) return;
+
+        if (!navigator.onLine) {
+            alert("Du bist offline. Upload zur Zeit nicht möglich.");
+            return;
+        }
+
+        await sendToGoogleDrive(log);
+        alert("Logbuch erfolgreich erneut hochgeladen!");
+    } catch (err) {
+        console.error("Re-upload failed", err);
+        alert("Fehler beim Hochladen: " + err.message);
+    }
+}
+
+async function deleteHistoricalLog(index) {
+    if (!confirm("Diesen Eintrag wirklich aus dem Verlauf löschen?")) return;
+    
+    try {
+        const historyLogs = await localforage.getItem('uav_history_logs') || [];
+        historyLogs.splice(index, 1);
+        await localforage.setItem('uav_history_logs', historyLogs);
+        renderHistory();
+    } catch (err) {
+        console.error("Failed to delete log", err);
+    }
+}
+
 // Global scope injection
 window.saveLogbook = saveLogbook;
+window.loadHistoricalData = loadHistoricalData;
+window.exportHistoricalLog = exportHistoricalLog;
+window.reUploadHistoricalLog = reUploadHistoricalLog;
+window.deleteHistoricalLog = deleteHistoricalLog;
+window.renderHistory = renderHistory;
 
 // Listen for online status to trigger sync
 window.addEventListener('online', checkPendingLogs);

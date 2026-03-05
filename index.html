@@ -48,6 +48,10 @@
 
                     <button id="refreshBtn" class="btn btn-icon" title="Aktualisieren">🔄</button>
 
+                    <button id="historyBtn" class="btn btn-icon" title="Verlauf" onclick="switchTab('history-view')">
+                        🕒 <span class="btn-text" style="margin-left: 0.25rem;">Verlauf</span>
+                    </button>
+
                     <button id="exportBtn" class="btn btn-icon" title="Speichern/Teilen"
                         style="font-size: 0.85rem; padding: 0.5rem 0.8rem;">
                         📤 <span class="btn-text" style="margin-left: 0.25rem;">Teilen/Export</span>
@@ -171,7 +175,7 @@
                         </div>
                         <div class="input-group">
                             <label for="lb_total_time">Gesamte Flugzeit (in Minuten):</label>
-                            <input type="number" id="lb_total_time" class="log-input" placeholder="z.B. 25" required>
+                            <input type="number" id="lb_total_time" class="log-input" min="0" required>
                         </div>
                     </div>
 
@@ -319,6 +323,23 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- HISTORY VIEW -->
+            <div id="history-view" class="view-section" style="display: none;">
+                <div class="status-banner" style="text-align: left; padding: 1.5rem; margin-bottom: 2rem; background: var(--card-bg); border: 1px solid var(--card-border);">
+                    <h2 style="font-size: 1.5rem;">Verlauf</h2>
+                    <p>Gespeicherte Logbücher und Projekthistorie.</p>
+                </div>
+
+                <div id="historyList" class="history-list">
+                    <!-- History entries will be injected here -->
+                    <p style="text-align: center; opacity: 0.6; padding: 2rem;">Keine Einträge im Verlauf gefunden.</p>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="btn btn-secondary" onclick="switchTab('dashboard-view')">Zurück zum Dashboard</button>
                 </div>
             </div>
         </div>
