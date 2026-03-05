@@ -11,12 +11,12 @@
     --warning-color: #eab308;
     --success-color: #22c55e;
 
-    --status-green-bg: rgba(34, 197, 94, 0.2);
-    --status-green-border: rgba(34, 197, 94, 0.5);
-    --status-yellow-bg: rgba(234, 179, 8, 0.2);
-    --status-yellow-border: rgba(234, 179, 8, 0.5);
-    --status-red-bg: rgba(239, 68, 68, 0.2);
-    --status-red-border: rgba(239, 68, 68, 0.5);
+    --status-green-bg: rgba(34, 197, 94, 0.12);
+    --status-green-border: rgba(34, 197, 94, 0.4);
+    --status-yellow-bg: rgba(234, 179, 8, 0.12);
+    --status-yellow-border: rgba(234, 179, 8, 0.4);
+    --status-red-bg: rgba(239, 68, 68, 0.12);
+    --status-red-border: rgba(239, 68, 68, 0.4);
 }
 
 * {
@@ -48,13 +48,10 @@ body {
     border-radius: 1rem;
     text-align: center;
     margin-bottom: 2rem;
-    animation: fadeInDown 0.4s ease-out;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    animation: fadeInDown 0.3s ease-out;
+    border: 1px solid var(--card-border);
+    transition: all 0.2s ease;
+    background: rgba(30, 41, 59, 0.7);
 }
 
 .status-banner h2 {
@@ -127,22 +124,20 @@ header p {
 
 .tile {
     grid-column: span 2;
-    background: var(--card-bg);
+    background: rgba(30, 41, 59, 0.6);
     border: 1px solid var(--card-border);
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     padding: 1.5rem 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
 .tile:hover {
-    background: var(--card-hover-bg);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(30, 41, 59, 0.85);
+    transform: translateY(-2px);
 }
 
 .tile .label {
@@ -221,151 +216,35 @@ header p {
 /* Scale perfectly using container queries and flexbox magic on mobile */
 @media (max-width: 768px) {
     body {
-        height: 100dvh;
-        padding: 0;
-        overflow: hidden;
+        padding: 1rem;
+        overflow-x: hidden;
     }
 
     .app-container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 3vw;
-        box-sizing: border-box;
-        max-width: none;
-    }
-
-    header {
-        margin-bottom: 2vh;
-        flex-shrink: 0;
-    }
-
-    header h1 {
-        font-size: min(1.8rem, 7vw);
-        margin-bottom: 0.5vh;
-    }
-
-    header p {
-        font-size: min(0.9rem, 3.5vw);
-    }
-
-    .status-banner {
-        padding: 1.5vh 3vw;
-        margin-bottom: 2vh;
-        border-radius: 1rem;
-        flex-shrink: 0;
-    }
-
-    .status-banner h2 {
-        font-size: min(1.3rem, 5vw);
-        margin-bottom: 0.5vh;
-    }
-
-    .status-banner p {
-        font-size: min(0.8rem, 3.5vw);
-    }
-
-    /* Grid takes up exactly the remaining vertical space */
-    .weather-grid {
-        flex-grow: 1;
-        display: grid;
-        grid-template-rows: repeat(3, 1fr);
-        gap: 2vw;
-        min-height: 0;
-        /* needed for flex shrink */
-    }
-
-    /* Tiles become containers so standard fonts scale relatively */
-    .tile {
-        container-type: size;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 1rem;
     }
 
-    .icon {
-        font-size: 20cqmin;
-        margin-bottom: 2cqmin;
+    .weather-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .title {
-        font-size: 8cqmin;
-        margin-bottom: 2cqmin;
-        text-align: center;
+    .tile {
+        grid-column: span 1;
+        padding: 1rem;
     }
 
-    .value {
-        font-size: 20cqmin;
-        line-height: 1.1;
-    }
-
-    .unit {
-        font-size: 8cqmin;
-    }
-
-    /* Force the JS-added Anpassen text to scale properly too */
-    .tile div[style*="font-size: 0.65rem"] {
-        font-size: 6cqmin !important;
-        margin-top: 3cqmin !important;
-        opacity: 0.5 !important;
-    }
-
-    .app-metadata {
-        margin-top: 2vh;
-        padding-top: 1.5vh;
-        flex-shrink: 0;
-        gap: 1vh;
-    }
-
-    .log-date {
-        font-size: min(0.8rem, 3.5vw);
-    }
-
-    .gps-badge {
-        font-size: min(0.75rem, 3.5vw);
-        padding: 0.5vh 3vw;
-    }
-
-    .app-version {
-        font-size: min(0.65rem, 3vw);
-        margin-top: 0.5vh;
-    }
-
-    .btn {
-        padding: 1.5vh 3vw;
-        font-size: min(0.8rem, 3.5vw);
+    .tile.wide,
+    .tile.half-wide {
+        grid-column: span 2;
     }
 }
 
 .tile {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 0.3s forwards;
-    /* Remove translateZ/backface-visibility if it causes artifacts on Windows */
+    animation: fadeInUp 0.2s ease-out forwards;
 }
 
 .tile:hover {
-    transform: translateY(-2px);
-    background: var(--card-hover-bg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: none;
-    /* Disabling blur on hover can fix some flicker issues */
+    background: rgba(30, 41, 59, 0.9);
 }
 
 .tile.status-green {
@@ -395,40 +274,8 @@ header p {
     border-color: var(--danger-color);
 }
 
-.tile:nth-child(1) {
-    animation-delay: 0.05s;
-}
-
-.tile:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.tile:nth-child(3) {
-    animation-delay: 0.15s;
-}
-
-.tile:nth-child(4) {
-    animation-delay: 0.2s;
-}
-
-.tile:nth-child(5) {
-    animation-delay: 0.25s;
-}
-
-.tile:nth-child(6) {
-    animation-delay: 0.3s;
-}
-
-.tile:nth-child(7) {
-    animation-delay: 0.35s;
-}
-
-.tile:nth-child(8) {
-    animation-delay: 0.4s;
-}
-
-.tile:nth-child(9) {
-    animation-delay: 0.45s;
+.tile:nth-child(n) {
+    animation-delay: 0s;
 }
 
 .icon {

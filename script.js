@@ -544,7 +544,7 @@ async function identifyFeature(latlng) {
         'dipul:temporaere_betriebseinschraenkungen'
     ].join(',');
 
-    const url = `https://uas-betrieb.de/geoservices/dipul/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&LAYERS=${layers}&QUERY_LAYERS=${layers}&BBOX=${bbox}&FEATURE_COUNT=10&HEIGHT=${size.y}&WIDTH=${size.x}&INFO_FORMAT=application/json&I=${Math.floor(point.x)}&J=${Math.floor(point.y)}&CRS=EPSG:4326`;
+    const url = `https://uas-betrieb.de/geoservices/dipul/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&LAYERS=${layers}&QUERY_LAYERS=${layers}&BBOX=${bbox}&FEATURE_COUNT=50&HEIGHT=${size.y}&WIDTH=${size.x}&INFO_FORMAT=application/json&I=${Math.floor(point.x)}&J=${Math.floor(point.y)}&CRS=EPSG:4326`;
 
     try {
         const res = await fetch(url);
@@ -570,7 +570,7 @@ async function identifyFeature(latlng) {
 // --- Render Logic ---
 function renderApp(weather, kpIndex, dipulData, alerts = []) {
     const grid = document.getElementById('weatherGrid');
-    const windSpeed = weather.wind_speed_10;
+    const windSpeed = weather.wind_speed || weather.wind_speed_10 || 0;
     const precipitation = weather.precipitation_60 || weather.precipitation_30 || weather.precipitation_10 || 0;
     const solarRad = weather.solar_60 || weather.solar_30 || weather.solar_10 || 0;
 
@@ -579,23 +579,23 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
     let kpColorClass = "bg-white";
     if (kpIndex !== null) {
         kpText = `Kp ${kpIndex.toFixed(1)}`;
-        if (kpIndex < 4) { kpColorClass = "bg-green"; kpText += " (Ruhig)"; }
-        else if (kpIndex < 6) { kpColorClass = "bg-yellow"; kpText += " (Unruhig)"; }
-        else { kpColorClass = "bg-red"; kpText += " (Sturm)"; }
+        if (kpIndex < 4) { kpColorClass = "status-green"; kpText += " (Ruhig)"; }
+        else if (kpIndex < 6) { kpColorClass = "status-yellow"; kpText += " (Unruhig)"; }
+        else { kpColorClass = "status-red"; kpText += " (Sturm)"; }
     }
 
     // Process alerts
     let alertText = "Keine Warnungen";
-    let alertColorClass = "bg-green";
+    let alertColorClass = "status-green";
     if (alerts && alerts.length > 0) {
-        alertColorClass = "bg-yellow";
+        alertColorClass = "status-yellow";
         let headlines = alerts.map(a => a.event_de || a.headline_de || "Warnung");
         alertText = [...new Set(headlines)].join(' & ');
     }
 
     // Process dipul status (names and types)
     let airStatusText = "Frei von Beschränkungen";
-    let airColorClass = "bg-green";
+    let airColorClass = "status-green";
     if (dipulData && dipulData.features && dipulData.features.length > 0) {
         let details = [];
         let hasCritical = false;
@@ -616,24 +616,24 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
             details.push(label);
         });
         airStatusText = [...new Set(details)].join('<br>');
-        airColorClass = hasCritical ? "bg-red" : "bg-yellow";
+        airColorClass = hasCritical ? "status-red" : "status-yellow";
     }
 
     const tilesData = [
-        { label: '🌡️ Temperatur', value: `${Math.round(weather.temperature)} °C`, colorClass: getTileColor('temp', weather.temperature) },
-        { label: '🌤️ Zustand', value: translateCondition(weather.icon), colorClass: getTileColor('condition', weather.icon) },
-        { label: '☁️ Bewölkung', value: `${weather.cloud_cover} %`, colorClass: 'bg-green' },
+        { label: 'Temperatur', value: `${Math.round(weather.temperature)}`, unit: '°C', icon: '🌡️', colorClass: getTileColor('temp', weather.temperature) },
+        { label: 'Zustand', value: translateCondition(weather.icon), unit: '', icon: getIcon(weather.icon), colorClass: getTileColor('condition', weather.icon) },
+        { label: 'Bewölkung', value: `${weather.cloud_cover}`, unit: '%', icon: '☁️', colorClass: 'status-green' },
 
-        { label: '💨 Windgeschw.', value: `${Math.round(windSpeed)} km/h`, extra: getCompassDirection(weather.wind_direction_10), colorClass: getTileColor('wind_speed', windSpeed) },
-        { label: '☀️ Solarstrahlung', value: `${Math.round(solarRad)} W/m²`, colorClass: getTileColor('solar', solarRad) },
-        { label: '💧 Luftfeuchte', value: `${Math.round(weather.relative_humidity)} %`, colorClass: getTileColor('humidity', weather.relative_humidity) },
+        { label: 'Windgeschw.', value: `${Math.round(windSpeed)}`, unit: 'km/h', icon: '💨', extra: getCompassDirection(weather.wind_direction_10), colorClass: getTileColor('wind_speed', windSpeed) },
+        { label: 'Solarstrahlung', value: `${Math.round(solarRad)}`, unit: 'W/m²', icon: '☀️', colorClass: getTileColor('solar', solarRad) },
+        { label: 'Luftfeuchte', value: `${Math.round(weather.relative_humidity)}`, unit: '%', icon: '💧', colorClass: getTileColor('humidity', weather.relative_humidity) },
 
-        { label: '🌧️ Niederschlag', value: `${precipitation.toFixed(1)} mm`, colorClass: getTileColor('precip', precipitation) },
-        { label: '🛰️ Kp-Index', value: kpText, colorClass: kpColorClass },
-        { label: '👁️ Sichtweite', value: `${Math.round(weather.visibility / 1000)} km`, colorClass: getTileColor('visibility', weather.visibility) },
+        { label: 'Niederschlag', value: `${precipitation.toFixed(1)}`, unit: 'mm', icon: '🌧️', colorClass: getTileColor('precip', precipitation) },
+        { label: 'Kp-Index', value: kpText.split(' ')[1] || kpText, unit: kpText.includes('(') ? kpText.split('(')[1].replace(')', '') : '', icon: '🛰️', colorClass: kpColorClass },
+        { label: 'Sichtweite', value: `${Math.round(weather.visibility / 1000)}`, unit: 'km', icon: '👁️', colorClass: getTileColor('visibility', weather.visibility) },
 
-        { halfWide: true, label: '🚨 Wetterwarnungen', value: alertText, colorClass: alertColorClass },
-        { halfWide: true, label: '✈️ Luftraum (dipul)', value: airStatusText, colorClass: airColorClass }
+        { halfWide: true, label: 'Wetterwarnungen', value: alertText, icon: '🚨', colorClass: alertColorClass },
+        { halfWide: true, label: 'Luftraum (dipul)', value: airStatusText, icon: '✈️', colorClass: airColorClass }
     ];
 
     grid.innerHTML = '';
@@ -641,17 +641,21 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
     let hasYellow = false;
 
     tilesData.forEach(item => {
-        if (item.colorClass === 'bg-red') hasRed = true;
-        if (item.colorClass === 'bg-yellow') hasYellow = true;
+        if (item.colorClass === 'status-red') hasRed = true;
+        if (item.colorClass === 'status-yellow') hasYellow = true;
 
         const tile = document.createElement('div');
-        tile.className = `tile ${item.colorClass || 'bg-white'}`;
+        tile.className = `tile ${item.colorClass || 'status-white'}`;
         if (item.wide) tile.classList.add('wide');
         if (item.halfWide) tile.classList.add('half-wide');
 
         tile.innerHTML = `
-            <div class="label">${item.label}</div>
-            <div class="value">${item.value} ${item.extra ? '<span style="font-size:0.8rem; opacity:0.7;">' + item.extra + '</span>' : ''}</div>
+            <div class="icon">${item.icon}</div>
+            <div class="title">${item.label}</div>
+            <div class="value">
+                ${item.value} <span class="unit">${item.unit || ''}</span>
+            </div>
+            ${item.extra ? `<div style="font-size: 0.7rem; opacity: 0.7; margin-top: 0.25rem;">${item.extra}</div>` : ''}
         `;
         grid.appendChild(tile);
     });
@@ -676,10 +680,15 @@ function autoFillLogbookMisc(airStatusHtml) {
     // We only want the warnings (with ⚠️)
     const parser = new DOMParser();
     const doc = parser.parseFromString(airStatusHtml, 'text/html');
-    const warnings = Array.from(doc.querySelectorAll('strong')).map(el => el.innerText.trim());
 
-    if (warnings.length > 0) {
-        const text = `Betroffene Lufträume: ${warnings.join(', ')}`;
+    // Extract both warnings (strong) and normal ones (li/div)
+    // We try to get all names.
+    const allItems = Array.from(doc.body.innerText.split('\n'))
+        .map(line => line.replace('⚠️', '').replace('•', '').trim())
+        .filter(line => line.length > 0 && line !== "Frei von Beschränkungen");
+
+    if (allItems.length > 0) {
+        const text = `Betroffene Lufträume: ${allItems.join(', ')}`;
         if (!miscField.value || miscField.value.includes('Betroffene Lufträume:')) {
             miscField.value = text;
         }
@@ -721,34 +730,35 @@ function setNow(fieldId) {
 
 // Logic Alignment to Alternative App
 function getTileColor(type, value) {
-    if (value === null || value === undefined) return 'bg-white';
+    if (value === null || value === undefined) return 'status-white';
     switch (type) {
         case 'temp':
-            if (value >= 0 && value <= 40) return 'bg-green';
-            if (value >= -10 && value < 0) return 'bg-yellow';
-            return 'bg-red';
+            if (value >= 5 && value <= 35) return 'status-green';
+            if (value >= 0 && value < 5 || value > 35 && value <= 40) return 'status-yellow';
+            return 'status-red';
         case 'condition':
-            if (['clear-day', 'clear-night', 'partly-cloudy-day', 'partly-cloudy-night', 'cloudy'].includes(value)) return 'bg-green';
-            if (['fog', 'rain', 'sleet', 'snow'].includes(value)) return 'bg-yellow';
-            return 'bg-red';
+            if (['clear-day', 'clear-night', 'partly-cloudy-day', 'partly-cloudy-night', 'cloudy'].includes(value)) return 'status-green';
+            if (['fog', 'wind'].includes(value)) return 'status-yellow';
+            return 'status-red';
         case 'wind_speed':
-            if (value <= 21.6) return 'bg-green';
-            if (value > 21.6 && value <= 36) return 'bg-yellow';
-            return 'bg-red';
-        case 'solar':
-            if (value >= 800) return 'bg-yellow'; return 'bg-green';
-        case 'humidity':
-            if (value <= 80) return 'bg-green'; return 'bg-yellow';
+            if (value <= 20) return 'status-green';
+            if (value > 20 && value <= 35) return 'status-yellow';
+            return 'status-red';
         case 'precip':
-            if (value <= 2.5) return 'bg-green';
-            if (value > 2.5 && value <= 10) return 'bg-yellow';
-            return 'bg-red';
+            if (value === 0) return 'status-green';
+            if (value < 1) return 'status-yellow';
+            return 'status-red';
+        case 'solar':
+            if (value <= 1000) return 'status-green';
+            return 'status-yellow';
+        case 'humidity':
+            return 'status-green';
         case 'visibility':
-            const visKm = value / 1000;
-            if (visKm >= 3) return 'bg-green';
-            if (visKm >= 0.5 && visKm < 3) return 'bg-yellow';
-            return 'bg-red';
-        default: return 'bg-white';
+            if (value >= 5000) return 'status-green';
+            if (value >= 2000) return 'status-yellow';
+            return 'status-red';
+        default:
+            return 'status-green';
     }
 }
 
