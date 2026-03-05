@@ -313,7 +313,8 @@ header p {
 }
 
 .app-metadata {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    /* Davor: 3rem */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -321,7 +322,8 @@ header p {
     font-size: 0.95rem;
     color: var(--text-primary);
     border-top: 1px solid var(--card-border);
-    padding-top: 2rem;
+    padding-top: 1.5rem;
+    /* Davor: 2rem */
 }
 
 .log-date {
@@ -718,9 +720,14 @@ textarea.log-input {
 }
 
 .signature-tools {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
 }
 
 /* --- ERP View --- */

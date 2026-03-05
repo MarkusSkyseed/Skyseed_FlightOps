@@ -69,7 +69,7 @@
         </header>
 
         <!-- VIEWS CONTAINER -->
-        <div id="views-container" style="padding-bottom: 80px;">
+        <div id="views-container">
             <!-- DASHBOARD VIEW -->
             <div id="dashboard-view" class="view-section active">
                 <div id="flight-status" class="status-banner status-loading"
@@ -200,15 +200,14 @@
                         <label for="lb_misc">Sonstiges:</label>
                         <textarea id="lb_misc" class="log-input" rows="2" placeholder="Keine"></textarea>
                     </div>
-
                     <div class="input-group" style="margin-top: 2rem;">
                         <label>Name / Unterschrift RPIC 1</label>
                         <div class="signature-container">
                             <canvas id="signaturePad1" width="600" height="150" class="signature-canvas"></canvas>
-                            <div class="signature-tools">
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="clearSignature(1)">Löschen</button>
-                            </div>
+                        </div>
+                        <div class="signature-tools">
+                            <button type="button" class="btn btn-secondary btn-small" onclick="clearSignature(1)">🗑️
+                                Unterschrift löschen</button>
                         </div>
                     </div>
 
@@ -216,10 +215,10 @@
                         <label>Name / Unterschrift RPIC 2</label>
                         <div class="signature-container">
                             <canvas id="signaturePad2" width="600" height="150" class="signature-canvas"></canvas>
-                            <div class="signature-tools">
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="clearSignature(2)">Löschen</button>
-                            </div>
+                        </div>
+                        <div class="signature-tools">
+                            <button type="button" class="btn btn-secondary btn-small" onclick="clearSignature(2)">🗑️
+                                Unterschrift löschen</button>
                         </div>
                     </div>
 
@@ -325,7 +324,7 @@
         </div>
 
         <!-- Metadata Footer -->
-        <div class="app-metadata" style="margin-bottom: 2rem;">
+        <div class="app-metadata">
             <p id="dateTime" class="log-date">Log vom: --</p>
             <div class="gps-badge" id="geoCoords">GPS: --.--° N, --.--° E</div>
             <p class="app-version">App Version: 1.1.1</p>
@@ -336,7 +335,7 @@
     <nav class="bottom-nav">
         <button class="nav-btn active" onclick="switchTab('dashboard-view')">
             <span class="nav-icon">📊</span>
-            <span class="nav-label">Wetter</span>
+            <span class="nav-label">Status</span>
         </button>
         <button class="nav-btn" onclick="switchTab('logbook-view')">
             <span class="nav-icon">📖</span>

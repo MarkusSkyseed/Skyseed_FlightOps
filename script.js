@@ -934,130 +934,161 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 // --- Export Logic ---
 document.getElementById('exportBtn').addEventListener('click', async () => {
     const exportBtn = document.getElementById('exportBtn');
-    const refreshBtn = document.getElementById('refreshBtn');
     const originalText = exportBtn.innerHTML;
     exportBtn.innerHTML = '⏳...';
     exportBtn.disabled = true;
 
-    // Clear any text selection (prevents highlighted text in screenshot)
     window.getSelection().removeAllRanges();
 
-    // Hide buttons for the screenshot
-    exportBtn.style.display = 'none';
-    refreshBtn.style.display = 'none';
+    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
+    buttonsToHide.forEach(b => b.style.opacity = '0');
 
-    // Inject a temporary stylesheet that forces everything opaque for html2canvas.
-    // This is the only reliable method because html2canvas cannot render:
-    //   - backdrop-filter (glassmorphism)
-    //   - CSS animations (elements stuck at opacity:0 initial state)
-    //   - -webkit-background-clip: text (gradient titles)
-    //   - rgba() backgrounds with low alpha
     const exportCSS = document.createElement('style');
-    exportCSS.id = 'export-override';
+    exportCSS.id = 'portfolio-export-style';
     exportCSS.textContent = `
-        /* Kill all animations and transitions */
-        *, *::before, *::after {
-            animation: none !important;
-            transition: none !important;
-        }
-
-        /* Force tiles fully opaque with solid backgrounds */
-        .tile {
-            opacity: 1 !important;
-            transform: none !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            background: #1e293b !important;
-            border-color: rgba(255,255,255,0.15) !important;
-        }
-
-        /* Preserve status colors but make them opaque */
-        /* Colors are rgba(x,y,z,0.2) blended over #0f172a */
-        .tile.status-green {
-            background: #133a34 !important;
-            border-color: rgba(34, 197, 94, 0.5) !important;
-        }
-        .tile.status-yellow {
-            background: #3b3623 !important;
-            border-color: rgba(234, 179, 8, 0.5) !important;
-        }
-        .tile.status-red {
-            background: #3c202f !important;
-            border-color: rgba(239, 68, 68, 0.5) !important;
-        }
-
-        /* Fix gradient title - replace with solid white */
-        header h1 {
-            background: none !important;
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: #f8fafc !important;
-            color: #f8fafc !important;
-        }
-
-        /* Force all text to be fully opaque */
-        .title, .value, .unit, .icon, header p {
-            opacity: 1 !important;
-        }
-
-        /* Status banner - make opaque */
-        .status-banner.good {
-            background: #133a34 !important;
-            border-color: rgba(34, 197, 94, 0.5) !important;
-        }
-        .status-banner.warning {
-            background: #3b3623 !important;
-            border-color: rgba(234, 179, 8, 0.5) !important;
-        }
-        .status-banner.danger {
-            background: #3c202f !important;
-            border-color: rgba(239, 68, 68, 0.5) !important;
-        }
-
-        /* GPS badge */
-        .gps-badge {
-            background: #334155 !important;
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+        .tile { opacity: 1 !important; transform: none !important; background: #1e293b !important; border-color: rgba(255,255,255,0.15) !important; }
+        .tile.status-green { background: #133a34 !important; border-color: rgba(34, 197, 94, 0.5) !important; }
+        .tile.status-yellow { background: #3b3623 !important; border-color: rgba(234, 179, 8, 0.5) !important; }
+        .tile.status-red { background: #3c202f !important; border-color: rgba(239, 68, 68, 0.5) !important; }
+        header h1 { background: none !important; -webkit-text-fill-color: #f8fafc !important; color: #f8fafc !important; }
+        .title, .value, .unit, .icon, header p, .log-input { opacity: 1 !important; color: white !important; }
+        .log-input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+        .status-banner.good { background: #133a34 !important; }
+        .status-banner.warning { background: #3b3623 !important; }
+        .status-banner.danger { background: #3c202f !important; }
+        .export-section-title { 
+            font-size: 1.5rem; font-weight: 800; color: var(--accent-color); 
+            margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);
+            text-transform: uppercase; letter-spacing: 0.1em;
         }
     `;
     document.head.appendChild(exportCSS);
 
-    // Let the browser repaint with the new stylesheet
-    await new Promise(resolve => setTimeout(resolve, 200));
+    // FIX: Leaflet Map vor dem Klonen als statisches Bild zwischenspeichern
+    const originalDashboard = document.getElementById('dashboard-view');
+    const wasDashboardHidden = originalDashboard.style.display === 'none';
+    if (wasDashboardHidden) {
+        originalDashboard.style.display = 'block';
+        originalDashboard.style.opacity = '0'; // Unsichtbar, aber im DOM gerendert
+    }
+
+    let mapDataUrl = null;
+    try {
+        const liveMap = document.getElementById('map');
+        const mapCanvas = await html2canvas(liveMap, { useCORS: true, logging: false });
+        mapDataUrl = mapCanvas.toDataURL('image/png');
+    } catch (e) { console.warn("Karte konnte nicht gerendert werden", e); }
+
+    if (wasDashboardHidden) {
+        originalDashboard.style.display = 'none';
+        originalDashboard.style.opacity = '1';
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-9999px'; // Wieder unsichtbar neben den Bildschirm schieben
+    wrapper.style.top = '0';
+    wrapper.style.width = '900px';
+    wrapper.style.background = '#0f172a';
+    wrapper.style.padding = '40px';
+    wrapper.style.color = 'white';
+    document.body.appendChild(wrapper);
 
     try {
-        const appContainer = document.querySelector('.app-container');
+        const headerClone = document.querySelector('header').cloneNode(true);
+        wrapper.appendChild(headerClone);
 
-        const canvas = await html2canvas(appContainer, {
+        const statusTitle = document.createElement('div');
+        statusTitle.className = 'export-section-title';
+        statusTitle.innerText = 'I. AKTUELLER STATUS & WETTER';
+        wrapper.appendChild(statusTitle);
+
+        const dashboardView = document.getElementById('dashboard-view').cloneNode(true);
+        dashboardView.style.display = 'block';
+        dashboardView.style.opacity = '1';
+
+        // FIX: Die fehlerhafte geklonte Map durch unser statisches Bild ersetzen
+        const clonedMap = dashboardView.querySelector('#map');
+        if (clonedMap && mapDataUrl) {
+            clonedMap.innerHTML = `<img src="${mapDataUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem;" />`;
+            clonedMap.style.background = 'none';
+        }
+        wrapper.appendChild(dashboardView);
+
+        const erpTitle = document.createElement('div');
+        erpTitle.className = 'export-section-title';
+        erpTitle.innerText = 'II. NOTFALLPLAN (ERP)';
+        wrapper.appendChild(erpTitle);
+
+        const erpView = document.getElementById('erp-view').cloneNode(true);
+        erpView.style.display = 'block';
+        wrapper.appendChild(erpView);
+
+        const logTitle = document.createElement('div');
+        logTitle.className = 'export-section-title';
+        logTitle.innerText = 'III. LOGBUCH-DOKUMENTATION';
+        wrapper.appendChild(logTitle);
+
+        const logbookView = document.getElementById('logbook-view').cloneNode(true);
+        logbookView.style.display = 'block';
+
+        const originalInputs = document.getElementById('logbook-view').querySelectorAll('input, textarea, select');
+        const clonedInputs = logbookView.querySelectorAll('input, textarea, select');
+        originalInputs.forEach((inp, idx) => {
+            if (clonedInputs[idx]) clonedInputs[idx].value = inp.value;
+        });
+
+        const sig1 = document.getElementById('signaturePad1');
+        const sig2 = document.getElementById('signaturePad2');
+        const canvasClones = logbookView.querySelectorAll('canvas');
+        if (canvasClones[0]) {
+            const ctx = canvasClones[0].getContext('2d');
+            ctx.drawImage(sig1, 0, 0);
+        }
+        if (canvasClones[1]) {
+            const ctx = canvasClones[1].getContext('2d');
+            ctx.drawImage(sig2, 0, 0);
+        }
+
+        wrapper.appendChild(logbookView);
+
+        const metaClone = document.querySelector('.app-metadata').cloneNode(true);
+        wrapper.appendChild(metaClone);
+
+        await new Promise(r => setTimeout(r, 400)); // Etwas mehr Zeit für Safari Rendering
+
+        // FIX: scrollHeight übergeben, damit auf Tablets nicht nach der Bildschirmhöhe abgeschnitten wird
+        const canvas = await html2canvas(wrapper, {
             scale: 2,
             backgroundColor: '#0f172a',
             useCORS: true,
-            allowTaint: true,
             logging: false,
+            width: 900,
+            windowWidth: 900,
+            height: wrapper.scrollHeight,
+            windowHeight: wrapper.scrollHeight
         });
 
-        // Filename: Wetter_Berlin_2026-02-27_12-30.png
         const now = new Date();
         const dateStr = now.toISOString().split('T')[0];
         const timeStr = `${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
         const cityNameSafe = currentCityName.replace(/[^a-zA-Z0-9]/g, '_');
-        const filename = `Wetter_${cityNameSafe}_${dateStr}_${timeStr}.png`;
+        const filename = `UAV_Portfolio_${cityNameSafe}_${dateStr}_${timeStr}.png`;
 
         canvas.toBlob(async (blob) => {
-            if (!blob) throw new Error("Canvas to Blob failed");
-
+            if (!blob) throw new Error("Canvas failure");
             const file = new File([blob], filename, { type: 'image/png' });
 
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
                     await navigator.share({
                         files: [file],
-                        title: 'UAV Flight Forecast',
-                        text: `Aktuelle Flugbedingungen für ${currentCityName}`
+                        title: 'UAV Flight Portfolio',
+                        text: `Vollständige Dokumentation für ${currentCityName}`
                     });
                 } catch (err) {
-                    if (err.name !== 'AbortError') {
-                        console.error('Share failed', err);
-                        downloadBlob(blob, filename);
-                    }
+                    if (err.name !== 'AbortError') downloadBlob(blob, filename);
                 }
             } else {
                 downloadBlob(blob, filename);
@@ -1065,16 +1096,12 @@ document.getElementById('exportBtn').addEventListener('click', async () => {
         }, 'image/png');
 
     } catch (e) {
-        console.error("Fehler beim Exportieren", e);
-        alert("Fehler beim Erstellen des Bildes: " + e.message);
+        console.error("Export failure", e);
+        alert("Portfolio-Export fehlgeschlagen: " + e.message);
     } finally {
-        // Remove the temporary stylesheet — everything snaps back to normal
-        const overrideSheet = document.getElementById('export-override');
-        if (overrideSheet) overrideSheet.remove();
-
-        // Restore buttons
-        exportBtn.style.display = '';
-        refreshBtn.style.display = '';
+        document.getElementById('portfolio-export-style')?.remove();
+        wrapper.remove();
+        buttonsToHide.forEach(b => b.style.opacity = '1');
         exportBtn.innerHTML = originalText;
         exportBtn.disabled = false;
     }
