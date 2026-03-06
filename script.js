@@ -376,9 +376,16 @@ const dipulLayerMapping = {
 function initMap() {
     if (isMapInitialized) return;
 
-    map = L.map('map', { attributionControl: true }).setView([activeCoords.lat || 51.16, activeCoords.lon || 10.45], 13);
+    map = L.map('map', { 
+        attributionControl: true, 
+        zoomControl: false,
+        preferCanvas: true // Render geofence and other vectors on canvas for better screenshotting
+    }).setView([activeCoords.lat || 51.16, activeCoords.lon || 10.45], 12); // Default zoom 12
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        crossOrigin: true // Ensure CORS for screenshotting
     }).addTo(map);
 
     const restrictionLayers = [
@@ -444,9 +451,11 @@ function updateMap(lat, lon) {
     initMap();
     if (!map) return;
 
-    // Auto-centering only for manual/geo
-    if (activeSource !== 'polygon') {
-        map.setView([lat, lon], map.getZoom());
+    // Zentrierung: Geofence hat Priorität, sonst Punkt-Koordinaten
+    if (activeProject.geofence && geofenceLayer) {
+        map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
+    } else {
+        map.setView([lat, lon], 12); // Festgelegter Zoom 12
     }
 
     if (marker) {
@@ -953,11 +962,15 @@ async function exportAppAsImage() {
 
     try {
         const canvas = await generateScreenshotCanvas();
-        const now = new Date();
-        const dateStr = now.toISOString().split('T')[0];
-        const timeStr = `${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
-        const cityNameSafe = currentCityName.replace(/[^a-zA-Z0-9]/g, '_');
-        const filename = `UAV_Portfolio_${cityNameSafe}_${dateStr}_${timeStr}.png`;
+        
+        // Dateiname nach Format: YYYY_MM_DD_Project_Customer_Location
+        const dateInput = document.getElementById('lb_date').value || new Date().toISOString().split('T')[0];
+        const safeDate = dateInput.replace(/-/g, '_');
+        const safeProject = (activeProject.name || 'UAS').replace(/[^a-zA-Z0-9]/g, '_');
+        const safeCustomer = (document.getElementById('lb_customer').value || 'Unbekannt').replace(/[^a-zA-Z0-9]/g, '_');
+        const safeLocation = (document.getElementById('lb_location').value || 'Unbekannt').replace(/[^a-zA-Z0-9]/g, '_');
+        
+        const filename = `${safeDate}_${safeProject}_${safeCustomer}_${safeLocation}.png`;
 
         canvas.toBlob(async (blob) => {
             if (!blob) throw new Error("Canvas failure");
@@ -967,8 +980,8 @@ async function exportAppAsImage() {
                 try {
                     await navigator.share({
                         files: [file],
-                        title: 'UAV Flight Portfolio',
-                        text: `Vollständige Dokumentation für ${currentCityName}`
+                        title: 'UAV Flight Documentation',
+                        text: `Dokumentation für ${safeProject}`
                     });
                 } catch (err) {
                     if (err.name !== 'AbortError') downloadBlob(blob, filename);
@@ -987,6 +1000,11 @@ async function exportAppAsImage() {
 }
 
 async function generateScreenshotCanvas() {
+    // FIX: Scroll to top to prevent offset issues with html2canvas
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    window.scrollTo(0, 0);
+
     window.getSelection().removeAllRanges();
 
     const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, #historyBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
@@ -1025,7 +1043,28 @@ async function generateScreenshotCanvas() {
     let mapDataUrl = null;
     try {
         const liveMap = document.getElementById('map');
-        const mapCanvas = await html2canvas(liveMap, { useCORS: true, logging: false });
+        
+        // FIX: Karte vor dem Screenshot explizit zentrieren
+        if (map) {
+            if (activeProject.geofence && geofenceLayer) {
+                map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50], animate: false });
+            } else if (activeCoords.lat !== 0) {
+                map.setView([activeCoords.lat, activeCoords.lon], 11, { animate: false });
+            }
+            map.invalidateSize({ animate: false });
+            // Längere Wartezeit für Kacheln und Marker-Ausrichtung
+            await new Promise(r => setTimeout(r, 500));
+        }
+
+        const mapCanvas = await html2canvas(liveMap, { 
+            useCORS: true, 
+            logging: false,
+            allowTaint: true,
+            scale: 2,
+            scrollX: 0,
+            scrollY: 0,
+            backgroundColor: null
+        });
         mapDataUrl = mapCanvas.toDataURL('image/png');
     } catch (e) { console.warn("Karte konnte nicht gerendert werden", e); }
 
@@ -1057,10 +1096,12 @@ async function generateScreenshotCanvas() {
         dashboardView.style.display = 'block';
         dashboardView.style.opacity = '1';
 
+        // FIX: Die fehlerhafte geklonte Map durch unser statisches Bild ersetzen
         const clonedMap = dashboardView.querySelector('#map');
         if (clonedMap && mapDataUrl) {
             clonedMap.innerHTML = `<img src="${mapDataUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem;" />`;
             clonedMap.style.background = 'none';
+            clonedMap.className = ""; // Remove leaflet classes
         }
         wrapper.appendChild(dashboardView);
 
@@ -1104,7 +1145,7 @@ async function generateScreenshotCanvas() {
         const metaClone = document.querySelector('.app-metadata').cloneNode(true);
         wrapper.appendChild(metaClone);
 
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 600));
 
         const canvas = await html2canvas(wrapper, {
             scale: 2,
@@ -1114,7 +1155,9 @@ async function generateScreenshotCanvas() {
             width: 900,
             windowWidth: 900,
             height: wrapper.scrollHeight,
-            windowHeight: wrapper.scrollHeight
+            windowHeight: wrapper.scrollHeight,
+            scrollX: 0,
+            scrollY: 0
         });
 
         return canvas;
@@ -1123,6 +1166,8 @@ async function generateScreenshotCanvas() {
         const style = document.getElementById('portfolio-export-style');
         if (style) style.remove();
         buttonsToHide.forEach((b, i) => b.style.opacity = originalOpacities[i]);
+        // Restore scroll position
+        window.scrollTo(scrollX, scrollY);
     }
 }
 
@@ -1513,6 +1558,8 @@ async function saveLogbook() {
             date: document.getElementById('lb_date').value,
             customer: document.getElementById('lb_customer').value,
             location: document.getElementById('lb_location').value,
+            lat: activeCoords.lat, // Store lat
+            lon: activeCoords.lon, // Store lon
             setupTime: document.getElementById('lb_setup_time').value,
             flights: document.getElementById('lb_flights').value,
             teardownTime: document.getElementById('lb_teardown_time').value,
@@ -1710,6 +1757,21 @@ async function loadHistoricalData(index) {
             document.getElementById('lb_reactions').value = log.reactions || '';
             document.getElementById('lb_weather').value = log.weather || '';
             document.getElementById('lb_misc').value = log.misc || '';
+
+            // Bestehenden Geofence/Projekt löschen, um Fokus auf den Log-Standort zu setzen
+            if (geofenceLayer) {
+                map.removeLayer(geofenceLayer);
+                geofenceLayer = null;
+            }
+            activeProject.geofence = null;
+            activeProject.name = "Historischer Eintrag";
+
+            // Update map if coordinates are available
+            if (log.lat && log.lon) {
+                activeCoords = { lat: log.lat, lon: log.lon };
+                activeSource = "manual";
+                updateMap(log.lat, log.lon);
+            }
 
             // Switch tab first so canvases are visible and have proper dimensions
             switchTab('logbook-view');
