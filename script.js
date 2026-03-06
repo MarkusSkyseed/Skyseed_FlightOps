@@ -728,6 +728,15 @@ function setNow(fieldId) {
     }
 }
 
+function incrementValue(id, amount = 1) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let val = parseInt(el.value) || 0;
+    val += amount;
+    if (val < 0) val = 0;
+    el.value = val;
+}
+
 // Logic Alignment to Alternative App
 function getTileColor(type, value) {
     if (value === null || value === undefined) return 'status-white';

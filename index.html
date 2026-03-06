@@ -161,15 +161,6 @@
                             </div>
                         </div>
                         <div class="input-group">
-                            <label for="lb_flights">Anzahl Flüge:</label>
-                            <div class="counter-group">
-                                <button type="button" class="btn-counter" onclick="changeValue('lb_flights', -1)">−</button>
-                                <input type="number" id="lb_flights" class="log-input counter-input" min="0" value="0" required>
-                                <button type="button" class="btn-counter" onclick="changeValue('lb_flights', 1)">+</button>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
                             <label for="lb_teardown_time">Abbau Checkliste um:</label>
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="time" id="lb_teardown_time" class="log-input" required>
@@ -177,14 +168,28 @@
                                     onclick="setNow('lb_teardown_time')">🕒</button>
                             </div>
                         </div>
+
+                        <div class="input-group">
+                            <label for="lb_flights">Anzahl Flüge:</label>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <button type="button" class="btn btn-secondary" style="font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0;" onclick="incrementValue('lb_flights', -1)">-</button>
+                                <input type="number" id="lb_flights" class="log-input" min="0" required style="flex: 1; text-align: center; font-size: 1.25rem;">
+                                <button type="button" class="btn btn-secondary" style="font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0;" onclick="incrementValue('lb_flights', 1)">+</button>
+                            </div>
+                        </div>
                         <div class="input-group">
                             <label for="lb_total_time">Gesamte Flugzeit (in Minuten):</label>
-                            <div class="time-increment-group">
-                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 1)">+1</button>
-                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 5)">+5</button>
-                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 10)">+10</button>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <button type="button" class="btn btn-secondary" style="font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0;" onclick="incrementValue('lb_total_time', -1)">-</button>
+                                    <input type="number" id="lb_total_time" class="log-input" min="0" required style="flex: 1; text-align: center; font-size: 1.25rem;">
+                                    <button type="button" class="btn btn-secondary" style="font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0;" onclick="incrementValue('lb_total_time', 1)">+</button>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button type="button" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 0;" onclick="incrementValue('lb_total_time', 5)">+5 min</button>
+                                    <button type="button" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 0;" onclick="incrementValue('lb_total_time', 10)">+10 min</button>
+                                </div>
                             </div>
-                            <input type="number" id="lb_total_time" class="log-input" min="0" value="0" required>
                         </div>
                     </div>
 
