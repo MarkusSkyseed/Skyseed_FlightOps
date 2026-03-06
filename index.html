@@ -162,7 +162,11 @@
                         </div>
                         <div class="input-group">
                             <label for="lb_flights">Anzahl Flüge:</label>
-                            <input type="number" id="lb_flights" class="log-input" min="0" required>
+                            <div class="counter-group">
+                                <button type="button" class="btn-counter" onclick="changeValue('lb_flights', -1)">−</button>
+                                <input type="number" id="lb_flights" class="log-input counter-input" min="0" value="0" required>
+                                <button type="button" class="btn-counter" onclick="changeValue('lb_flights', 1)">+</button>
+                            </div>
                         </div>
 
                         <div class="input-group">
@@ -175,7 +179,12 @@
                         </div>
                         <div class="input-group">
                             <label for="lb_total_time">Gesamte Flugzeit (in Minuten):</label>
-                            <input type="number" id="lb_total_time" class="log-input" min="0" required>
+                            <div class="time-increment-group">
+                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 1)">+1</button>
+                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 5)">+5</button>
+                                <button type="button" class="btn-time-plus" onclick="changeValue('lb_total_time', 10)">+10</button>
+                            </div>
+                            <input type="number" id="lb_total_time" class="log-input" min="0" value="0" required>
                         </div>
                     </div>
 

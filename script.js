@@ -942,9 +942,46 @@ async function exportAppAsImage() {
     exportBtn.innerHTML = '⏳...';
     exportBtn.disabled = true;
 
+    try {
+        const canvas = await generateScreenshotCanvas();
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+        const timeStr = `${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
+        const cityNameSafe = currentCityName.replace(/[^a-zA-Z0-9]/g, '_');
+        const filename = `UAV_Portfolio_${cityNameSafe}_${dateStr}_${timeStr}.png`;
+
+        canvas.toBlob(async (blob) => {
+            if (!blob) throw new Error("Canvas failure");
+            const file = new File([blob], filename, { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        files: [file],
+                        title: 'UAV Flight Portfolio',
+                        text: `Vollständige Dokumentation für ${currentCityName}`
+                    });
+                } catch (err) {
+                    if (err.name !== 'AbortError') downloadBlob(blob, filename);
+                }
+            } else {
+                downloadBlob(blob, filename);
+            }
+        }, 'image/png');
+    } catch (err) {
+        console.error("Export failed", err);
+        alert("Export fehlgeschlagen.");
+    } finally {
+        exportBtn.innerHTML = originalText;
+        exportBtn.disabled = false;
+    }
+}
+
+async function generateScreenshotCanvas() {
     window.getSelection().removeAllRanges();
 
     const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, #historyBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
+    const originalOpacities = Array.from(buttonsToHide).map(b => b.style.opacity);
     buttonsToHide.forEach(b => b.style.opacity = '0');
 
     const exportCSS = document.createElement('style');
@@ -969,12 +1006,11 @@ async function exportAppAsImage() {
     `;
     document.head.appendChild(exportCSS);
 
-    // FIX: Leaflet Map vor dem Klonen als statisches Bild zwischenspeichern
     const originalDashboard = document.getElementById('dashboard-view');
     const wasDashboardHidden = originalDashboard.style.display === 'none';
     if (wasDashboardHidden) {
         originalDashboard.style.display = 'block';
-        originalDashboard.style.opacity = '0'; // Unsichtbar, aber im DOM gerendert
+        originalDashboard.style.opacity = '0';
     }
 
     let mapDataUrl = null;
@@ -991,7 +1027,7 @@ async function exportAppAsImage() {
 
     const wrapper = document.createElement('div');
     wrapper.style.position = 'absolute';
-    wrapper.style.left = '-9999px'; // Wieder unsichtbar neben den Bildschirm schieben
+    wrapper.style.left = '-9999px';
     wrapper.style.top = '0';
     wrapper.style.width = '900px';
     wrapper.style.background = '#0f172a';
@@ -1012,7 +1048,6 @@ async function exportAppAsImage() {
         dashboardView.style.display = 'block';
         dashboardView.style.opacity = '1';
 
-        // FIX: Die fehlerhafte geklonte Map durch unser statisches Bild ersetzen
         const clonedMap = dashboardView.querySelector('#map');
         if (clonedMap && mapDataUrl) {
             clonedMap.innerHTML = `<img src="${mapDataUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem;" />`;
@@ -1060,9 +1095,8 @@ async function exportAppAsImage() {
         const metaClone = document.querySelector('.app-metadata').cloneNode(true);
         wrapper.appendChild(metaClone);
 
-        await new Promise(r => setTimeout(r, 400)); // Etwas mehr Zeit für Safari Rendering
+        await new Promise(r => setTimeout(r, 400));
 
-        // FIX: scrollHeight übergeben, damit auf Tablets nicht nach der Bildschirmhöhe abgeschnitten wird
         const canvas = await html2canvas(wrapper, {
             scale: 2,
             backgroundColor: '#0f172a',
@@ -1074,40 +1108,12 @@ async function exportAppAsImage() {
             windowHeight: wrapper.scrollHeight
         });
 
-        const now = new Date();
-        const dateStr = now.toISOString().split('T')[0];
-        const timeStr = `${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
-        const cityNameSafe = currentCityName.replace(/[^a-zA-Z0-9]/g, '_');
-        const filename = `UAV_Portfolio_${cityNameSafe}_${dateStr}_${timeStr}.png`;
-
-        canvas.toBlob(async (blob) => {
-            if (!blob) throw new Error("Canvas failure");
-            const file = new File([blob], filename, { type: 'image/png' });
-
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
-                    await navigator.share({
-                        files: [file],
-                        title: 'UAV Flight Portfolio',
-                        text: `Vollständige Dokumentation für ${currentCityName}`
-                    });
-                } catch (err) {
-                    if (err.name !== 'AbortError') downloadBlob(blob, filename);
-                }
-            } else {
-                downloadBlob(blob, filename);
-            }
-        }, 'image/png');
-
-    } catch (e) {
-        console.error("Export failure", e);
-        alert("Portfolio-Export fehlgeschlagen: " + e.message);
+        return canvas;
     } finally {
-        document.getElementById('portfolio-export-style')?.remove();
-        wrapper.remove();
-        buttonsToHide.forEach(b => b.style.opacity = '1');
-        exportBtn.innerHTML = originalText;
-        exportBtn.disabled = false;
+        document.body.removeChild(wrapper);
+        const style = document.getElementById('portfolio-export-style');
+        if (style) style.remove();
+        buttonsToHide.forEach((b, i) => b.style.opacity = originalOpacities[i]);
     }
 }
 
@@ -1419,7 +1425,6 @@ document.getElementById('planFileInput').addEventListener('change', function (e)
                     // Re-center map to the geofence
                     map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
                     activeProject.geofence = polyCoords;
-                    activeProject.area = "Geofence aktiv";
                 }
             }
 
@@ -1454,7 +1459,7 @@ function updateProjectBanner() {
     const polyBtn = document.getElementById('polyCenterBtn');
 
     if (display) {
-        display.innerText = activeProject.name + (activeProject.area ? ` (${activeProject.area})` : "");
+        display.innerText = activeProject.name;
     }
 
     if (clearBtn) {
@@ -1467,7 +1472,7 @@ function updateProjectBanner() {
 }
 
 // --- Sync & Drive Export Logic ---
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwHs37H7b-l8aoTyKV6vfQeos94K_cZOplMvGc1eZTthEcngZlCQum0BOr57gKatf9/exec"; // Hier kommt die URL des Google Apps Scripts hin
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7rbH4X1HCnvTXfYPJuhu0hboBVeBiHECaVmTXpaunO_iJC-jJAUGFZxgig90_I1Uv/exec"; // Hier kommt die URL des Google Apps Scripts hin
 
 async function saveLogbook() {
     const form = document.getElementById('logbookForm');
@@ -1476,78 +1481,117 @@ async function saveLogbook() {
         return;
     }
 
-    const formData = {
-        project: activeProject.name,
-        area: activeProject.area,
-        rpic1: document.getElementById('lb_rpic1').value,
-        rpic2: document.getElementById('lb_rpic2').value,
-        copter: document.getElementById('lb_copter').value,
-        date: document.getElementById('lb_date').value,
-        customer: document.getElementById('lb_customer').value,
-        location: document.getElementById('lb_location').value,
-        setupTime: document.getElementById('lb_setup_time').value,
-        flights: document.getElementById('lb_flights').value,
-        teardownTime: document.getElementById('lb_teardown_time').value,
-        totalTime: document.getElementById('lb_total_time').value,
-        events: document.getElementById('lb_events').value,
-        operation: document.getElementById('lb_operation').value,
-        reactions: document.getElementById('lb_reactions').value,
-        weather: document.getElementById('lb_weather').value,
-        misc: document.getElementById('lb_misc').value,
-        signature1: document.getElementById('signaturePad1').toDataURL(),
-        signature2: document.getElementById('signaturePad2').toDataURL(),
-        timestamp: new Date().toISOString()
-    };
-
-    // Always save to persistent history
-    try {
-        const historyLogs = await localforage.getItem('uav_history_logs') || [];
-        historyLogs.unshift(formData); // Add to beginning of history
-        await localforage.setItem('uav_history_logs', historyLogs);
-        console.log("Log added to history.");
-    } catch (hErr) {
-        console.error("Failed to save to history", hErr);
-    }
+    const saveBtn = document.querySelector('button[onclick="saveLogbook()"]');
+    const originalBtnText = saveBtn.innerHTML;
+    saveBtn.innerHTML = '⏳ Erstelle Portfolio & Sync...';
+    saveBtn.disabled = true;
 
     try {
-        if (!navigator.onLine) {
-            throw new Error("Offline");
+        // Portfolio Screenshot generieren (wie beim Export)
+        let screenshotDataUrl = null;
+        try {
+            const canvas = await generateScreenshotCanvas();
+            screenshotDataUrl = canvas.toDataURL('image/png');
+        } catch (screenshotErr) {
+            console.warn("Screenshot konnte für Sync nicht erstellt werden", screenshotErr);
         }
 
-        await sendToGoogleDrive(formData);
-        alert("Logbuch erfolgreich synchronisiert!");
-        form.reset();
-        document.getElementById('lb_rpic2').disabled = true;
-        clearSignature(1);
-        clearSignature(2);
-    } catch (err) {
-        console.warn("Sync failed or offline. Saving locally...", err);
-        const pendingLogs = await localforage.getItem('pending_logs') || [];
-        pendingLogs.push(formData);
-        await localforage.setItem('pending_logs', pendingLogs);
-        alert("Offline: Logbuch wurde lokal gespeichert und wird bei Verbindung synchronisiert.");
-        form.reset();
-        document.getElementById('lb_rpic2').disabled = true;
-        clearSignature(1);
-        clearSignature(2);
+        const formData = {
+            project: activeProject.name,
+            rpic1: document.getElementById('lb_rpic1').value,
+            rpic2: document.getElementById('lb_rpic2').value,
+            copter: document.getElementById('lb_copter').value,
+            date: document.getElementById('lb_date').value,
+            customer: document.getElementById('lb_customer').value,
+            location: document.getElementById('lb_location').value,
+            setupTime: document.getElementById('lb_setup_time').value,
+            flights: document.getElementById('lb_flights').value,
+            teardownTime: document.getElementById('lb_teardown_time').value,
+            totalTime: document.getElementById('lb_total_time').value,
+            events: document.getElementById('lb_events').value,
+            operation: document.getElementById('lb_operation').value,
+            reactions: document.getElementById('lb_reactions').value,
+            weather: document.getElementById('lb_weather').value,
+            misc: document.getElementById('lb_misc').value,
+            signature1: document.getElementById('signaturePad1').toDataURL(),
+            signature2: document.getElementById('signaturePad2').toDataURL(),
+            screenshot: screenshotDataUrl, // Der Portfolio-Screenshot
+            timestamp: new Date().toISOString(),
+            id: Date.now() + Math.random().toString(36).substr(2, 9), // Unique ID for duplication check
+            synced: false // Default to false
+        };
+
+        try {
+            if (!navigator.onLine) {
+                throw new Error("Offline");
+            }
+
+            const responseText = await sendToGoogleDrive(formData);
+            
+            if (responseText.startsWith("Error")) {
+                throw new Error(responseText);
+            }
+            if (responseText === "Duplicate") {
+                alert("Dieser Eintrag wurde bereits hochgeladen (Dublette erkannt).");
+                formData.synced = true; // Mark as synced anyway to avoid re-upload loops
+            } else {
+                formData.synced = true;
+                alert("Logbuch & Portfolio erfolgreich synchronisiert!");
+            }
+            
+            form.reset();
+            document.getElementById('lb_rpic2').disabled = true;
+            clearSignature(1);
+            clearSignature(2);
+        } catch (err) {
+            console.warn("Sync failed or offline. Saving as offline...", err);
+            formData.synced = false;
+            alert("Aktuell keine Verbindung oder Upload-Fehler. Logbuch wurde im Verlauf als 'Offline' markiert und kann später hochgeladen werden.");
+            form.reset();
+            document.getElementById('lb_rpic2').disabled = true;
+            clearSignature(1);
+            clearSignature(2);
+        }
+
+        // Always save to persistent history after attempting sync
+        try {
+            const historyLogs = await localforage.getItem('uav_history_logs') || [];
+            historyLogs.unshift(formData); // Add to beginning of history
+            await localforage.setItem('uav_history_logs', historyLogs);
+            console.log("Log added to history with sync status:", formData.synced);
+        } catch (hErr) {
+            console.error("Failed to save to history", hErr);
+        }
+    } catch (globalErr) {
+        console.error("Fehler beim Speichern:", globalErr);
+        alert("Fehler beim Speichern des Logbuchs.");
+    } finally {
+        saveBtn.innerHTML = originalBtnText;
+        saveBtn.disabled = false;
     }
 }
 
 async function sendToGoogleDrive(data) {
     if (!GOOGLE_SCRIPT_URL) {
-        console.error("Google Script URL not set. Cannot sync.");
-        return;
+        throw new Error("Google Script URL nicht konfiguriert.");
     }
 
+    // Wir müssen die Daten als Text/Plain oder via FormData senden, 
+    // um CORS-Preflight-Probleme bei Apps Scripts zu minimieren, 
+    // aber wir wollen die Antwort lesen können.
     const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Apps Script web apps often require no-cors for simple posts
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain;charset=utf-8' 
         },
         body: JSON.stringify(data)
     });
-    return response;
+
+    if (!response.ok) {
+        throw new Error(`Server-Fehler: ${response.status}`);
+    }
+
+    return await response.text();
 }
 
 async function checkPendingLogs() {
@@ -1591,17 +1635,22 @@ async function renderHistory() {
 
         historyList.innerHTML = historyLogs.map((log, index) => {
             const dateStr = new Date(log.timestamp).toLocaleString('de-DE');
+            const syncStatus = log.synced ? 
+                '<span style="color: #4ade80; font-weight: bold; font-size: 0.8rem; margin-left: 0.5rem;">● SYNC</span>' : 
+                '<span style="color: #f87171; font-weight: bold; font-size: 0.8rem; margin-left: 0.5rem;">● OFFLINE</span>';
+                
             return `
                 <div class="history-card">
                     <div class="history-header">
                         <div class="history-info">
-                            <h3>${log.project || 'Unbenanntes Projekt'}</h3>
-                            <p>${log.location || 'Kein Standort'}</p>
+                            <h3>${log.project || 'Unbenanntes Projekt'}${syncStatus}</h3>
+                            <p>${log.customer ? log.customer + ' - ' : ''}${log.location || 'Kein Standort'}</p>
                         </div>
                         <div class="history-date">${dateStr}</div>
                     </div>
                     <div class="history-details">
-                        <div class="detail-item"><span class="detail-label">RPIC:</span> ${log.rpic1}</div>
+                        <div class="detail-item"><span class="detail-label">RPIC 1:</span> ${log.rpic1 || '---'}</div>
+                        ${log.rpic2 ? `<div class="detail-item"><span class="detail-label">RPIC 2:</span> ${log.rpic2}</div>` : ''}
                         <div class="detail-item"><span class="detail-label">Copter:</span> ${log.copter}</div>
                         <div class="detail-item"><span class="detail-label">Dauer:</span> ${log.totalTime || '0'} min</div>
                     </div>
@@ -1736,8 +1785,37 @@ async function reUploadHistoricalLog(index) {
             return;
         }
 
-        await sendToGoogleDrive(log);
-        alert("Logbuch erfolgreich erneut hochgeladen!");
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '⏳...';
+        btn.disabled = true;
+
+        try {
+            // Falls keine ID vorhanden ist (für alte Einträge), eine generieren
+            if (!log.id) {
+                log.id = Date.now() + Math.random().toString(36).substr(2, 9);
+            }
+
+            const responseText = await sendToGoogleDrive(log);
+            if (responseText.startsWith("Error")) {
+                throw new Error(responseText);
+            }
+
+            if (responseText === "Duplicate") {
+                alert("Dieser Eintrag wurde bereits hochgeladen.");
+            } else {
+                alert("Logbuch erfolgreich hochgeladen!");
+            }
+            
+            log.synced = true;
+            await localforage.setItem('uav_history_logs', historyLogs);
+            renderHistory();
+        } catch (err) {
+            throw err;
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     } catch (err) {
         console.error("Re-upload failed", err);
         alert("Fehler beim Hochladen: " + err.message);
