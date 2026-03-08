@@ -4,6 +4,7 @@ const urlsToCache = [
     './index.html',
     './style.css',
     './script.js',
+    './erp_database.js',
     'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
 ];
@@ -20,11 +21,10 @@ self.addEventListener('install', event => {
 
 self.addEventListener('fetch', event => {
     // We only want to cache our static assets.
-    // API calls (Brightsky, Nominatim, Overpass API, Google Drive Webhook) should NOT be aggressively cached by the SW 
+    // API calls (Brightsky, Nominatim, Google Drive Webhook) should NOT be aggressively cached by the SW 
     // as they need to be fresh or are handled by our own offline IndexedDB queue logic.
     if (event.request.url.includes('api.brightsky.dev') ||
         event.request.url.includes('nominatim.openstreetmap.org') ||
-        event.request.url.includes('overpass-api.de') ||
         event.request.url.includes('script.google.com')) {
         return; // let the browser handle it
     }

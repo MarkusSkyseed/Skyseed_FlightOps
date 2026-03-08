@@ -1321,99 +1321,123 @@ function clearSignature(num) {
     }
 }
 
-// --- ERP Logic (Overpass API & Distance) ---
+// --- ERP Logic (Offline: Local erp_database.js) ---
 let erpDataFetched = false;
-
 let lastErpCoords = { lat: 0, lon: 0 };
 
-function initErpData() {
+async function initErpData() {
     const lat = activeCoords.lat;
     const lon = activeCoords.lon;
 
+    // Skip if coordinates are invalid
+    if (!lat || !lon) return;
+
     // Skip if we already have data for these approximate coordinates (within 100m)
-    if (lat === 0 || (Math.abs(lastErpCoords.lat - lat) < 0.001 && Math.abs(lastErpCoords.lon - lon) < 0.001)) return;
+    if (Math.abs(lastErpCoords.lat - lat) < 0.001 && Math.abs(lastErpCoords.lon - lon) < 0.001 && erpDataFetched) return;
 
     const poiTable = document.getElementById('erpPoiList');
     if (!poiTable) return;
 
-    poiTable.innerHTML = '<tr><td colspan="4" style="text-align: center;">Suche nach Kliniken und Flughäfen im Umkreis von 50km...</td></tr>';
-
+    poiTable.innerHTML = '<tr><td colspan="4" style="text-align: center;">Lade Notfalldaten aus lokaler Datenbank...</td></tr>';
     lastErpCoords = { lat, lon };
 
-    // Overpass QL to find hospitals, aeroways (airports, helipads) within 50km
-    const query = `
-        [out:json][timeout:25];
-        (
-          node["amenity"="hospital"](around:50000,${lat},${lon});
-          way["amenity"="hospital"](around:50000,${lat},${lon});
-          node["aeroway"~"aerodrome|heliport"](around:50000,${lat},${lon});
-          way["aeroway"~"aerodrome|heliport"](around:50000,${lat},${lon});
-        );
-        out center;
-    `;
+    // Get Static Data (Filtered by type-specific distances)
+    let staticResults = [];
+    if (typeof ERP_STATIC_DATA !== 'undefined') {
+        const manualPhones = await localforage.getItem('erp_manual_phones') || {};
+        
+        staticResults = ERP_STATIC_DATA.map(entry => {
+            const dist = calculateHaversineDistance(lat, lon, entry.lat, entry.lon);
+            const dir = getCompassDirectionFromBearing(lat, lon, entry.lat, entry.lon);
+            
+            // Check for manual override
+            const key = `${entry.lat.toFixed(5)}_${entry.lon.toFixed(5)}`;
+            const phone = manualPhones[key] || entry.phone;
 
-    const url = "https://overpass-api.de/api/interpreter";
-
-    fetch(url, {
-        method: "POST",
-        body: query
-    })
-        .then(res => res.json())
-        .then(data => {
-            let pois = [];
-
-            data.elements.forEach(el => {
-                if (!el.tags || !el.tags.name) return;
-
-                const pLat = el.lat || el.center.lat;
-                const pLon = el.lon || el.center.lon;
-
-                const distance = calculateHaversineDistance(lat, lon, pLat, pLon);
-                const direction = getCompassDirectionFromBearing(lat, lon, pLat, pLon);
-
-                let type = el.tags.amenity === 'hospital' ? 'Klinik' :
-                    (el.tags.aeroway === 'heliport' ? 'Heliport' : 'Flugplatz');
-
-                let phone = el.tags['contact:phone'] || el.tags.phone || 'Unbekannt';
-
-                pois.push({
-                    name: el.tags.name,
-                    type: type,
-                    phone: phone,
-                    distance: distance,
-                    direction: direction
-                });
-            });
-
-            // Sort by distance
-            pois.sort((a, b) => a.distance - b.distance);
-
-            // Take top 6
-            pois = pois.slice(0, 6);
-
-            if (pois.length === 0) {
-                poiTable.innerHTML = '<tr><td colspan="4" style="text-align: center;">Keine Einträge im 50km Umkreis gefunden.</td></tr>';
-                return;
-            }
-
-            poiTable.innerHTML = '';
-            pois.forEach(poi => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                <td>${poi.name}</td>
-                <td>${poi.type}</td>
-                <td>${poi.phone !== 'Unbekannt' ? '<a href="tel:' + poi.phone.replace(/[^0-9+]/g, '') + '" style="color: var(--accent-color);">' + poi.phone + '</a>' : 'Unbekannt'}</td>
-                <td>${poi.distance.toFixed(1)} km ${poi.direction}</td>
-            `;
-                poiTable.appendChild(tr);
-            });
-
-            erpDataFetched = true;
-        })
-        .catch(err => {
-            console.error("Overpass API Error:", err);
-            poiTable.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--danger-color);">Fehler beim Laden der Umgebungsdaten. (Offline?)</td></tr>';
+            return {
+                ...entry,
+                phone: phone,
+                distance: dist,
+                direction: dir,
+                source: manualPhones[key] ? 'Manual' : 'Offline-DB'
+            };
+        }).filter(item => {
+            if (item.type === 'Flughafen (International)') return item.distance <= 25;
+            if (item.type === 'Flugplatz') return item.distance <= 20;
+            return item.distance <= 15; // All other types (Clinics, Heliports, etc.)
         });
+    } else {
+        console.warn("ERP_STATIC_DATA is not defined. Make sure erp_database.js is loaded.");
+    }
+
+    // Sort & Render
+    staticResults.sort((a, b) => a.distance - b.distance);
+    const finalResults = staticResults.slice(0, 10); // Show top 10
+
+    renderErpTable(finalResults, poiTable);
+    erpDataFetched = true;
+}
+
+function renderErpTable(items, tableEl) {
+    if (items.length === 0) {
+        tableEl.innerHTML = '<tr><td colspan="4" style="text-align: center;">Keine relevanten Einträge im 25km Umkreis gefunden.</td></tr>';
+        return;
+    }
+
+    tableEl.innerHTML = '';
+    items.forEach(poi => {
+        const tr = document.createElement('tr');
+        
+        // Highlight International Airports with red background
+        if (poi.type === 'Flughafen (International)') {
+            tr.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'; // Light red tint
+            tr.style.borderLeft = '4px solid var(--danger-color)';
+        }
+
+        // Highlight phone number if available, otherwise offer search link
+        let phoneHtml = '';
+        const hasPhone = poi.phone && poi.phone !== 'Unbekannt';
+        
+        if (hasPhone) {
+            const cleanPhone = poi.phone.replace(/[^0-9+]/g, '');
+            phoneHtml = `<a href="tel:${cleanPhone}" style="color: var(--accent-color); font-weight: bold;">${poi.phone}</a>`;
+        } else {
+            const searchQuery = encodeURIComponent(`${poi.name} ${poi.type} Telefonnummer`);
+            const searchUrl = `https://www.google.com/search?q=${searchQuery}`;
+            phoneHtml = `<a href="${searchUrl}" target="_blank" style="color: var(--accent-color); font-size: 0.9em; text-decoration: underline;">🔍 Suchen</a>`;
+        }
+
+        // Add edit button
+        phoneHtml += ` <span onclick="editErpPhone('${poi.lat}', '${poi.lon}', '${poi.name}')" style="cursor: pointer; opacity: 0.5; font-size: 0.8em;" title="Nummer bearbeiten">✏️</span>`;
+
+        tr.innerHTML = `
+            <td>${poi.name} ${poi.source === 'Manual' ? '<span title="Manuell ergänzt">✍️</span>' : ''}</td>
+            <td>${poi.type}</td>
+            <td>${phoneHtml}</td>
+            <td>${poi.distance.toFixed(1)} km ${poi.direction}</td>
+        `;
+        tableEl.appendChild(tr);
+    });
+}
+
+async function editErpPhone(lat, lon, name) {
+    const newPhone = prompt(`Telefonnummer für ${name} eingeben:`);
+    if (newPhone === null) return; // Cancelled
+
+    const manualPhones = await localforage.getItem('erp_manual_phones') || {};
+    const key = `${parseFloat(lat).toFixed(5)}_${parseFloat(lon).toFixed(5)}`;
+    
+    if (newPhone.trim() === "") {
+        delete manualPhones[key];
+    } else {
+        manualPhones[key] = newPhone.trim();
+    }
+    
+    await localforage.setItem('erp_manual_phones', manualPhones);
+    
+    // Force refresh the table
+    erpDataFetched = false;
+    initErpData();
 }
 
 function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
