@@ -447,6 +447,16 @@ function initMap() {
     isMapInitialized = true;
 }
 
+// Handle mobile viewport changes (keyboard open/close, rotation, etc.)
+window.addEventListener('resize', () => {
+    if (map && isMapInitialized) {
+        // Delay slightly to ensure DOM has updated
+        setTimeout(() => {
+            map.invalidateSize({ animate: false });
+        }, 100);
+    }
+});
+
 function updateMap(lat, lon) {
     initMap();
     if (!map) return;
@@ -1225,6 +1235,15 @@ function switchTab(viewId) {
         exportBtn.style.display = 'flex'; // Keep visible
         refreshBtn.style.display = 'flex'; // Keep visible
         initErpData(); // Fetch POIs when ERP tab is opened
+    } else if (viewId === 'dashboard-view') {
+        exportBtn.style.display = 'flex';
+        refreshBtn.style.display = 'flex';
+        // Fix for mobile: recalculate map size after viewport changes (keyboard)
+        if (map && isMapInitialized) {
+            setTimeout(() => {
+                map.invalidateSize({ animate: false });
+            }, 100);
+        }
     } else {
         exportBtn.style.display = 'flex';
         refreshBtn.style.display = 'flex';
