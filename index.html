@@ -29,7 +29,7 @@
 
         <header>
             <div class="header-content">
-                <div>
+                <div style="flex: 0 0 40%; max-width: 40%; min-width: 200px;">
                     <h1><span id="locationText">Standort wird gesucht...</span></h1>
                     <p id="locationSourceLabel" style="font-size: 0.75rem; opacity: 0.7; margin-top: -0.25rem;">Ermittle
                         Datenquelle...</p>
@@ -43,26 +43,23 @@
                             title="Projekt löschen">✖</button>
                     </div>
                 </div>
-                <div style="display:flex; gap: 0.5rem; align-items:center;">
-                    <button id="erpWarnBtn" class="btn"
-                        style="background-color: var(--danger-color); color: white; display: none;">🚨 Notfall</button>
-
-                    <button id="refreshBtn" class="btn btn-icon" title="Aktualisieren">🔄</button>
-
-                    <button id="historyBtn" class="btn btn-icon" title="Verlauf" onclick="switchTab('history-view')">
-                        🕒 <span class="btn-text" style="margin-left: 0.25rem;">Verlauf</span>
-                    </button>
-
-                    <button id="exportBtn" class="btn btn-icon" title="Speichern/Teilen"
-                        style="font-size: 0.85rem; padding: 0.5rem 0.8rem;">
-                        📤 <span class="btn-text" style="margin-left: 0.25rem;">Teilen/Export</span>
-                    </button>
-
-                    <label class="btn btn-icon" title=".plan Importieren"
-                        style="cursor: pointer; margin: 0; font-size: 0.85rem; padding: 0.5rem 0.8rem;">
-                        🗺️ <span class="btn-text" style="margin-left: 0.25rem;">.Plan Import</span>
-                        <input type="file" id="planFileInput" accept=".plan" style="display: none;">
-                    </label>
+                <div style="display:flex; gap: 0.5rem; align-items:center; flex-wrap: wrap; justify-content: flex-end; flex: 1; min-width: 0;">
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: nowrap;">
+                        <button id="refreshBtn" class="btn btn-icon" title="Aktualisieren">🔄</button>
+                        <button id="historyBtn" class="btn btn-icon" title="Verlauf" onclick="switchTab('history-view')">
+                            🕒 <span class="btn-text" style="margin-left: 0.25rem;">Verlauf</span>
+                        </button>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button id="exportBtn" class="btn btn-icon" title="Speichern/Teilen">
+                            📤 <span class="btn-text" style="margin-left: 0.25rem;">Teilen/Export</span>
+                        </button>
+                        <label id="planImportBtn" class="btn btn-icon" title=".plan Importieren"
+                            style="cursor: pointer; margin: 0;">
+                            🗺️ <span class="btn-text" style="margin-left: 0.25rem;">.Plan Import</span>
+                            <input type="file" id="planFileInput" accept=".plan" style="display: none;">
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -252,16 +249,14 @@
 
             <!-- ERP VIEW -->
             <div id="erp-view" class="view-section" style="display: none;">
-                <div class="status-banner danger"
-                    style="text-align: left; padding: 1.5rem; background: rgba(239, 68, 68, 0.15);">
-                    <h2 style="font-size: 1.5rem; color: #fca5a5;">Notfallplan bei "Fly-away"</h2>
-                    <p>Das UAS fliegt trotz ausgelöster Terminierung weiter.</p>
+                <h1 style="text-align: center; font-size: 2.5rem; color: var(--danger-color); margin-bottom: 2rem;">Emergency Response Plan</h1>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+                    <button class="btn btn-primary" onclick="document.getElementById('flyaway-banner').scrollIntoView({behavior: 'smooth'})">Fly-Away Notfall</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('crash-banner').scrollIntoView({behavior: 'smooth'})">Absturz Notfall</button>
                 </div>
 
                 <div class="erp-content logbook-form">
-                    <h3 style="text-align:center; color: var(--danger-color); margin-bottom: 1.5rem;">Ruhe bewahren!
-                        Menschenrettung vor Objektrettung!</h3>
-
                     <div class="erp-section">
                         <h4>Standort & Kontaktdaten</h4>
                         <div class="table-responsive">
@@ -286,6 +281,22 @@
                                 Fluglotsens/ATM Betreibers:</strong><br>
                             Kein kontrollierter Flughafen: Allg. Kontakt DFS (FIS Langen) / (AIS-Centre)<br>
                             Telefon: +49 6103 707-0 / 06103 707-5500 / Alternativ: 112</p>
+
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; border: 1px solid var(--card-border); font-size: 0.9rem;">
+                            <p style="margin-bottom: 0.5rem;"><strong>📍 Position der Notfallausrüstung:</strong></p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                <span>🦺 Warnwesten:</span> <strong style="color: var(--accent-color);">Im Fahrerhaus</strong>
+                                <span>🩹 Verbandkasten:</span> <strong style="color: var(--accent-color);">Im Laderaum</strong>
+                                <span>🧯 Feuerlöscher:</span> <strong style="color: var(--accent-color);">Im Laderaum</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NOTFALLPLAN BEI FLY-AWAY -->
+                    <div id="flyaway-banner" class="status-banner danger" style="text-align: left; padding: 1.5rem; background: var(--danger-color); margin: 2rem 0;">
+                        <h2 style="font-size: 1.5rem; color: white;">Notfallplan bei "Fly-away"</h2>
+                        <p style="color: white; font-weight: 700;">Ruhe bewahren! Menschenrettung vor Objektrettung!</p>
+                        <p style="color: white; margin-top: 0.5rem;">Das UAS fliegt trotz ausgelöster Terminierung weiter.</p>
                     </div>
 
                     <div class="erp-checklist">
@@ -334,6 +345,94 @@
                                 <ul>
                                     <li>Telefonische Meldung des Fly-aways und Warnung über möglichen Absturz</li>
                                     <li>Gleiche Angaben wie bei Schritt 2 & 3 bereithalten</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NOTFALLPLAN BEI ABSTURZ -->
+                    <div id="crash-banner" class="status-banner danger" style="text-align: left; padding: 1.5rem; background: var(--danger-color); margin: 2rem 0;">
+                        <h2 style="font-size: 1.5rem; color: white;">Notfallplan bei Absturz des UAS</h2>
+                        <p style="color: white; font-weight: 700;">Ruhe bewahren! Menschenrettung vor Objektrettung!</p>
+                    </div>
+
+                    <div class="erp-checklist">
+                        <div class="checklist-step">
+                            <div class="step-icon">⚠️</div>
+                            <div class="step-content">
+                                <strong>1. Überblick verschaffen</strong>
+                                <ul>
+                                    <li>Warnwesten anziehen</li>
+                                    <li>Schnellstmöglich zur Unfallstelle begeben</li>
+                                    <li>Unfallstelle absichern</li>
+                                    <li>Eigenschutz beachten</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">🏃</div>
+                            <div class="step-content">
+                                <strong>2. Wenn Personen betroffen: RETTEN</strong>
+                                <ul>
+                                    <li>Menschen aus der Gefahrenzone bergen</li>
+                                    <li>Sicherheitsabstand zum Unfallort einnehmen</li>
+                                    <li>Eigenschutz beachten</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">📞</div>
+                            <div class="step-content">
+                                <strong>3. Wenn nötig: NOTRUF ABSETZEN (Tel.: 110 oder 112)</strong>
+                                <ul>
+                                    <li>Wer meldet? / Wo ist es passiert?</li>
+                                    <li>Was ist passiert? / Wie viele Verletzte?</li>
+                                    <li>Rückfragen beantworten!</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">🧯</div>
+                            <div class="step-content">
+                                <strong>4. Wenn nötig: BRAND LÖSCHEN</strong>
+                                <ul>
+                                    <li>Sich selbst nicht in Gefahr bringen</li>
+                                    <li>Brand bekämpfen (Feuerlöscher oder Löschdecke)</li>
+                                    <li>Besondere Vorsicht bei Akkus! Explosionsgefahr!</li>
+                                    <li>Eintreffende Feuerwehr einweisen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">➕</div>
+                            <div class="step-content">
+                                <strong>5. Wenn nötig: ERSTE HILFE LEISTEN</strong>
+                                <ul>
+                                    <li>Verletzte auf Lebenszeichen prüfen</li>
+                                    <li>Reanimation bei Kreislaufstillstand</li>
+                                    <li>Stillen von Blutungen</li>
+                                    <li>Verletzte in stabile Seitenlage bringen</li>
+                                    <li>Rettungsdienst einweisen</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checklist-step">
+                            <div class="step-icon">📱</div>
+                            <div class="step-content">
+                                <strong>6. UNFALL MELDEN</strong>
+                                <ul style="margin-top: 0.5rem;">
+                                    <li style="font-size: 0.9rem; opacity: 0.9;">Unverzüglich Meldung des Unfalls an die Bundesstelle für Flugunfalluntersuchung u.a. bei:
+                                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                                            <li>Unfällen oder schweren Störungen</li>
+                                            <li>Beschädigung von Eigentum</li>
+                                            <li>Einer schweren oder tödlichen Verletzung</li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -503,12 +503,13 @@ body.exporting .tile {
 }
 
 .btn {
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: 600;
     transition: background 0.2s;
+    box-sizing: border-box;
 }
 
 .btn-secondary {
@@ -533,10 +534,15 @@ body.exporting .tile {
     background: var(--card-bg);
     color: var(--text-primary);
     border: 1px solid var(--card-border);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    height: 38px;
+    padding: 0 0.8rem;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .btn-icon:hover {

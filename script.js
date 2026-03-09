@@ -1007,7 +1007,7 @@ async function generateScreenshotCanvas() {
 
     window.getSelection().removeAllRanges();
 
-    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #erpWarnBtn, #historyBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
+    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #historyBtn, #planImportBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
     const originalOpacities = Array.from(buttonsToHide).map(b => b.style.opacity);
     buttonsToHide.forEach(b => b.style.opacity = '0');
 
@@ -1218,20 +1218,20 @@ function switchTab(viewId) {
     // Update Header Context based on View
     const exportBtn = document.getElementById('exportBtn');
     const refreshBtn = document.getElementById('refreshBtn');
-    const erpWarnBtn = document.getElementById('erpWarnBtn');
 
     if (viewId === 'logbook-view') {
         autoFillWeatherLog();
     } else if (viewId === 'erp-view') {
         exportBtn.style.display = 'flex'; // Keep visible
         refreshBtn.style.display = 'flex'; // Keep visible
-        erpWarnBtn.style.display = 'none'; // hide the warning btn when already in ERP
         initErpData(); // Fetch POIs when ERP tab is opened
     } else {
         exportBtn.style.display = 'flex';
         refreshBtn.style.display = 'flex';
-        erpWarnBtn.style.display = 'flex';
     }
+
+    // Scroll to top when switching tabs
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // --- Weather Log Auto-fill ---
@@ -1463,10 +1463,6 @@ function getCompassDirectionFromBearing(lat1, lon1, lat2, lon2) {
 
     return getCompassDirection(brng);
 }
-
-document.getElementById('erpWarnBtn').addEventListener('click', () => {
-    switchTab('erp-view');
-});
 
 // --- Plan File Parsing ---
 document.getElementById('planFileInput').addEventListener('change', function (e) {
