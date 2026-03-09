@@ -1066,14 +1066,23 @@ async function generateScreenshotCanvas() {
             await new Promise(r => setTimeout(r, 500));
         }
 
+        // Get map dimensions for proper rendering
+        const mapSize = map ? map.getSize() : { x: 900, y: 350 };
+        const mapWidth = mapSize.x || 900;
+        const mapHeight = mapSize.y || 350;
+
         const mapCanvas = await html2canvas(liveMap, { 
             useCORS: true, 
             logging: false,
             allowTaint: true,
-            scale: 2,
+            scale: 1,
             scrollX: 0,
             scrollY: 0,
-            backgroundColor: null
+            backgroundColor: null,
+            width: mapWidth,
+            height: mapHeight,
+            windowWidth: mapWidth,
+            windowHeight: mapHeight
         });
         mapDataUrl = mapCanvas.toDataURL('image/png');
     } catch (e) { console.warn("Karte konnte nicht gerendert werden", e); }
