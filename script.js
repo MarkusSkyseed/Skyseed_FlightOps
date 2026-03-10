@@ -964,9 +964,29 @@ async function triggerExport() {
     updateStatusProgress("Export wird vorbereitet...", 5);
     try {
         const canvas = await generateScreenshotCanvas((msg, p) => updateStatusProgress(msg, p));
-        updateStatusProgress("Download startet...", 95);
-        canvas.toBlob((blob) => {
-            downloadBlob(blob, `Skyseed_FlightLog_${activeProject.name || 'Export'}_${new Date().toISOString().split('T')[0]}.png`);
+        updateStatusProgress("Bereit zum Teilen/Speichern...", 95);
+        
+        canvas.toBlob(async (blob) => {
+            const fileName = `Skyseed_FlightLog_${activeProject.name || 'Export'}_${new Date().toISOString().split('T')[0]}.png`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+
+            // Bevorzugt natives Teilen-Menü öffnen
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Skyseed Flug-Logbuch',
+                        text: `Logbuch-Export für Projekt: ${activeProject.name || 'Export'}`
+                    });
+                    hideStatusProgress();
+                    return; // Erfolgreich geteilt
+                } catch (shareErr) {
+                    console.warn("Teilen abgebrochen oder fehlgeschlagen, weiche auf Download aus.", shareErr);
+                }
+            }
+
+            // Fallback: Direkter Download, falls Teilen nicht unterstützt oder abgebrochen wurde
+            downloadBlob(blob, fileName);
             hideStatusProgress();
         }, 'image/png');
     } catch (e) {
