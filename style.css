@@ -108,6 +108,12 @@ header h1 {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+header h1:hover {
+    opacity: 0.8;
 }
 
 header p {
