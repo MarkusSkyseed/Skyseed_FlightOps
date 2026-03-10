@@ -1067,9 +1067,9 @@ async function generateScreenshotCanvas() {
         }
 
         // Get map dimensions for proper rendering
-        const mapSize = map ? map.getSize() : { x: 900, y: 350 };
+        const mapSize = map ? map.getSize() : { x: 900, y: 320 };
         const mapWidth = mapSize.x || 900;
-        const mapHeight = mapSize.y || 350;
+        const mapHeight = mapSize.y || 320;
 
         const mapCanvas = await html2canvas(liveMap, { 
             useCORS: true, 
@@ -1403,7 +1403,60 @@ async function initErpData() {
     const finalResults = staticResults.slice(0, 10); // Show top 10
 
     renderErpTable(finalResults, poiTable);
+    updateDfsInfo(lat, lon);
     erpDataFetched = true;
+}
+
+function updateDfsInfo(lat, lon) {
+    const dfsInfoEl = document.getElementById('closestDfsInfo');
+    if (!dfsInfoEl) return;
+
+    // DFS Centres Data
+    const dfsCentres = [
+        {
+            name: "DFS Bremen Control Centre",
+            region: "Norddeutschland",
+            desc: "Zuständig für den norddeutschen Luftraum",
+            lat: 53.0500,
+            lon: 8.7833,
+            phone: "+49 421 53720"
+        },
+        {
+            name: "DFS Munich Control Centre",
+            region: "Süddeutschland",
+            desc: "Zuständig für den süddeutschen Luftraum (Nordallee München-Flughafen)",
+            lat: 48.3538,
+            lon: 11.7861,
+            phone: "+49 89 97800"
+        },
+        {
+            name: "DFS Langen Control Centre",
+            region: "Mitte Deutschlands",
+            desc: "Zuständig für die Mitte Deutschlands (DFS-Campus/Frankfurter Raum)",
+            lat: 49.9917,
+            lon: 8.6631,
+            phone: "+49 6103 7070"
+        }
+    ];
+
+    // Find closest based on latitude primarily for North/Central/South distinction,
+    // or just use Haversine to find the geometrically closest.
+    let closest = dfsCentres[0];
+    let minDist = Infinity;
+
+    dfsCentres.forEach(centre => {
+        const dist = calculateHaversineDistance(lat, lon, centre.lat, centre.lon);
+        if (dist < minDist) {
+            minDist = dist;
+            closest = centre;
+        }
+    });
+
+    dfsInfoEl.innerHTML = `
+        <div style="color: var(--accent-color);">${closest.name} (${closest.region})</div>
+        <div style="font-size: 0.85rem; font-weight: normal; opacity: 0.9; margin: 0.25rem 0;">${closest.desc}</div>
+        <div style="margin-top: 0.4rem;">📞 <a href="tel:${closest.phone.replace(/\s/g, '')}" style="color: white; text-decoration: none;">${closest.phone}</a></div>
+    `;
 }
 
 function renderErpTable(items, tableEl) {

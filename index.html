@@ -85,8 +85,7 @@
                 </div>
 
                 <!-- Map Section -->
-                <div id="map"
-                    style="height: 350px; width: 100%; border-radius: 1rem; margin-top: 1.5rem; border: 1px solid var(--card-border); z-index: 1;">
+                <div id="map">
                 </div>
             </div>
 
@@ -277,10 +276,16 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Name und Telefonnummer des nächsten
-                                Fluglotsens/ATM Betreibers:</strong><br>
-                            Kein kontrollierter Flughafen: Allg. Kontakt DFS (FIS Langen) / (AIS-Centre)<br>
-                            Telefon: +49 6103 707-0 / 06103 707-5500 / Alternativ: 112</p>
+                        
+                        <div id="dynamicDfsContainer" style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; border-left: 4px solid var(--accent-color);">
+                            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Zuständiger ATM Betreiber (DFS):</strong></p>
+                            <div id="closestDfsInfo" style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                                Ermittle zuständige DFS Niederlassung...
+                            </div>
+                            <div id="permanentDfsInfo" style="font-size: 0.85rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;">
+                                AIS-Centre: <a href="tel:+4961037075500" style="color: inherit; text-decoration: none;">+49 6103 707-5500</a> | NOTAM Office: <a href="tel:+4961037075555" style="color: inherit; text-decoration: none;">+49 6103 707-5555</a>
+                            </div>
+                        </div>
 
                         <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; border: 1px solid var(--card-border); font-size: 0.9rem;">
                             <p style="margin-bottom: 0.5rem;"><strong>📍 Position der Notfallausrüstung:</strong></p>

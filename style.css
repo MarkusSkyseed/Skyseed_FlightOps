@@ -184,6 +184,21 @@ header p {
 }
 
 /* Leaflet Map Overrides */
+#map {
+    height: 350px;
+    width: 100%;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+    border: 1px solid var(--card-border);
+    z-index: 1;
+}
+
+@media (max-width: 1024px) {
+    #map {
+        height: 320px; /* ~10% reduction for better scrolling on tablets/mobile */
+    }
+}
+
 .leaflet-container {
     font-family: inherit;
     background: #1e293b !important;

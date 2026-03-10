@@ -1,5 +1,6 @@
 // Statische Datenbank für Notfallkontakte (Deutschland)
-// Angereichert via AI Search (Perplexity) am: 6.3.2026, 19:47:08
+// Angereichert via AI Search (Perplexity: sonar-pro) am: 10.3.2026, 13:18:04
+// Kosten für diese Sitzung: $1.686
 // Enthält: Verkehrsflughäfen, Flugplätze, Heliports und Notfall-Kliniken
 
 const ERP_STATIC_DATA = [
@@ -193,7 +194,7 @@ const ERP_STATIC_DATA = [
         "phone": "+49 841 8800"
     },
     {
-        "name": "DIAKO",
+        "name": "Freudenberg (Siegen-Wittgenstein) Diakonie Klinikum Krankenhaus Bethesda",
         "type": "Klinik (mit Heliport)",
         "lat": 53.124681,
         "lon": 8.7438336,
@@ -1971,7 +1972,7 @@ const ERP_STATIC_DATA = [
         "phone": null
     },
     {
-        "name": "3",
+        "name": "Heliport 3",
         "type": "Heliport",
         "lat": 52.2683019,
         "lon": 9.2515415,
@@ -2178,7 +2179,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 51.8880941,
         "lon": 10.5740924,
-        "phone": null
+        "phone": "05322 760"
     },
     {
         "name": "Asklepios Klinik Lich",
@@ -2199,7 +2200,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 53.0536024,
         "lon": 14.2760877,
-        "phone": null
+        "phone": "+493332530"
     },
     {
         "name": "Auchtweid",
@@ -2871,7 +2872,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 50.6937037,
         "lon": 6.4191947,
-        "phone": null
+        "phone": "+49 170 1812428"
     },
     {
         "name": "Düsseldorf Airport",
@@ -2948,7 +2949,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 51.2950333,
         "lon": 13.3138928,
-        "phone": null
+        "phone": "+4935257540"
     },
     {
         "name": "EnBW Kernkraft GmbH",
@@ -2990,14 +2991,14 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 50.3479775,
         "lon": 7.5929692,
-        "phone": null
+        "phone": "+49261137-0"
     },
     {
         "name": "Fachkrankenhaus Coswig",
         "type": "Klinik (mit Heliport)",
         "lat": 51.1318666,
         "lon": 13.593102,
-        "phone": null
+        "phone": "+49 3523 650"
     },
     {
         "name": "Fallschirmsport Grefrath",
@@ -3060,21 +3061,21 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 50.1715184,
         "lon": 7.0556397,
-        "phone": null
+        "phone": "+49267894011162"
     },
     {
         "name": "Fliegerhorst Faßberg",
         "type": "Flugplatz",
         "lat": 52.9136485,
         "lon": 10.1838339,
-        "phone": null
+        "phone": "+49 5055 5970"
     },
     {
         "name": "Fliegerhorst Hohn",
         "type": "Flugplatz",
         "lat": 54.3136508,
         "lon": 9.5368838,
-        "phone": null
+        "phone": "+494335 9421051"
     },
     {
         "name": "Fliegerhorst Jagel",
@@ -3088,28 +3089,28 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.1815784,
         "lon": 10.8625925,
-        "phone": null
+        "phone": "+49 30 182424242"
     },
     {
         "name": "Fliegerhorst Neuburg",
         "type": "Flugplatz",
         "lat": 48.710842,
         "lon": 11.2124115,
-        "phone": null
+        "phone": "+498431 6430"
     },
     {
         "name": "Fliegerhorst Nordholz",
         "type": "Flugplatz",
         "lat": 53.7722043,
         "lon": 8.65582,
-        "phone": null
+        "phone": "+49 30 2004-0"
     },
     {
         "name": "Fliegerhorst Schönewalde / Holzdorf",
         "type": "Flugplatz",
         "lat": 51.7747939,
         "lon": 13.1698832,
-        "phone": null
+        "phone": "+49 35389 86 51533"
     },
     {
         "name": "Fliegerhorst Wittmundhafen",
@@ -3648,7 +3649,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.9395042,
         "lon": 8.9053381,
-        "phone": null
+        "phone": "+495231390246"
     },
     {
         "name": "Flugplatz Diepholz-Dümmerland",
@@ -3760,7 +3761,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.3858161,
         "lon": 9.0767234,
-        "phone": null
+        "phone": "+4974738191"
     },
     {
         "name": "Flugplatz Finsterwalde-Heinrichsruh",
@@ -3914,7 +3915,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 49.6419669,
         "lon": 11.1623133,
-        "phone": null
+        "phone": "+4991345152"
     },
     {
         "name": "Flugplatz Hildesheim",
@@ -4124,7 +4125,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 49.3306052,
         "lon": 8.2135615,
-        "phone": null
+        "phone": "+49 33875 30535"
     },
     {
         "name": "Flugplatz Lüchow-Rehbeck",
@@ -4278,7 +4279,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.621205,
         "lon": 9.6557623,
-        "phone": null
+        "phone": "+49-7164-2464"
     },
     {
         "name": "Flugplatz Ober-Mörlen",
@@ -4439,14 +4440,14 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.9005153,
         "lon": 13.1981782,
-        "phone": null
+        "phone": "+49337466980"
     },
     {
         "name": "Flugplatz Renneritz",
         "type": "Flugplatz",
         "lat": 51.5938473,
         "lon": 12.2293394,
-        "phone": null
+        "phone": "+493495439196"
     },
     {
         "name": "Flugplatz Riedlingen",
@@ -4460,35 +4461,35 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.1753122,
         "lon": 9.052787,
-        "phone": null
+        "phone": "+4957512002"
     },
     {
         "name": "Flugplatz Rotenburg",
         "type": "Flugplatz",
         "lat": 53.129717,
         "lon": 9.3513785,
-        "phone": null
+        "phone": "+4942614139327"
     },
     {
         "name": "Flugplatz Rothenburg/Görlitz",
         "type": "Flugplatz",
         "lat": 51.3637237,
         "lon": 14.9540865,
-        "phone": null
+        "phone": "+4935891470"
     },
     {
         "name": "Flugplatz Rudolstadt - Groschwitz",
         "type": "Flugplatz",
         "lat": 50.7342055,
         "lon": 11.2348481,
-        "phone": null
+        "phone": "+4936724806601"
     },
     {
         "name": "Flugplatz Rügen",
         "type": "Flugplatz",
         "lat": 54.3839367,
         "lon": 13.3253881,
-        "phone": null
+        "phone": "+49383061289"
     },
     {
         "name": "Flugplatz Saarlouis-Düren",
@@ -4502,49 +4503,49 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.3074218,
         "lon": 13.10057,
-        "phone": null
+        "phone": "+493070090312"
     },
     {
         "name": "Flugplatz Schlechtenfeld",
         "type": "Flugplatz",
         "lat": 48.2844608,
         "lon": 9.6734004,
-        "phone": null
+        "phone": "+49-7391-2222"
     },
     {
         "name": "Flugplatz Schleswig-Kropp",
         "type": "Flugplatz",
         "lat": 54.4255258,
         "lon": 9.5419215,
-        "phone": null
+        "phone": "+494624456"
     },
     {
         "name": "Flugplatz Schlierstadt",
         "type": "Flugplatz",
         "lat": 49.442653,
         "lon": 9.3621342,
-        "phone": null
+        "phone": "+49 6292 9277230"
     },
     {
         "name": "Flugplatz Schmoldow",
         "type": "Flugplatz",
         "lat": 53.9737992,
         "lon": 13.3433367,
-        "phone": null
+        "phone": "+49383538000172"
     },
     {
         "name": "Flugplatz Schönebeck-Zackmünde",
         "type": "Flugplatz",
         "lat": 51.9980848,
         "lon": 11.7898325,
-        "phone": null
+        "phone": "+49 3928 400647"
     },
     {
         "name": "Flugplatz Schotten",
         "type": "Flugplatz",
         "lat": 50.5346825,
         "lon": 9.1454373,
-        "phone": null
+        "phone": "+4960442811"
     },
     {
         "name": "Flugplatz Schwäbisch Hall-Weckrieden",
@@ -4558,7 +4559,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.4877497,
         "lon": 13.8796804,
-        "phone": null
+        "phone": "+493575280670"
     },
     {
         "name": "Flugplatz Schwenningen am Neckar",
@@ -4572,63 +4573,63 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 54.0670106,
         "lon": 10.7420835,
-        "phone": null
+        "phone": "+4945638341"
     },
     {
         "name": "Flugplatz Sömmerda-Dermsdorf",
         "type": "Flugplatz",
         "lat": 51.1976983,
         "lon": 11.191753,
-        "phone": null
+        "phone": "+493635482388"
     },
     {
         "name": "Flugplatz Sonnen",
         "type": "Flugplatz",
         "lat": 48.6824152,
         "lon": 13.6940266,
-        "phone": null
+        "phone": "+49 171 9541082"
     },
     {
         "name": "Flugplatz Speichersdorf",
         "type": "Flugplatz",
         "lat": 49.8640888,
         "lon": 11.7884305,
-        "phone": null
+        "phone": "+49 9275 428"
     },
     {
         "name": "Flugplatz Spremberg-Welzow",
         "type": "Flugplatz",
         "lat": 51.5755577,
         "lon": 14.1369438,
-        "phone": null
+        "phone": "+49 (0) 35751 13833"
     },
     {
         "name": "Flugplatz St. Michaelisdonn",
         "type": "Flugplatz",
         "lat": 53.9788592,
         "lon": 9.1447198,
-        "phone": null
+        "phone": "+49 4855 254"
     },
     {
         "name": "Flugplatz Stade",
         "type": "Flugplatz",
         "lat": 53.5605559,
         "lon": 9.5000352,
-        "phone": null
+        "phone": "+49414161474"
     },
     {
         "name": "Flugplatz Stadtlohn-Vreden",
         "type": "Flugplatz",
         "lat": 51.9956507,
         "lon": 6.8422809,
-        "phone": null
+        "phone": "+49 (0) 2563 3333"
     },
     {
         "name": "Flugplatz Stahringen-Wahlwies",
         "type": "Flugplatz",
         "lat": 47.8027522,
         "lon": 8.9789953,
-        "phone": null
+        "phone": "+4977712829"
     },
     {
         "name": "Flugplatz Stechow-Ferchesar",
@@ -4642,21 +4643,21 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.7393826,
         "lon": 12.390578,
-        "phone": null
+        "phone": "+493387530535"
     },
     {
         "name": "Flugplatz Stralsund",
         "type": "Flugplatz",
         "lat": 54.3357416,
         "lon": 13.0473999,
-        "phone": null
+        "phone": "+493831391049"
     },
     {
         "name": "Flugplatz Straubing-Wallmühle",
         "type": "Flugplatz",
         "lat": 48.901039,
         "lon": 12.5163427,
-        "phone": null
+        "phone": "+49 9429 308"
     },
     {
         "name": "Flugplatz Tangeln",
@@ -4670,7 +4671,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.0091847,
         "lon": 10.0994321,
-        "phone": null
+        "phone": "+4983951244"
     },
     {
         "name": "Flugplatz Thannhausen",
@@ -4691,21 +4692,21 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 49.8637094,
         "lon": 6.7868593,
-        "phone": null
+        "phone": "+49 6502 2999"
     },
     {
         "name": "Flugplatz Tutow",
         "type": "Flugplatz",
         "lat": 53.9204128,
         "lon": 13.2197688,
-        "phone": null
+        "phone": "+49 39999 76843"
     },
     {
         "name": "Flugplatz Uehrde",
         "type": "Flugplatz",
         "lat": 52.1009215,
         "lon": 10.738236,
-        "phone": null
+        "phone": "+49 5332 8149999"
     },
     {
         "name": "Flugplatz Uetersen/Heist",
@@ -4726,28 +4727,28 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.9100647,
         "lon": 8.0434966,
-        "phone": null
+        "phone": "+4944714976"
     },
     {
         "name": "Flugplatz Vielbrunn",
         "type": "Flugplatz",
         "lat": 49.7191807,
         "lon": 9.0820304,
-        "phone": null
+        "phone": "+496066246"
     },
     {
         "name": "Flugplatz Vilsbiburg",
         "type": "Flugplatz",
         "lat": 48.4247488,
         "lon": 12.3442752,
-        "phone": null
+        "phone": "+498741520"
     },
     {
         "name": "Flugplatz Völkleshofen-Lichtenberg",
         "type": "Flugplatz",
         "lat": 49.0094625,
         "lon": 9.3547217,
-        "phone": null
+        "phone": "+49 7148-8800"
     },
     {
         "name": "Flugplatz Wahlstedt",
@@ -4761,28 +4762,28 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 53.7855857,
         "lon": 7.9183727,
-        "phone": null
+        "phone": "+49 4469 942596"
     },
     {
         "name": "Flugplatz Warngau",
         "type": "Flugplatz",
         "lat": 47.8247867,
         "lon": 11.7044006,
-        "phone": null
+        "phone": "08021/7228"
     },
     {
         "name": "Flugplatz Wasentegernbach",
         "type": "Flugplatz",
         "lat": 48.2732044,
         "lon": 12.2178707,
-        "phone": null
+        "phone": "+498082226388"
     },
     {
         "name": "Flugplatz Weimar",
         "type": "Flugplatz",
         "lat": 50.9650441,
         "lon": 11.400853,
-        "phone": null
+        "phone": "+493643518251"
     },
     {
         "name": "Flugplatz Weinheim/Bergstraße",
@@ -4796,21 +4797,21 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.2890669,
         "lon": 10.1394037,
-        "phone": null
+        "phone": "+49 (07309) 2777"
     },
     {
         "name": "Flugplatz Werneuchen",
         "type": "Flugplatz",
         "lat": 52.6321771,
         "lon": 13.7686571,
-        "phone": null
+        "phone": "+491773005002"
     },
     {
         "name": "Flugplatz Wershofen/Eifel",
         "type": "Flugplatz",
         "lat": 50.451195,
         "lon": 6.7812885,
-        "phone": null
+        "phone": "+492694277"
     },
     {
         "name": "Flugplatz Wertheim",
@@ -4824,35 +4825,35 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.6611601,
         "lon": 6.5978385,
-        "phone": null
+        "phone": "+4928123668"
     },
     {
         "name": "Flugplatz Westerstede-Felde",
         "type": "Flugplatz",
         "lat": 53.2885437,
         "lon": 7.9297981,
-        "phone": null
+        "phone": "+494488860711"
     },
     {
         "name": "Flugplatz Wiefelstede-Conneforde",
         "type": "Flugplatz",
         "lat": 53.3216232,
         "lon": 8.0736636,
-        "phone": null
+        "phone": "+494458918213"
     },
     {
         "name": "Flugplatz Winzeln Schramberg",
         "type": "Flugplatz",
         "lat": 48.2795062,
         "lon": 8.4285343,
-        "phone": null
+        "phone": "+4974228750"
     },
     {
         "name": "Flugplatz Witzenhausen-Burgberg",
         "type": "Flugplatz",
         "lat": 51.3501583,
         "lon": 9.8250174,
-        "phone": null
+        "phone": "+4955422349"
     },
     {
         "name": "Flugplatz Würselen-Aachen",
@@ -4866,7 +4867,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 54.6860129,
         "lon": 8.5318539,
-        "phone": null
+        "phone": "+4946815504"
     },
     {
         "name": "Flugplatz Zeitz-Sprossen - Ultraleicht",
@@ -4929,7 +4930,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.3657241,
         "lon": 9.337205,
-        "phone": null
+        "phone": "+49560653800"
     },
     {
         "name": "Flutlichtanalage vorhanden",
@@ -5055,7 +5056,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 49.4865203,
         "lon": 8.3892418,
-        "phone": null
+        "phone": "+49 (0) 6202 843-0"
     },
     {
         "name": "Gleitschirm Flugplatz Teuchern (Startplatz Ost)",
@@ -5300,7 +5301,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.6586022,
         "lon": 9.6240963,
-        "phone": null
+        "phone": "+49716140093"
     },
     {
         "name": "Grafenwöhr Army Airfield",
@@ -5321,7 +5322,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.1374415,
         "lon": 10.569289,
-        "phone": null
+        "phone": "+49 5331 63437"
     },
     {
         "name": "Großer Kopf",
@@ -5349,7 +5350,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 49.2905901,
         "lon": 9.170837,
-        "phone": null
+        "phone": "+496269381"
     },
     {
         "name": "Güstrow Flugplatz",
@@ -5359,7 +5360,7 @@ const ERP_STATIC_DATA = [
         "phone": "+49 3843 000"
     },
     {
-        "name": "H",
+        "name": "Heliport",
         "type": "Heliport",
         "lat": 52.584793,
         "lon": 13.9153936,
@@ -5489,7 +5490,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 51.4717762,
         "lon": 11.3101253,
-        "phone": null
+        "phone": "+493464660"
     },
     {
         "name": "Helios Klinik Wipperfürth",
@@ -5972,7 +5973,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 49.018377,
         "lon": 8.3748426,
-        "phone": null
+        "phone": "+496215034050"
     },
     {
         "name": "Klinik für Kinder- und Jugendpsychiatrie",
@@ -6007,7 +6008,7 @@ const ERP_STATIC_DATA = [
         "type": "Klinik (mit Heliport)",
         "lat": 48.5297391,
         "lon": 9.0380922,
-        "phone": null
+        "phone": "+4971127833501"
     },
     {
         "name": "Klinikum Balg",
@@ -7498,7 +7499,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.8723406,
         "lon": 8.2091435,
-        "phone": null
+        "phone": "+49722221101"
     },
     {
         "name": "Segelfluggelände Baumerlenbach",
@@ -7603,7 +7604,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 50.8378079,
         "lon": 8.0134838,
-        "phone": null
+        "phone": "+49 2761 5222"
     },
     {
         "name": "Segelfluggelände Eudenbach",
@@ -7694,7 +7695,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 48.6370731,
         "lon": 8.7320662,
-        "phone": null
+        "phone": "+497554990322"
     },
     {
         "name": "Segelfluggelände Kirchzarten",
@@ -7876,7 +7877,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 53.3375008,
         "lon": 9.7791461,
-        "phone": null
+        "phone": "+49416580461"
     },
     {
         "name": "Segelfluggelände Weper",
@@ -8289,7 +8290,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 53.3810904,
         "lon": 10.8037483,
-        "phone": null
+        "phone": "+49 178 1336298"
     },
     {
         "name": "Segelflugplatz Neuruppin",
@@ -8534,7 +8535,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.9942442,
         "lon": 12.9756439,
-        "phone": null
+        "phone": "+4915733674220"
     },
     {
         "name": "Sonderlandeplatz Ansbach-Petersdorf",
@@ -9563,7 +9564,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.1592864,
         "lon": 7.2411449,
-        "phone": null
+        "phone": "+4925531437"
     },
     {
         "name": "UL-Flugplatz Roggenhagen",
@@ -9675,7 +9676,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 52.2941978,
         "lon": 9.3773282,
-        "phone": null
+        "phone": "+495031913110"
     },
     {
         "name": "Ultraleichtflugplatz Kückhoven",
@@ -10046,7 +10047,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 50.0489909,
         "lon": 8.3253096,
-        "phone": null
+        "phone": "+4961131435653000"
     },
     {
         "name": "WImbachgrieshütte",
@@ -10123,7 +10124,7 @@ const ERP_STATIC_DATA = [
         "type": "Flugplatz",
         "lat": 51.3861599,
         "lon": 12.820949,
-        "phone": null
+        "phone": "+493425923793"
     },
     {
         "name": "Flugplatz Bautzen (EDAB)",
@@ -11258,5 +11259,2140 @@ const ERP_STATIC_DATA = [
         "lat": 49.9486,
         "lon": 7.2638,
         "phone": "+49 6543 509200"
+    },
+    {
+        "name": "Wertheim Rotkreuzklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.76133333333333,
+        "lon": 9.498666666666667,
+        "phone": "+49 9342 303-0"
+    },
+    {
+        "name": "Bad Windsheim Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.51466666666666,
+        "lon": 10.4105,
+        "phone": "+499841900"
+    },
+    {
+        "name": "Berchtesgaden Kreisklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.64033333333333,
+        "lon": 13.006166666666667,
+        "phone": ""
+    },
+    {
+        "name": "Bobingen Wertach Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.281333333333336,
+        "lon": 10.823666666666666,
+        "phone": "+49823481-0"
+    },
+    {
+        "name": "Burghausen Kreiskliniken",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.1675,
+        "lon": 12.848,
+        "phone": "+4986778800"
+    },
+    {
+        "name": "Deggendorf Bezirksklinikum Mainkofen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.805,
+        "lon": 12.893333333333333,
+        "phone": "+49 9931 87-0"
+    },
+    {
+        "name": "Dingolfing DOANAUISAR Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.62116666666667,
+        "lon": 12.4895,
+        "phone": "+498731880"
+    },
+    {
+        "name": "Freyung Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.8055,
+        "lon": 13.545333333333334,
+        "phone": "+49 8551 977 0"
+    },
+    {
+        "name": "Füssen Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.567,
+        "lon": 10.707,
+        "phone": "+4983625000"
+    },
+    {
+        "name": "Grafenau Kliniken am goldenen Steig",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.8585,
+        "lon": 13.392833333333334,
+        "phone": "+4985524210"
+    },
+    {
+        "name": "Rotthalmünster Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.352833333333336,
+        "lon": 13.203,
+        "phone": "+498533990"
+    },
+    {
+        "name": "Scheßlitz Juraklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.98,
+        "lon": 11.0395,
+        "phone": "+4995427790"
+    },
+    {
+        "name": "Schongau Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.8255,
+        "lon": 10.8975,
+        "phone": "+4988612150"
+    },
+    {
+        "name": "Schrobenhausen Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.57216666666667,
+        "lon": 11.263,
+        "phone": "+498252940"
+    },
+    {
+        "name": "Schwabmünchen Wertach Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.17666666666667,
+        "lon": 10.746166666666667,
+        "phone": "+4982325080"
+    },
+    {
+        "name": "Seeshaupt Lauterbacher Mühle Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.7925,
+        "lon": 11.291666666666666,
+        "phone": "+49 8801 18203"
+    },
+    {
+        "name": "Sonthofen Klinik Sonthofen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.50833333333333,
+        "lon": 10.2775,
+        "phone": "+4983239100"
+    },
+    {
+        "name": "Sulzbach-Rosenberg St. Anna-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.50633333333333,
+        "lon": 11.729833333333334,
+        "phone": "+4996615200"
+    },
+    {
+        "name": "Trostberg Kreisklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.02916666666667,
+        "lon": 12.543,
+        "phone": "+498621870"
+    },
+    {
+        "name": "Tutzing Benedictus Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.906333333333336,
+        "lon": 11.276333333333334,
+        "phone": "+49815823-0"
+    },
+    {
+        "name": "Vilsbiburg Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.44466666666667,
+        "lon": 12.360833333333334,
+        "phone": "+498741600"
+    },
+    {
+        "name": "Wasserburg am Inn Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.06333333333333,
+        "lon": 12.213,
+        "phone": "+49 (8071) 77 0"
+    },
+    {
+        "name": "Wegscheid Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.6005,
+        "lon": 13.7955,
+        "phone": "+4985928800"
+    },
+    {
+        "name": "Weilheim i.OBWiese",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.8255,
+        "lon": 11.143,
+        "phone": "+498811888620"
+    },
+    {
+        "name": "Weißenburg i.Bay.Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.03483333333333,
+        "lon": 10.987,
+        "phone": "+4991419030"
+    },
+    {
+        "name": "Zwiesel Arberlandklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.00833333333333,
+        "lon": 13.2175,
+        "phone": "+499922990"
+    },
+    {
+        "name": "Berlin DRK-Kliniken Köpenick",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.440666666666665,
+        "lon": 13.597166666666666,
+        "phone": "+493030353000"
+    },
+    {
+        "name": "Berlin Gemeinschaftskrankenhaus Havelhöhe",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.461166666666664,
+        "lon": 13.162833333333333,
+        "phone": "+4930365010"
+    },
+    {
+        "name": "Berlin Helios Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.4225,
+        "lon": 13.254166666666666,
+        "phone": "+493094010"
+    },
+    {
+        "name": "Berlin Spandau Klinikum (Vivantes)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.5495,
+        "lon": 13.205,
+        "phone": "+4930130130"
+    },
+    {
+        "name": "Berlin Neukölln Krankenhaus (Vivantes Klinikum Neukölln)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.43833333333333,
+        "lon": 13.459166666666667,
+        "phone": "+493013010"
+    },
+    {
+        "name": "Berlin Vivantes Klinikum im Friedrichshain",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.527,
+        "lon": 13.439166666666667,
+        "phone": ""
+    },
+    {
+        "name": "Berlin Ev. Waldkrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.562,
+        "lon": 13.153833333333333,
+        "phone": "+493037020"
+    },
+    {
+        "name": "Berlin Caritas Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.56966666666667,
+        "lon": 13.413833333333333,
+        "phone": "+4930475170"
+    },
+    {
+        "name": "Forst (Lausitz)Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.75833333333333,
+        "lon": 14.638333333333334,
+        "phone": "+4935629850"
+    },
+    {
+        "name": "Hennigsdorf Oberhavel Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.656333333333336,
+        "lon": 13.192833333333333,
+        "phone": "+4933025450"
+    },
+    {
+        "name": "Evangelisches Krankenhaus Ludwigsfelde",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.3115,
+        "lon": 13.257,
+        "phone": "+4933788280"
+    },
+    {
+        "name": "Rathenow Haveland Kliniken, Standort Rathenow",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.6075,
+        "lon": 12.3495,
+        "phone": "+4933855550"
+    },
+    {
+        "name": "Rüdersdorf bei Berlin Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.4555,
+        "lon": 13.773,
+        "phone": "+49 33638 83-0"
+    },
+    {
+        "name": "Seelow Lutherstift Ev. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.537166666666664,
+        "lon": 14.374666666666666,
+        "phone": "+49 3346 877700"
+    },
+    {
+        "name": "Templin Sana Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.105,
+        "lon": 13.5,
+        "phone": "+493987420"
+    },
+    {
+        "name": "Treuenbrietzen Johanniter-Krankenhaus im Fläming",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.080333333333336,
+        "lon": 12.8745,
+        "phone": "+493374880"
+    },
+    {
+        "name": "Wittstock/Dosse KMK Klinikum Mitte Gmb H, Standort Wittstock",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.17033333333333,
+        "lon": 12.486166666666668,
+        "phone": "+4933944270"
+    },
+    {
+        "name": "Hamburg-Altona Asklepios Klinik Altona",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.55533333333333,
+        "lon": 9.902166666666666,
+        "phone": "+49401818810"
+    },
+    {
+        "name": "Hamburg-Bergedorf Bethesda Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.48616666666667,
+        "lon": 10.234666666666667,
+        "phone": "+4940725540"
+    },
+    {
+        "name": "Hamburg-Langenhorn Heidberg Asklepios Klinik Nord",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.675333333333334,
+        "lon": 10.030833333333334,
+        "phone": "+49401818870"
+    },
+    {
+        "name": "Hamburg-Volksdorf Amalie Sieveking Ev. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.641333333333336,
+        "lon": 10.153166666666667,
+        "phone": "+4940644110"
+    },
+    {
+        "name": "Hamburg-Wandsbek Asklepios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.5695,
+        "lon": 10.089666666666666,
+        "phone": "+49401818830"
+    },
+    {
+        "name": "Alsfeld Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.763666666666666,
+        "lon": 9.269666666666666,
+        "phone": "+496631980"
+    },
+    {
+        "name": "Bad Hersfeld Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.877,
+        "lon": 9.714666666666666,
+        "phone": "+496621880"
+    },
+    {
+        "name": "Bad Nauheim Feuerwehr",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.35666666666667,
+        "lon": 8.753666666666666,
+        "phone": "+49 (0) 6032 9305-0"
+    },
+    {
+        "name": "Bad Wildungen Feuerwehr",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.119166666666665,
+        "lon": 9.140333333333333,
+        "phone": "+495621964151"
+    },
+    {
+        "name": "Bad Zwesten Werner Wicker Hardtwaldklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.06133333333333,
+        "lon": 9.1735,
+        "phone": ""
+    },
+    {
+        "name": "Frankfurt am Main Klinikum Höchst (Boden)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.108333333333334,
+        "lon": 8.547,
+        "phone": ""
+    },
+    {
+        "name": "Frankfurt am Main Uni-Klinik, Haus 95 Neurologie/Neurochirurgie",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.09133333333333,
+        "lon": 8.6475,
+        "phone": "+496963016395"
+    },
+    {
+        "name": "Fulda Herz-Jesu-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.56366666666667,
+        "lon": 9.6725,
+        "phone": "+49661150"
+    },
+    {
+        "name": "Groß-Gerau Kreisklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.9125,
+        "lon": 8.475,
+        "phone": "+4961529860"
+    },
+    {
+        "name": "Groß-Umstadt Kreisklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.8675,
+        "lon": 8.937,
+        "phone": "+496078790"
+    },
+    {
+        "name": "Orthopädische Klinik Hessisch Lichtenau",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.21216666666667,
+        "lon": 9.706,
+        "phone": "+49 5602 830"
+    },
+    {
+        "name": "Hofgeismar Kreisklinik Hofgeismar",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.496833333333335,
+        "lon": 9.368166666666667,
+        "phone": "+495671810"
+    },
+    {
+        "name": "Hünfeld HELIOS Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.6625,
+        "lon": 9.767833333333334,
+        "phone": "+4966529870"
+    },
+    {
+        "name": "Immenhausen Lungenfachklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.42366666666667,
+        "lon": 9.476833333333333,
+        "phone": "+49 5673 501-0"
+    },
+    {
+        "name": "Klinikum Kassel",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.33,
+        "lon": 9.510833333333334,
+        "phone": "0561 980-0"
+    },
+    {
+        "name": "Langen (Hessen)Asklepios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.997166666666665,
+        "lon": 8.6845,
+        "phone": "+4961039120"
+    },
+    {
+        "name": "Lauterbach Eichhof Krankenhaus / Dirlammer Str./ Einmündung Eichhofstr.",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.63066666666667,
+        "lon": 9.380333333333333,
+        "phone": "+496641820"
+    },
+    {
+        "name": "Rotenburg a. d. Fulda Herz- und Kreislaufzentrum (Dachlandestelle PIS)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.00333333333333,
+        "lon": 9.738333333333333,
+        "phone": "+496623886105"
+    },
+    {
+        "name": "Weilburg Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.48616666666667,
+        "lon": 8.253166666666667,
+        "phone": "+4964713130"
+    },
+    {
+        "name": "Weilmünster Vitos Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.4255,
+        "lon": 8.39,
+        "phone": "+49647260292"
+    },
+    {
+        "name": "AMEOS Klinikum Anklam",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.84883333333333,
+        "lon": 13.699166666666667,
+        "phone": "+493971 834-0"
+    },
+    {
+        "name": "Ueckermünde Haus 1 Rondel",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.739666666666665,
+        "lon": 14.022833333333333,
+        "phone": "+49 39771 41 0"
+    },
+    {
+        "name": "Achim Aller-Weser-Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.018,
+        "lon": 9.005833333333333,
+        "phone": "+4942029980"
+    },
+    {
+        "name": "Bad Gandersheim Helios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.873666666666665,
+        "lon": 10.025833333333333,
+        "phone": ""
+    },
+    {
+        "name": "Bremervörde Ostemed Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.4705,
+        "lon": 9.1355,
+        "phone": "+4947619800"
+    },
+    {
+        "name": "Helios Klinik Cuxhaven",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.852,
+        "lon": 8.695,
+        "phone": "+494721780"
+    },
+    {
+        "name": "Dannenberg (Elbe)Capio Elbe-Jeetzel-Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.08166666666666,
+        "lon": 11.08,
+        "phone": "+495861830"
+    },
+    {
+        "name": "Diepholz Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.61,
+        "lon": 8.376333333333333,
+        "phone": "+4954419720"
+    },
+    {
+        "name": "Einbeck Bürgerspital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.833,
+        "lon": 9.869166666666667,
+        "phone": "+49 5561 940 0"
+    },
+    {
+        "name": "Gehrden Klinikum Robert-Koch",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.303333333333335,
+        "lon": 9.596333333333334,
+        "phone": "+495108690"
+    },
+    {
+        "name": "Goslar Harzklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.927,
+        "lon": 10.443,
+        "phone": ""
+    },
+    {
+        "name": "Göttingen-Weende Ev. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.5905,
+        "lon": 9.8755,
+        "phone": "0551 5034-0"
+    },
+    {
+        "name": "Gronau (Leine)Johanniter-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.0825,
+        "lon": 9.7665,
+        "phone": "+49 5182 5830"
+    },
+    {
+        "name": "Hannover Friederikenstift",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.3705,
+        "lon": 9.724333333333334,
+        "phone": "+49 511 129-0"
+    },
+    {
+        "name": "Herzberg am Harz Helios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.67016666666667,
+        "lon": 10.342666666666666,
+        "phone": "+4955218660"
+    },
+    {
+        "name": "Hildesheim St. Bernward Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.14633333333333,
+        "lon": 9.948,
+        "phone": "+495121900"
+    },
+    {
+        "name": "Jesteburg Waldklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.3205,
+        "lon": 9.9505,
+        "phone": "+4941837990"
+    },
+    {
+        "name": "Leer (Ostfriesland)Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.228,
+        "lon": 7.445,
+        "phone": "+4949850"
+    },
+    {
+        "name": "Lehrte Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.381,
+        "lon": 9.984166666666667,
+        "phone": "+4951325030"
+    },
+    {
+        "name": "Melle Christliches Klinikum Wirtschaftshof",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.19866666666667,
+        "lon": 8.335166666666666,
+        "phone": "+4954221040"
+    },
+    {
+        "name": "Norden Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.60033333333333,
+        "lon": 7.2195,
+        "phone": "04931-181-0"
+    },
+    {
+        "name": "Norderney Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.715833333333336,
+        "lon": 7.171333333333333,
+        "phone": "+4949328920"
+    },
+    {
+        "name": "Nordhorn Euregio Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.44383333333333,
+        "lon": 7.0655,
+        "phone": "+49 5921 840"
+    },
+    {
+        "name": "Ostercappeln Klinikum St. Georg",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.344166666666666,
+        "lon": 8.228833333333334,
+        "phone": ""
+    },
+    {
+        "name": "Osterholz-Scharmbeck Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.23383333333334,
+        "lon": 8.793333333333333,
+        "phone": "+4947918030"
+    },
+    {
+        "name": "Seesen Schildauklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.8825,
+        "lon": 10.214666666666666,
+        "phone": ""
+    },
+    {
+        "name": "Sulingen Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.68383333333333,
+        "lon": 8.804666666666666,
+        "phone": "+49427182-0"
+    },
+    {
+        "name": "Vechta St. Marienhospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.7225,
+        "lon": 8.288833333333333,
+        "phone": "+49 4441 99 0"
+    },
+    {
+        "name": "Verden (Aller)Aller-Weser-Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.913666666666664,
+        "lon": 9.233,
+        "phone": "+4942311030"
+    },
+    {
+        "name": "Walsrode Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.858666666666664,
+        "lon": 9.587833333333334,
+        "phone": "+4951616020"
+    },
+    {
+        "name": "Attendorn Feuerwehr",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.12383333333333,
+        "lon": 7.897833333333333,
+        "phone": ""
+    },
+    {
+        "name": "Bad Berleburg Helios Klinik Bad Berleburg",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.062,
+        "lon": 8.405333333333333,
+        "phone": "+492751448636"
+    },
+    {
+        "name": "Bad Driburg Sankt Josef Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.74183333333333,
+        "lon": 9.012,
+        "phone": "+4952539851000"
+    },
+    {
+        "name": "St. Elisabeth-Hospital Beckum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.75216666666667,
+        "lon": 8.038666666666666,
+        "phone": "+49 2521 841-0"
+    },
+    {
+        "name": "Bergisch Gladbach Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.9895,
+        "lon": 7.136333333333333,
+        "phone": "+4922021220"
+    },
+    {
+        "name": "Bergisch Gladbach-Bensberg Vinzenz-Palotti-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.961333333333336,
+        "lon": 7.1754999999999995,
+        "phone": "+492204410"
+    },
+    {
+        "name": "St. Agnes-Hospital Bocholt",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.85616666666667,
+        "lon": 6.6258333333333335,
+        "phone": ""
+    },
+    {
+        "name": "Bochum Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.465333333333334,
+        "lon": 7.3275,
+        "phone": "+492345090"
+    },
+    {
+        "name": "Bottrop Knappschaftskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.51566666666667,
+        "lon": 6.906,
+        "phone": "+492041150"
+    },
+    {
+        "name": "Bottrop Marienhospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.53366666666667,
+        "lon": 6.917166666666667,
+        "phone": "+49 2041 106-0"
+    },
+    {
+        "name": "Brakel St.Vincenz-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.72716666666667,
+        "lon": 9.182,
+        "phone": "+4952726071101"
+    },
+    {
+        "name": "Brilon Städtisches Krankenhaus Maria-Hilf",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.386,
+        "lon": 8.582,
+        "phone": "+4929617800"
+    },
+    {
+        "name": "Datteln Uniper Kraftwerke, Im Löringsfof 10",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.633,
+        "lon": 7.347166666666666,
+        "phone": "+49236356792698"
+    },
+    {
+        "name": "Datteln Uniper Kraftwerke, Im Löringsfof 10",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.633,
+        "lon": 7.347166666666666,
+        "phone": "+49236356792698"
+    },
+    {
+        "name": "Klinikum Dortmund",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.51883333333333,
+        "lon": 7.533333333333333,
+        "phone": "+49 (0) 231 953 - 0"
+    },
+    {
+        "name": "Dortmund Knappschaftskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.501333333333335,
+        "lon": 7.33,
+        "phone": "+492319220"
+    },
+    {
+        "name": "Duisburg Herzzentrum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.463166666666666,
+        "lon": 6.7755,
+        "phone": "+49203451-3000"
+    },
+    {
+        "name": "Düren Krankenhaus Düren",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.80833333333333,
+        "lon": 6.497,
+        "phone": "+49 2421 30-0"
+    },
+    {
+        "name": "Düren St. Augustinus Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.7695,
+        "lon": 6.487333333333333,
+        "phone": "+4924215990"
+    },
+    {
+        "name": "Düren St. Marien-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.822833333333335,
+        "lon": 6.465833333333333,
+        "phone": "+4924218050"
+    },
+    {
+        "name": "Düsseldorf Sana Krankenhaus Benrath",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.152,
+        "lon": 6.872,
+        "phone": "+49 211 2800-02"
+    },
+    {
+        "name": "Eitorf St. Franziskus Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.76833333333333,
+        "lon": 7.4525,
+        "phone": "+4922438810"
+    },
+    {
+        "name": "Emmerich am Rhein St. Willibrord-Spital (LP ETV Sportplatz, Zur Ladestraße, 46446 Emmerich)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.831833333333336,
+        "lon": 6.245833333333334,
+        "phone": "+492822730"
+    },
+    {
+        "name": "Erftstadt Marien Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.806666666666665,
+        "lon": 6.809666666666667,
+        "phone": "+4922354040"
+    },
+    {
+        "name": "Erkelenz Hermann-Josef-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.074666666666666,
+        "lon": 6.3133333333333335,
+        "phone": "+492431892425"
+    },
+    {
+        "name": "Essen Alfried Krupp von Bohzlen und Halbach Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.4255,
+        "lon": 7.008666666666667,
+        "phone": "0201 434-1"
+    },
+    {
+        "name": "Euskirchen Marien-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.64216666666667,
+        "lon": 6.792833333333333,
+        "phone": "+492251900"
+    },
+    {
+        "name": "Fröndenberg/Ruhr Justizvollzugskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.47966666666667,
+        "lon": 7.783833333333334,
+        "phone": "+4923737580"
+    },
+    {
+        "name": "Geldern St.-Clemens-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.53,
+        "lon": 6.3261666666666665,
+        "phone": "+4928313900"
+    },
+    {
+        "name": "Marienhospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.49633333333333,
+        "lon": 7.101166666666667,
+        "phone": "+492327807710"
+    },
+    {
+        "name": "Goch Katholisches Karl-Leisner-Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.67666666666667,
+        "lon": 6.1825,
+        "phone": "+4928238910"
+    },
+    {
+        "name": "Greven Maria-Josef-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.087833333333336,
+        "lon": 7.610833333333334,
+        "phone": "+49 2571 502-0"
+    },
+    {
+        "name": "Gronau (Westf.)St. Antonius-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.208,
+        "lon": 7.019666666666667,
+        "phone": "+4925629150"
+    },
+    {
+        "name": "Gütersloh Klinikum Gütersloh",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.897,
+        "lon": 8.386166666666666,
+        "phone": "+49 5241 83-00"
+    },
+    {
+        "name": "St. Elisabeth Hospital Gütersloh",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.883,
+        "lon": 8.383666666666667,
+        "phone": "+4952415890"
+    },
+    {
+        "name": "Hagen Allgemeines Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.355,
+        "lon": 7.4675,
+        "phone": ""
+    },
+    {
+        "name": "Hagen HELIOS Klinik Hagen – Ambrock",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.3145,
+        "lon": 7.516166666666667,
+        "phone": "+4923319740"
+    },
+    {
+        "name": "Hagen St. Johannes Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.39633333333333,
+        "lon": 7.473333333333334,
+        "phone": "+492331805300"
+    },
+    {
+        "name": "Hamm Evangelisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.66916666666667,
+        "lon": 7.827833333333333,
+        "phone": "+4923815890"
+    },
+    {
+        "name": "Hattingen Helios Klinik Holthausen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.39,
+        "lon": 7.217,
+        "phone": "+4923249660"
+    },
+    {
+        "name": "Heinsberg Städtisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.0655,
+        "lon": 6.094666666666667,
+        "phone": "+4924521880"
+    },
+    {
+        "name": "Hemer Lungenklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.39366666666667,
+        "lon": 7.765,
+        "phone": "+49 2372 908-0"
+    },
+    {
+        "name": "Herdecke Gemeinschaftskrankenhaus Herdecke",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.410333333333334,
+        "lon": 7.3995,
+        "phone": "+49 2330 62-0"
+    },
+    {
+        "name": "Herten St.-Elisabeth-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.593,
+        "lon": 7.1241666666666665,
+        "phone": ""
+    },
+    {
+        "name": "Hilden Feuerwache Hilden",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.1805,
+        "lon": 6.941666666666666,
+        "phone": "+49 2103 72-2200"
+    },
+    {
+        "name": "Höxter St. Ansgar Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.785833333333336,
+        "lon": 9.3645,
+        "phone": "+495271660"
+    },
+    {
+        "name": "Iserlohn St.-Elisabeth-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.38033333333333,
+        "lon": 7.6905,
+        "phone": "+492371780"
+    },
+    {
+        "name": "Kamen Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.5955,
+        "lon": 7.661333333333333,
+        "phone": "+4923071491"
+    },
+    {
+        "name": "St. Bernhard-Hospital Kamp-Lintfort",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.49133333333333,
+        "lon": 6.516333333333334,
+        "phone": "+4928427080"
+    },
+    {
+        "name": "Kevelaer Marien Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.5845,
+        "lon": 6.248833333333334,
+        "phone": "+49283210-0"
+    },
+    {
+        "name": "Kleve St. Antonius Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.772,
+        "lon": 6.1353333333333335,
+        "phone": "+4928214900"
+    },
+    {
+        "name": "Köln Eduardus-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.932,
+        "lon": 6.980833333333333,
+        "phone": "+4922182740"
+    },
+    {
+        "name": "Köln Heilig Geist-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.99166666666667,
+        "lon": 6.926333333333333,
+        "phone": "+4922174910"
+    },
+    {
+        "name": "Krefeld Alexianer Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.326166666666666,
+        "lon": 6.586333333333333,
+        "phone": "+4921513343551"
+    },
+    {
+        "name": "Lemgo Klinikum-Lippe",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.03783333333333,
+        "lon": 8.899166666666666,
+        "phone": "+495261260"
+    },
+    {
+        "name": "HELIOS Klinik Lengerich",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.19916666666666,
+        "lon": 7.844666666666667,
+        "phone": "+4954818010"
+    },
+    {
+        "name": "Lippstadt Ev. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.6845,
+        "lon": 8.342,
+        "phone": "+492941670"
+    },
+    {
+        "name": "Klinikum Lüdenscheid",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.207166666666666,
+        "lon": 7.663666666666667,
+        "phone": "+49 2351 46-0"
+    },
+    {
+        "name": "Lünen Klinikum Westfalen g Gmb H, Klinik am Park (Brambauer)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.59016666666667,
+        "lon": 7.443,
+        "phone": "+4923187870"
+    },
+    {
+        "name": "Marl Paracelsus Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.663833333333336,
+        "lon": 7.123833333333334,
+        "phone": "+49236590-0"
+    },
+    {
+        "name": "Marl Marien-Hospital Marl",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.65133333333333,
+        "lon": 7.0841666666666665,
+        "phone": "+4923659110"
+    },
+    {
+        "name": "Marsberg St. Marien Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.4645,
+        "lon": 8.8425,
+        "phone": "+4929926050"
+    },
+    {
+        "name": "Evangelisches Krankenhaus Mettmann",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.2475,
+        "lon": 6.9719999999999995,
+        "phone": "+4921047730"
+    },
+    {
+        "name": "Moers Krankenhaus Bethanien",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.461666666666666,
+        "lon": 6.634166666666666,
+        "phone": "+49 (0) 2841 200-0"
+    },
+    {
+        "name": "Mönchengladbach Elisabeth Krankenhaus Rheydt-Städtische Kliniken Mönchengladbach",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.157,
+        "lon": 6.418166666666667,
+        "phone": "+4921663940"
+    },
+    {
+        "name": "Münster-Hiltrup Herz-Jesu-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.910833333333336,
+        "lon": 7.633666666666667,
+        "phone": "+49 2501 17-0"
+    },
+    {
+        "name": "Nettetal Städtisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.30866666666667,
+        "lon": 6.271166666666667,
+        "phone": "+4921531250"
+    },
+    {
+        "name": "Neuss Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.212833333333336,
+        "lon": 6.66,
+        "phone": "+4921318880"
+    },
+    {
+        "name": "Neuss Gelände KPB, Jülicher Landstraße 178",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.186166666666665,
+        "lon": 6.6786666666666665,
+        "phone": "+4921313000"
+    },
+    {
+        "name": "Olsberg Elisabeth-Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.35633333333333,
+        "lon": 8.475,
+        "phone": "+4929628030"
+    },
+    {
+        "name": "Paderborn Brüderkrankenhaus St. Josef",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.7125,
+        "lon": 8.759666666666666,
+        "phone": "+4952517020"
+    },
+    {
+        "name": "Paderborn St. Johannisstift Ev. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.723333333333336,
+        "lon": 8.747166666666667,
+        "phone": "+49 5251 401-0"
+    },
+    {
+        "name": "Paderborn St. Louise Krankenhaus Frauen und Kinderklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.7095,
+        "lon": 8.764666666666667,
+        "phone": ""
+    },
+    {
+        "name": "Paderborn St. Vincenz Krankenhaus Haupthaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.718,
+        "lon": 8.760833333333334,
+        "phone": "+495251860"
+    },
+    {
+        "name": "Plettenberg",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.21333333333333,
+        "lon": 7.886666666666667,
+        "phone": ""
+    },
+    {
+        "name": "Radevormwald Sana Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.19883333333333,
+        "lon": 7.352,
+        "phone": "+49 2195 600-0"
+    },
+    {
+        "name": "Recklinghausen Knappschafts Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.61866666666667,
+        "lon": 7.175833333333333,
+        "phone": ""
+    },
+    {
+        "name": "Recklinghausen Prosper-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.607,
+        "lon": 7.193666666666667,
+        "phone": "+492361540"
+    },
+    {
+        "name": "Rheda-Wiedenbrueck St.-Vinzenz-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.83283333333333,
+        "lon": 8.3305,
+        "phone": "+4952425910"
+    },
+    {
+        "name": "Salzkotten St. Josefs Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.67883333333333,
+        "lon": 8.6175,
+        "phone": "+49 5258 100"
+    },
+    {
+        "name": "Schmallenberg Fachkrankenhaus Kloster Grafschaft",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.1445,
+        "lon": 8.323333333333334,
+        "phone": "+49 2972 79100"
+    },
+    {
+        "name": "Klinikum Stadt Soest",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.56616666666667,
+        "lon": 8.077,
+        "phone": "+492921900"
+    },
+    {
+        "name": "Soest Marienkrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.574666666666666,
+        "lon": 8.1125,
+        "phone": "+4929213910"
+    },
+    {
+        "name": "Solingen Feuerwache 3",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.185833333333335,
+        "lon": 7.0525,
+        "phone": ""
+    },
+    {
+        "name": "Solingen Feuerwache 3",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.185833333333335,
+        "lon": 7.0525,
+        "phone": "0212 / 220 2-111"
+    },
+    {
+        "name": "Solingen Feuerwache 3",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.185833333333335,
+        "lon": 7.0525,
+        "phone": ""
+    },
+    {
+        "name": "Stolberg (Rhld.)Bethlehem Gesundheitszentrum Stolberg",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.773833333333336,
+        "lon": 6.2316666666666665,
+        "phone": "+4924021070"
+    },
+    {
+        "name": "Unna Evangelisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.532833333333336,
+        "lon": 7.676333333333333,
+        "phone": "+4923031000"
+    },
+    {
+        "name": "Velbert Helios Klinik Niederberg",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.351166666666664,
+        "lon": 7.0125,
+        "phone": "+4920519820"
+    },
+    {
+        "name": "Viersen Allg. Krankenhaus Viersen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.251333333333335,
+        "lon": 6.381333333333333,
+        "phone": "+49 2162 104-0"
+    },
+    {
+        "name": "Warendorf Josephs-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.961666666666666,
+        "lon": 8.003333333333334,
+        "phone": "+49 2581 20-0"
+    },
+    {
+        "name": "Warstein Krankenhaus Maria Hilf",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.44133333333333,
+        "lon": 8.355833333333333,
+        "phone": "+4929028910"
+    },
+    {
+        "name": "Werl Mariannen-Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.55083333333333,
+        "lon": 7.907,
+        "phone": "+4929228010"
+    },
+    {
+        "name": "Wermelskirchen Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.134166666666665,
+        "lon": 7.2205,
+        "phone": "+492196980"
+    },
+    {
+        "name": "Evangelisches Krankenhaus Wesel",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.6605,
+        "lon": 6.656333333333333,
+        "phone": ""
+    },
+    {
+        "name": "Westerholt Feuerwehr",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.60033333333333,
+        "lon": 7.0841666666666665,
+        "phone": ""
+    },
+    {
+        "name": "Winterberg St. Franziskus-Hospital (nur §25 Abs.2 Nr. 3 Luft VG)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.193333333333335,
+        "lon": 8.536666666666667,
+        "phone": "+4929818020"
+    },
+    {
+        "name": "Wuppertal Helios Klinikum Wuppertal",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.27633333333333,
+        "lon": 7.175833333333333,
+        "phone": "+492028960"
+    },
+    {
+        "name": "Xanten Sankt Josef Hospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.642833333333336,
+        "lon": 6.453833333333334,
+        "phone": "+49 28 01 7100"
+    },
+    {
+        "name": "Altenkirchen (Westerwald)DRK Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.6825,
+        "lon": 7.6295,
+        "phone": "+49 2681 88-0"
+    },
+    {
+        "name": "Andernach Rhein-Mosel Fachklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.428666666666665,
+        "lon": 7.398333333333333,
+        "phone": "+49 (0)2632/407-0"
+    },
+    {
+        "name": "Andernach St. Nikolaus-Stiftshospital",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.44166666666667,
+        "lon": 7.403333333333333,
+        "phone": "+4926324040"
+    },
+    {
+        "name": "Asbach DRK Kamillus Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.66833333333334,
+        "lon": 7.4245,
+        "phone": "+492683590"
+    },
+    {
+        "name": "Bad Bergzabern Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.10666666666667,
+        "lon": 7.9995,
+        "phone": "+4963439500"
+    },
+    {
+        "name": "Birkenfeld Birkenfeld",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.64783333333333,
+        "lon": 7.158333333333333,
+        "phone": "+49678218-0"
+    },
+    {
+        "name": "Bitburg Feuerwache",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.967166666666664,
+        "lon": 6.5275,
+        "phone": ""
+    },
+    {
+        "name": "Cochem Marienkrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.155,
+        "lon": 7.1786666666666665,
+        "phone": "+4926719850"
+    },
+    {
+        "name": "Daun Krankenhaus Daun",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.19283333333333,
+        "lon": 6.835833333333333,
+        "phone": "+4965927150"
+    },
+    {
+        "name": "Dernbach (Westerwald)Herz-Jesu-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.45366666666666,
+        "lon": 7.7861666666666665,
+        "phone": "+49 2602 684-0"
+    },
+    {
+        "name": "Frankenthal (Pfalz)Stadtklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.542833333333334,
+        "lon": 8.3325,
+        "phone": "+4962337711"
+    },
+    {
+        "name": "Hachenburg DRK Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.657,
+        "lon": 7.8295,
+        "phone": "+492662850"
+    },
+    {
+        "name": "Hermeskeil St. Josef-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.657333333333334,
+        "lon": 6.947166666666667,
+        "phone": "+496503810"
+    },
+    {
+        "name": "Klinikum Idar-Oberstein",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.7165,
+        "lon": 7.3196666666666665,
+        "phone": "+496781660"
+    },
+    {
+        "name": "Kandel Südpfalzkliniken",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.086666666666666,
+        "lon": 8.201833333333333,
+        "phone": "+497275710"
+    },
+    {
+        "name": "Kirchen (Sieg)DRK Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.8055,
+        "lon": 7.878666666666667,
+        "phone": "+4927416820"
+    },
+    {
+        "name": "Kirchheimbolanden Westpfalz-Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.65833333333333,
+        "lon": 8.006666666666666,
+        "phone": "+4963524050"
+    },
+    {
+        "name": "Kusel Westpfalz-Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.546,
+        "lon": 7.377666666666666,
+        "phone": "+496381930"
+    },
+    {
+        "name": "Landau in der Pfalz Vinzentius-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.19083333333333,
+        "lon": 8.114333333333333,
+        "phone": ""
+    },
+    {
+        "name": "Landau in der Pfalz Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.205333333333336,
+        "lon": 8.103666666666667,
+        "phone": "+4963419080"
+    },
+    {
+        "name": "Mayen Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.32333333333333,
+        "lon": 7.219833333333334,
+        "phone": "+492651833501"
+    },
+    {
+        "name": "Meisenheim Gesundheitszentrum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.70583333333333,
+        "lon": 7.6771666666666665,
+        "phone": "+4967539100"
+    },
+    {
+        "name": "Nastätten Paulinenstift",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.2025,
+        "lon": 7.855333333333333,
+        "phone": "+4967728040"
+    },
+    {
+        "name": "Neustadt an der Weinstraße Marienkrankenhaus Hetzelstift",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.3455,
+        "lon": 8.148666666666667,
+        "phone": "+4963218590"
+    },
+    {
+        "name": "Pirmasens Städt. Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.192,
+        "lon": 7.6175,
+        "phone": "+4963317140"
+    },
+    {
+        "name": "Remagen Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.5735,
+        "lon": 7.234166666666667,
+        "phone": "+49 2642 28-0"
+    },
+    {
+        "name": "Trier Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.80866666666667,
+        "lon": 6.690833333333334,
+        "phone": "+496512080"
+    },
+    {
+        "name": "Zell (Mosel)Klinikum Mittelmosel",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.025,
+        "lon": 7.168666666666667,
+        "phone": "+49 6542 97-0"
+    },
+    {
+        "name": "Dillingen/ Saar Marienhaus Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.354,
+        "lon": 6.7316666666666665,
+        "phone": "+4968317080"
+    },
+    {
+        "name": "Homburg Universitätsklinikum Boden",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.301833333333335,
+        "lon": 7.346166666666667,
+        "phone": "+49684116-0"
+    },
+    {
+        "name": "Merzig SHK Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.45583333333333,
+        "lon": 6.633,
+        "phone": "+49(0)6861/705-0"
+    },
+    {
+        "name": "Neunkirchen Marienhausklinik St. Josef Kohlhof",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.3175,
+        "lon": 7.228,
+        "phone": "+4968213630"
+    },
+    {
+        "name": "Püttlingen Krankenhaus Püttlingen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.27616666666667,
+        "lon": 6.866333333333333,
+        "phone": "+496898550"
+    },
+    {
+        "name": "Saarbrücken Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.222833333333334,
+        "lon": 6.996333333333333,
+        "phone": "+49 681 963-0"
+    },
+    {
+        "name": "Marienkrankenhaus St. Wendel",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.4545,
+        "lon": 7.179666666666667,
+        "phone": "+4968515901"
+    },
+    {
+        "name": "Sulzbach/ Saar Knappschaftsklinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.2975,
+        "lon": 7.053333333333334,
+        "phone": "+49(0)6897/5740"
+    },
+    {
+        "name": "Annaberg-Buchholz Erzgebirgsklinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.593666666666664,
+        "lon": 13.003,
+        "phone": "+493733800"
+    },
+    {
+        "name": "Arnsdorf Sächsisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.092166666666664,
+        "lon": 13.998,
+        "phone": "+4935200260"
+    },
+    {
+        "name": "Bischofswerda Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.136833333333335,
+        "lon": 14.1775,
+        "phone": "+4935947870"
+    },
+    {
+        "name": "Delitzsch Platz am Park",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.53216666666667,
+        "lon": 12.341833333333334,
+        "phone": ""
+    },
+    {
+        "name": "Dresden Städt. Krankenhaus, Industriestrasse 40",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.09,
+        "lon": 13.7095,
+        "phone": "+49 351 8560"
+    },
+    {
+        "name": "Ebersbach-Neugersdorf Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.00533333333333,
+        "lon": 14.568333333333333,
+        "phone": "+493583881000"
+    },
+    {
+        "name": "Glauchau Klinikum Rudolf Virchow",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.808,
+        "lon": 12.5545,
+        "phone": "+493763430"
+    },
+    {
+        "name": "Grimma Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.23716666666667,
+        "lon": 12.719333333333333,
+        "phone": "+49343793784000"
+    },
+    {
+        "name": "Hartmannsdorf Diakoniekrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.883,
+        "lon": 12.7895,
+        "phone": "+4937227610"
+    },
+    {
+        "name": "Kamenz Malteser Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.26416666666667,
+        "lon": 14.125333333333334,
+        "phone": "+49 3578 786-0"
+    },
+    {
+        "name": "Kirchberg Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.626333333333335,
+        "lon": 12.563,
+        "phone": "+49376028-0"
+    },
+    {
+        "name": "Lichtenstein Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.74783333333333,
+        "lon": 12.635333333333334,
+        "phone": "+49 37204 32 0"
+    },
+    {
+        "name": "Radeberg Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.1245,
+        "lon": 13.930833333333334,
+        "phone": "+4935284590"
+    },
+    {
+        "name": "Reichenbach im Vogtland Paracelsus-Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.612833333333334,
+        "lon": 12.312,
+        "phone": "+493765542401"
+    },
+    {
+        "name": "Rodewisch Klinikum Obergöltzsch/Rodewisch",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.52333333333333,
+        "lon": 12.411666666666667,
+        "phone": "+4937443610"
+    },
+    {
+        "name": "Stollberg/Erzgeb.Kreiskrankenhaus - Jahnsdorfer Str. 2",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.714166666666664,
+        "lon": 12.788666666666666,
+        "phone": "+4937296530"
+    },
+    {
+        "name": "Weißwasser/O.L.Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.50333333333333,
+        "lon": 14.6255,
+        "phone": "+4935762670"
+    },
+    {
+        "name": "Werdau Pleißental Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.7425,
+        "lon": 12.365333333333334,
+        "phone": "+4937614440"
+    },
+    {
+        "name": "Zittau Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.8995,
+        "lon": 14.822,
+        "phone": "+493583881000"
+    },
+    {
+        "name": "Zwickau Heinrich-Braun-Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.723,
+        "lon": 12.471166666666667,
+        "phone": "+49375510"
+    },
+    {
+        "name": "Chemnitz Klinikum - Zentralbereich PI",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.84616666666667,
+        "lon": 12.883333333333333,
+        "phone": ""
+    },
+    {
+        "name": "AMEOS Klinikum Aschersleben",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.74466666666667,
+        "lon": 11.456666666666667,
+        "phone": "+49 3473 970"
+    },
+    {
+        "name": "Gesundheitszentrum Bitterfeld-Wolfen",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.633,
+        "lon": 12.333,
+        "phone": "+49 3493 31-0"
+    },
+    {
+        "name": "-Anhalt Dessau-Roßlau Städtisches Klinikum (Boden)",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.81583333333333,
+        "lon": 12.197166666666666,
+        "phone": "+493405010"
+    },
+    {
+        "name": "-Anhalt Halberstadt AMEOS Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.901666666666664,
+        "lon": 11.052166666666666,
+        "phone": "+49 3941 640"
+    },
+    {
+        "name": "-Anhalt Haldensleben AMEOS Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.28616666666667,
+        "lon": 11.377,
+        "phone": "+49 3904 4740"
+    },
+    {
+        "name": "-Anhalt Hettstedt Helios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.66116666666667,
+        "lon": 11.493333333333334,
+        "phone": "+4934769330"
+    },
+    {
+        "name": "-Anhalt Möser Lungenklinik Lostau",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.216166666666666,
+        "lon": 11.729166666666666,
+        "phone": "+493922280"
+    },
+    {
+        "name": "-Anhalt Naumburg (Saale)Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.163,
+        "lon": 11.815166666666666,
+        "phone": "+4934452100"
+    },
+    {
+        "name": "-Anhalt Oschersleben (Bode)Bördeklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.06633333333333,
+        "lon": 11.1925,
+        "phone": "+4939499350"
+    },
+    {
+        "name": "-Anhalt Quedlinburg Harzklinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.79333333333334,
+        "lon": 11.162833333333333,
+        "phone": "+4939469090"
+    },
+    {
+        "name": "Carl-von-Basedow-Klinikum Merseburg Standort Querfurt",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.3705,
+        "lon": 11.606,
+        "phone": "+493461270"
+    },
+    {
+        "name": "-Anhalt Salzwedel Altmark-Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.857,
+        "lon": 11.145,
+        "phone": "+49 (0)3901 88-6"
+    },
+    {
+        "name": "-Anhalt Schönebeck Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.013333333333335,
+        "lon": 11.738833333333334,
+        "phone": "+49 3928 640"
+    },
+    {
+        "name": "-Anhalt Seehausen (Altmark)Diakoniekrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.879666666666665,
+        "lon": 11.743833333333333,
+        "phone": "+493938660"
+    },
+    {
+        "name": "-Anhalt Staßfurt Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.85366666666667,
+        "lon": 11.591666666666667,
+        "phone": ""
+    },
+    {
+        "name": "Damp Helios Ostseeklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 54.58583333333333,
+        "lon": 10.023333333333333,
+        "phone": "04352-806001"
+    },
+    {
+        "name": "SANA Kliniken Lübeck",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.848,
+        "lon": 10.687166666666666,
+        "phone": "0451 585-01"
+    },
+    {
+        "name": "Reinbek St. Adolf Stift",
+        "type": "Klinik (mit Heliport)",
+        "lat": 53.508833333333335,
+        "lon": 10.242166666666666,
+        "phone": "+494072800"
+    },
+    {
+        "name": "Altenburg Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.97416666666667,
+        "lon": 12.442833333333333,
+        "phone": "+493447520"
+    },
+    {
+        "name": "Apolda Robert-Koch-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.01383333333333,
+        "lon": 11.513,
+        "phone": "+493644571000"
+    },
+    {
+        "name": "Bad Langensalza Hufeland Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.102,
+        "lon": 10.654,
+        "phone": "+4936038550"
+    },
+    {
+        "name": "Blankenhain Helios Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.8595,
+        "lon": 11.338666666666667,
+        "phone": "+493645950"
+    },
+    {
+        "name": "Eisenberg Waldkrankenhaus Rudolf Elle",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.956833333333336,
+        "lon": 11.8815,
+        "phone": "+493669180"
+    },
+    {
+        "name": "Erfurt Katholisches Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.94616666666667,
+        "lon": 11.0855,
+        "phone": "+493616540"
+    },
+    {
+        "name": "SRH Wald-Klinikum Gera",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.867,
+        "lon": 12.050833333333333,
+        "phone": "+493658280"
+    },
+    {
+        "name": "Greiz Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.66416666666667,
+        "lon": 12.199666666666667,
+        "phone": "+493661460"
+    },
+    {
+        "name": "Ilmenau Ilm-Kreis-Klinik, Oehrenstöcker Str. 32, 98693 Ilmenau",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.67966666666667,
+        "lon": 10.918333333333333,
+        "phone": "+4936776060"
+    },
+    {
+        "name": "MühlhausenÖkumenisches Hainich Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.209666666666664,
+        "lon": 10.403833333333333,
+        "phone": "+49 3601 8030"
+    },
+    {
+        "name": "Schmalkalden Elisabeth Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.721666666666664,
+        "lon": 10.440333333333333,
+        "phone": "+4936836450"
+    },
+    {
+        "name": "Sondershausen Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.37383333333333,
+        "lon": 10.879666666666667,
+        "phone": "+493632670"
+    },
+    {
+        "name": "Bad Reichenhall Kreisklinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 47.72866666666667,
+        "lon": 12.872833333333332,
+        "phone": "+4986517720"
+    },
+    {
+        "name": "Kliniken Ostallgäu Kaufbeuren, Klinik Buchloe",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.033,
+        "lon": 10.724166666666667,
+        "phone": "+4982415040"
+    },
+    {
+        "name": "Klinikum Kulmbach",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.1175,
+        "lon": 11.466666666666667,
+        "phone": "+499221980"
+    },
+    {
+        "name": "Landshut Lu Ka Med Klinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.524166666666666,
+        "lon": 12.151166666666667,
+        "phone": ""
+    },
+    {
+        "name": "Schwandorf St. Barbara Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.31616666666667,
+        "lon": 12.112833333333333,
+        "phone": "+499431520"
+    },
+    {
+        "name": "Tirschenreuth Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.8845,
+        "lon": 12.332333333333333,
+        "phone": "+49 9631 87-0"
+    },
+    {
+        "name": "Vilshofen an der Donau Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 48.62716666666667,
+        "lon": 13.198333333333334,
+        "phone": "+4985412060"
+    },
+    {
+        "name": "Elbe-Elster Klinikum Gmb H, Standort Finsterwalde",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.63633333333333,
+        "lon": 13.698333333333334,
+        "phone": "+4935315030"
+    },
+    {
+        "name": "Heppenheim (Bergstraße)Kreiskrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.629333333333335,
+        "lon": 8.6235,
+        "phone": "+4962527010"
+    },
+    {
+        "name": "Rüsselsheim am Main Gesundheits- und Pflegezentrum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.98283333333333,
+        "lon": 8.425666666666666,
+        "phone": "+49 6142 88-0"
+    },
+    {
+        "name": "Duderstadt St. Martini Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.517,
+        "lon": 10.248,
+        "phone": "+4955278420"
+    },
+    {
+        "name": "Osnabrück Paracelsus Klinik",
+        "type": "Klinik (mit Heliport)",
+        "lat": 52.29,
+        "lon": 8.012,
+        "phone": "+49541335000"
+    },
+    {
+        "name": "Duisburg Malteser Krankenhaus St. Anna",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.3655,
+        "lon": 6.756166666666667,
+        "phone": "+49 203 755-0"
+    },
+    {
+        "name": "Düsseldorf Florence-Nightingale-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.3005,
+        "lon": 6.7505,
+        "phone": "+49 211 409-0"
+    },
+    {
+        "name": "Sankt Augustin Asklepios Kinderherzzentrum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.77633333333333,
+        "lon": 7.1803333333333335,
+        "phone": "02241 249680"
+    },
+    {
+        "name": "Montabaur Brüderkrankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 50.431333333333335,
+        "lon": 7.833,
+        "phone": "+4926021220"
+    },
+    {
+        "name": "Speyer St. Vincentius Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.31633333333333,
+        "lon": 8.4205,
+        "phone": "+4962321330"
+    },
+    {
+        "name": "Lebach Caritas-Krankenhaus",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.4195,
+        "lon": 6.888,
+        "phone": "+49 6881 501-0"
+    },
+    {
+        "name": "Völklingen SHG Kliniken",
+        "type": "Klinik (mit Heliport)",
+        "lat": 49.25666666666667,
+        "lon": 6.854166666666667,
+        "phone": "+49(0)6898/12-0"
+    },
+    {
+        "name": "-Anhalt Wernigerode Harzklinikum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 51.83583333333333,
+        "lon": 10.773666666666667,
+        "phone": "+4939469090"
+    },
+    {
+        "name": "Kiel Lubinus Clinicum",
+        "type": "Klinik (mit Heliport)",
+        "lat": 54.352,
+        "lon": 10.117166666666666,
+        "phone": "+49 431 388-0"
     }
 ];
