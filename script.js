@@ -960,56 +960,71 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 });
 
 // --- Export Logic ---
-document.getElementById('exportBtn').addEventListener('click', async () => {
-    exportAppAsImage();
-});
-
-async function exportAppAsImage() {
-    const exportBtn = document.getElementById('exportBtn');
-    const originalText = exportBtn.innerHTML;
-    exportBtn.innerHTML = '⏳...';
-    exportBtn.disabled = true;
-
+async function triggerExport() {
+    updateStatusProgress("Export wird vorbereitet...", 5);
     try {
-        const canvas = await generateScreenshotCanvas();
-        
-        // Dateiname nach Format: YYYY_MM_DD_Project_Customer_Location
-        const dateInput = document.getElementById('lb_date').value || new Date().toISOString().split('T')[0];
-        const safeDate = dateInput.replace(/-/g, '_');
-        const safeProject = (activeProject.name || 'UAS').replace(/[^a-zA-Z0-9]/g, '_');
-        const safeCustomer = (document.getElementById('lb_customer').value || 'Unbekannt').replace(/[^a-zA-Z0-9]/g, '_');
-        const safeLocation = (document.getElementById('lb_location').value || 'Unbekannt').replace(/[^a-zA-Z0-9]/g, '_');
-        
-        const filename = `${safeDate}_${safeProject}_${safeCustomer}_${safeLocation}.png`;
-
-        canvas.toBlob(async (blob) => {
-            if (!blob) throw new Error("Canvas failure");
-            const file = new File([blob], filename, { type: 'image/png' });
-
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
-                    await navigator.share({
-                        files: [file],
-                        title: 'UAV Flight Documentation',
-                        text: `Dokumentation für ${safeProject}`
-                    });
-                } catch (err) {
-                    if (err.name !== 'AbortError') downloadBlob(blob, filename);
-                }
-            } else {
-                downloadBlob(blob, filename);
-            }
+        const canvas = await generateScreenshotCanvas((msg, p) => updateStatusProgress(msg, p));
+        updateStatusProgress("Download startet...", 95);
+        canvas.toBlob((blob) => {
+            downloadBlob(blob, `Skyseed_FlightLog_${activeProject.name || 'Export'}_${new Date().toISOString().split('T')[0]}.png`);
+            hideStatusProgress();
         }, 'image/png');
-    } catch (err) {
-        console.error("Export failed", err);
+    } catch (e) {
+        console.error("Export Error:", e);
+        hideStatusProgress();
         alert("Export fehlgeschlagen.");
-    } finally {
-        exportBtn.innerHTML = originalText;
-        exportBtn.disabled = false;
     }
 }
 
-async function generateScreenshotCanvas() {
+document.getElementById('exportBtn').addEventListener('click', triggerExport);
+
+async function updateStatusProgress(message, percentage) {
+    let overlay = document.getElementById('status-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'status-overlay';
+        overlay.innerHTML = `
+            <div class="status-overlay-content">
+                <div class="status-spinner"></div>
+                <div id="status-message">Vorbereiten...</div>
+                <div class="progress-bar-container">
+                    <div id="status-progress-bar"></div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            #status-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(15, 23, 42, 0.85); display: flex; align-items: center; justify-content: center;
+                z-index: 10000; backdrop-filter: blur(8px); font-family: 'Outfit', sans-serif;
+            }
+            .status-overlay-content { text-align: center; width: 80%; max-width: 400px; }
+            #status-message { color: white; margin-bottom: 1rem; font-size: 1.2rem; font-weight: 600; }
+            .progress-bar-container { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+            #status-progress-bar { width: 0%; height: 100%; background: var(--accent-color, #38bdf8); transition: width 0.3s ease; }
+            .status-spinner { 
+                width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color, #38bdf8);
+                border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1.5rem; 
+            }
+            @keyframes spin { to { transform: rotate(360deg); } }
+        `;
+        document.head.appendChild(style);
+    }
+    overlay.style.display = 'flex';
+    document.getElementById('status-message').innerText = message;
+    document.getElementById('status-progress-bar').style.width = percentage + '%';
+}
+
+function hideStatusProgress() {
+    const overlay = document.getElementById('status-overlay');
+    if (overlay) overlay.style.display = 'none';
+}
+
+async function generateScreenshotCanvas(onProgress) {
+    if (onProgress) onProgress("Initialisiere Export...", 10);
     // FIX: Scroll to top to prevent offset issues with html2canvas
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
@@ -1052,6 +1067,7 @@ async function generateScreenshotCanvas() {
 
     let mapDataUrl = null;
     try {
+        if (onProgress) onProgress("Erfasse Karte...", 25);
         const liveMap = document.getElementById('map');
         
         // FIX: Karte vor dem Screenshot explizit zentrieren
@@ -1063,7 +1079,7 @@ async function generateScreenshotCanvas() {
             }
             map.invalidateSize({ animate: false });
             // Längere Wartezeit für Kacheln und Marker-Ausrichtung
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, 400));
         }
 
         // Get map dimensions for proper rendering
@@ -1103,6 +1119,7 @@ async function generateScreenshotCanvas() {
     document.body.appendChild(wrapper);
 
     try {
+        if (onProgress) onProgress("Baue Dokument zusammen...", 50);
         const headerClone = document.querySelector('header').cloneNode(true);
         wrapper.appendChild(headerClone);
 
@@ -1164,10 +1181,11 @@ async function generateScreenshotCanvas() {
         const metaClone = document.querySelector('.app-metadata').cloneNode(true);
         wrapper.appendChild(metaClone);
 
-        await new Promise(r => setTimeout(r, 600));
+        await new Promise(r => setTimeout(r, 400));
 
+        if (onProgress) onProgress("Generiere finales Bild...", 75);
         const canvas = await html2canvas(wrapper, {
-            scale: 2,
+            scale: 1.5,
             backgroundColor: '#0f172a',
             useCORS: true,
             logging: false,
@@ -1629,6 +1647,27 @@ function updateProjectBanner() {
 // --- Sync & Drive Export Logic ---
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7rbH4X1HCnvTXfYPJuhu0hboBVeBiHECaVmTXpaunO_iJC-jJAUGFZxgig90_I1Uv/exec"; // Hier kommt die URL des Google Apps Scripts hin
 
+async function sendToGoogleDrive(data) {
+    if (!GOOGLE_SCRIPT_URL) {
+        throw new Error("Google Script URL nicht konfiguriert.");
+    }
+
+    // Wir nutzen Content-Type text/plain um CORS Preflight Probleme zu minimieren
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8' 
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Server-Fehler: ${response.status}`);
+    }
+
+    return await response.text();
+}
+
 async function saveLogbook() {
     const form = document.getElementById('logbookForm');
     if (!form.checkValidity()) {
@@ -1636,17 +1675,18 @@ async function saveLogbook() {
         return;
     }
 
+    updateStatusProgress("Portfolio wird erstellt...", 5);
     const saveBtn = document.querySelector('button[onclick="saveLogbook()"]');
     const originalBtnText = saveBtn.innerHTML;
-    saveBtn.innerHTML = '⏳ Erstelle Portfolio & Sync...';
     saveBtn.disabled = true;
 
     try {
         // Portfolio Screenshot generieren (wie beim Export)
         let screenshotDataUrl = null;
         try {
-            const canvas = await generateScreenshotCanvas();
-            screenshotDataUrl = canvas.toDataURL('image/png');
+            const canvas = await generateScreenshotCanvas((msg, p) => updateStatusProgress(msg, p * 0.8));
+            updateStatusProgress("Komprimiere Daten...", 85);
+            screenshotDataUrl = canvas.toDataURL('image/jpeg', 0.8);
         } catch (screenshotErr) {
             console.warn("Screenshot konnte für Sync nicht erstellt werden", screenshotErr);
         }
@@ -1683,31 +1723,26 @@ async function saveLogbook() {
                 throw new Error("Offline");
             }
 
+            updateStatusProgress("Übertragung zur Cloud...", 90);
             const responseText = await sendToGoogleDrive(formData);
             
             if (responseText.startsWith("Error")) {
                 throw new Error(responseText);
             }
+
             if (responseText === "Duplicate") {
-                alert("Dieser Eintrag wurde bereits hochgeladen (Dublette erkannt).");
-                formData.synced = true; // Mark as synced anyway to avoid re-upload loops
+                formData.synced = true;
+                updateStatusProgress("Dublette erkannt - bereits gesichert!", 100);
             } else {
                 formData.synced = true;
-                alert("Logbuch & Portfolio erfolgreich synchronisiert!");
+                updateStatusProgress("Erfolgreich gespeichert!", 100);
             }
-            
-            form.reset();
-            document.getElementById('lb_rpic2').disabled = true;
-            clearSignature(1);
-            clearSignature(2);
-        } catch (err) {
-            console.warn("Sync failed or offline. Saving as offline...", err);
+            setTimeout(hideStatusProgress, 1000);
+        } catch (syncErr) {
+            console.warn("Sync fehlgeschlagen, speichere lokal", syncErr);
             formData.synced = false;
-            alert("Aktuell keine Verbindung oder Upload-Fehler. Logbuch wurde im Verlauf als 'Offline' markiert und kann später hochgeladen werden.");
-            form.reset();
-            document.getElementById('lb_rpic2').disabled = true;
-            clearSignature(1);
-            clearSignature(2);
+            hideStatusProgress();
+            alert("Offline / Fehler: Log wurde lokal gespeichert und kann später synchronisiert werden.");
         }
 
         // Always save to persistent history after attempting sync
@@ -1715,40 +1750,23 @@ async function saveLogbook() {
             const historyLogs = await localforage.getItem('uav_history_logs') || [];
             historyLogs.unshift(formData); // Add to beginning of history
             await localforage.setItem('uav_history_logs', historyLogs);
-            console.log("Log added to history with sync status:", formData.synced);
         } catch (hErr) {
             console.error("Failed to save to history", hErr);
         }
-    } catch (globalErr) {
-        console.error("Fehler beim Speichern:", globalErr);
+
+        form.reset();
+        document.getElementById('lb_rpic2').disabled = true;
+        // Clear signatures
+        clearSignature(1);
+        clearSignature(2);
+    } catch (err) {
+        console.error("Save Error:", err);
+        hideStatusProgress();
         alert("Fehler beim Speichern des Logbuchs.");
     } finally {
-        saveBtn.innerHTML = originalBtnText;
         saveBtn.disabled = false;
+        saveBtn.innerHTML = originalBtnText;
     }
-}
-
-async function sendToGoogleDrive(data) {
-    if (!GOOGLE_SCRIPT_URL) {
-        throw new Error("Google Script URL nicht konfiguriert.");
-    }
-
-    // Wir müssen die Daten als Text/Plain oder via FormData senden, 
-    // um CORS-Preflight-Probleme bei Apps Scripts zu minimieren, 
-    // aber wir wollen die Antwort lesen können.
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'text/plain;charset=utf-8' 
-        },
-        body: JSON.stringify(data)
-    });
-
-    if (!response.ok) {
-        throw new Error(`Server-Fehler: ${response.status}`);
-    }
-
-    return await response.text();
 }
 
 async function checkPendingLogs() {
@@ -1939,7 +1957,7 @@ async function exportHistoricalLog(index) {
         await loadHistoricalData(index);
         // Wait a small moment for layout and signatures to fully stabilize
         setTimeout(() => {
-            exportAppAsImage();
+            triggerExport();
         }, 500);
     } catch (err) {
         console.error("Historical export failed", err);
