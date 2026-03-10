@@ -1670,12 +1670,40 @@ function updateProjectBanner() {
 }
 
 // --- Sync & Drive Export Logic ---
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7rbH4X1HCnvTXfYPJuhu0hboBVeBiHECaVmTXpaunO_iJC-jJAUGFZxgig90_I1Uv/exec"; // Hier kommt die URL des Google Apps Scripts hin
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwegyc60NYs30kiLw2FGKzeZcqn-2LbdNZ8Y0ja_lC34lnqMaWBSRDgI9FaUjpSads/exec"; // Hier kommt die URL des Google Apps Scripts hin
+const AUTH_STORE_KEY = 'uav_sync_auth';
+
+function getStoredPassword() {
+    const encoded = localStorage.getItem(AUTH_STORE_KEY);
+    return encoded ? atob(encoded) : null;
+}
+
+function setStoredPassword(password) {
+    if (password) {
+        localStorage.setItem(AUTH_STORE_KEY, btoa(password));
+    } else {
+        localStorage.removeItem(AUTH_STORE_KEY);
+    }
+}
 
 async function sendToGoogleDrive(data) {
     if (!GOOGLE_SCRIPT_URL) {
         throw new Error("Google Script URL nicht konfiguriert.");
     }
+
+    // Passwort-Abfrage falls nicht vorhanden
+    let pwd = getStoredPassword();
+    if (!pwd) {
+        pwd = window.prompt("Bitte geben Sie das Sync-Passwort ein:");
+        if (pwd) {
+            setStoredPassword(pwd);
+        } else {
+            throw new Error("Passwort erforderlich für den Cloud-Upload.");
+        }
+    }
+
+    // Passwort mitsenden
+    data.password = pwd;
 
     // Wir nutzen Content-Type text/plain um CORS Preflight Probleme zu minimieren
     const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -1690,7 +1718,15 @@ async function sendToGoogleDrive(data) {
         throw new Error(`Server-Fehler: ${response.status}`);
     }
 
-    return await response.text();
+    const responseText = await response.text();
+
+    // Falls das Passwort falsch war (Error: Unauthorized vom GAS), lokal löschen
+    if (responseText.includes("Unauthorized")) {
+        setStoredPassword(null);
+        throw new Error("Ungültiges Passwort. Bitte erneut versuchen.");
+    }
+
+    return responseText;
 }
 
 async function saveLogbook() {
