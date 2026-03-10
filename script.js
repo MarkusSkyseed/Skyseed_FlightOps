@@ -1318,6 +1318,7 @@ function autoFillWeatherLog() {
 // --- Signature Pad Logic ---
 let signatureCtx1, signatureCtx2;
 let isDrawing1 = false, isDrawing2 = false;
+let hasSignature1 = false, hasSignature2 = false; // Neu: Status für Unterschriften
 let lastX1 = 0, lastY1 = 0;
 let lastX2 = 0, lastY2 = 0;
 
@@ -1327,15 +1328,15 @@ function initSignaturePads() {
 
     if (canvas1) {
         signatureCtx1 = canvas1.getContext('2d');
-        setupCanvas(canvas1, signatureCtx1, (id) => isDrawing1 = id, (val) => isDrawing1 = val, () => isDrawing1, (x, y) => { lastX1 = x; lastY1 = y; }, () => [lastX1, lastY1]);
+        setupCanvas(canvas1, signatureCtx1, (id) => isDrawing1 = id, (val) => isDrawing1 = val, () => isDrawing1, (x, y) => { lastX1 = x; lastY1 = y; }, () => [lastX1, lastY1], () => hasSignature1 = true);
     }
     if (canvas2) {
         signatureCtx2 = canvas2.getContext('2d');
-        setupCanvas(canvas2, signatureCtx2, (id) => isDrawing2 = id, (val) => isDrawing2 = val, () => isDrawing2, (x, y) => { lastX2 = x; lastY2 = y; }, () => [lastX2, lastY2]);
+        setupCanvas(canvas2, signatureCtx2, (id) => isDrawing2 = id, (val) => isDrawing2 = val, () => isDrawing2, (x, y) => { lastX2 = x; lastY2 = y; }, () => [lastX2, lastY2], () => hasSignature2 = true);
     }
 }
 
-function setupCanvas(canvas, ctx, setIsDrawing, getIsDrawingSet, getIsDrawing, setLastPos, getLastPos) {
+function setupCanvas(canvas, ctx, setIsDrawing, getIsDrawingSet, getIsDrawing, setLastPos, getLastPos, onDraw) {
     ctx.lineWidth = 2;
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
@@ -1365,6 +1366,7 @@ function setupCanvas(canvas, ctx, setIsDrawing, getIsDrawingSet, getIsDrawing, s
         ctx.lineTo(x, y);
         ctx.stroke();
         setLastPos(x, y);
+        if (onDraw) onDraw(); // Markiert das Feld als unterschrieben
     };
 
     const stop = () => setIsDrawing(false);
@@ -1384,6 +1386,9 @@ function clearSignature(num) {
     const ctx = num === 1 ? signatureCtx1 : signatureCtx2;
     if (ctx && canvas) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Status zurücksetzen
+        if (num === 1) hasSignature1 = false;
+        if (num === 2) hasSignature2 = false;
     }
 }
 
@@ -1692,6 +1697,18 @@ async function saveLogbook() {
     const form = document.getElementById('logbookForm');
     if (!form.checkValidity()) {
         form.reportValidity();
+        return;
+    }
+
+    // Validierung der Unterschriften
+    if (!hasSignature1) {
+        alert("Bitte unterschreiben Sie als RPIC 1.");
+        return;
+    }
+
+    const rpic2Value = document.getElementById('lb_rpic2').value.trim();
+    if (rpic2Value !== "" && !hasSignature2) {
+        alert("Bitte unterschreiben Sie als RPIC 2, da ein zweiter Pilot eingetragen wurde.");
         return;
     }
 
