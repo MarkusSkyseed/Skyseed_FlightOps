@@ -45,7 +45,6 @@
                 </div>
                 <div style="display:flex; gap: 0.5rem; align-items:center; flex-wrap: wrap; justify-content: flex-end; flex: 1; min-width: 0;">
                     <div style="display: flex; gap: 0.5rem; flex-wrap: nowrap;">
-                        <button id="refreshBtn" class="btn btn-icon" title="Aktualisieren">🔄</button>
                         <button id="historyBtn" class="btn btn-icon" title="Verlauf" onclick="switchTab('history-view')">
                             🕒 <span class="btn-text" style="margin-left: 0.25rem;">Verlauf</span>
                         </button>
@@ -74,6 +73,22 @@
         <div id="views-container">
             <!-- DASHBOARD VIEW -->
             <div id="dashboard-view" class="view-section active">
+                <!-- Forecast / Time Selection -->
+                <div id="forecastContainer" class="forecast-container" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem; align-items: center;">
+                    <div style="flex: 1; position: relative; display: flex; align-items: center;">
+                        <span style="position: absolute; left: 0.75rem; font-size: 0.9rem; opacity: 0.7; pointer-events: none;">📅</span>
+                        <input type="datetime-local" id="forecastDatePicker" class="log-input" 
+                            style="padding-left: 2.5rem; font-size: 0.85rem; height: 2.5rem; margin: 0; background: rgba(255,255,255,0.05); border: 2px solid var(--card-border); transition: border-color 0.3s ease;">
+                    </div>
+                    <div style="display: flex; gap: 0.25rem;">
+                        <button id="prevDayBtn" class="btn btn-secondary" style="height: 2.5rem; width: 2.5rem; padding: 0; font-size: 0.85rem; display: flex; align-items: center; justify-content: center;" title="Einen Tag zurück">-1T</button>
+                        <button id="nextDayBtn" class="btn btn-secondary" style="height: 2.5rem; width: 2.5rem; padding: 0; font-size: 0.85rem; display: flex; align-items: center; justify-content: center;" title="Einen Tag vor">+1T</button>
+                    </div>
+                    <button id="resetDateBtn" class="btn btn-secondary" style="height: 2.5rem; padding: 0 1rem; font-size: 0.85rem; white-space: nowrap;">
+                        🔄 Jetzt
+                    </button>
+                </div>
+
                 <div id="flight-status" class="status-banner status-loading"
                     style="margin-bottom: 1.5rem; text-align: center;">
                     <h2>Wetterdaten werden geladen...</h2>
@@ -469,6 +484,15 @@
             <div class="gps-badge" id="geoCoords">GPS: --.--° N, --.--° E</div>
             <p class="app-version">App Version: 1.1.1</p>
         </div>
+    </div>
+
+    <!-- Debug Overlay -->
+    <div id="debugOverlay" style="display:none; position:fixed; top:10%; left:5%; width:90%; height:80%; background:rgba(15,23,42,0.98); color:#00ff00; z-index:10000; padding:20px; border-radius:12px; border:1px solid #00ff00; font-family:monospace; overflow:auto;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <h3 style="margin:0;">DIPUL Debug Log</h3>
+            <button onclick="document.getElementById('debugOverlay').style.display='none'" style="background:#333; color:#fff; border:none; padding:5px 15px; cursor:pointer;">Schließen</button>
+        </div>
+        <pre id="debugOutput" style="font-size:12px; white-space:pre-wrap;"></pre>
     </div>
 
     <!-- Bottom Navigation Layer -->

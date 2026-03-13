@@ -57,12 +57,57 @@ let userThresholds = JSON.parse(localStorage.getItem('uavThresholds')) || defaul
 if (!userThresholds.condition) userThresholds.condition = defaultThresholds.condition;
 if (!userThresholds.solar) userThresholds.solar = defaultThresholds.solar;
 
+// --- Global App State ---
+let isOnline = navigator.onLine;
+let selectedDateTime = null; // null means "now"
+
 // --- Global Project State ---
 let activeProject = {
     name: "Kein Projekt geladen",
     area: "",
     geofence: null // Array of [lat, lon]
 };
+
+// --- Debug Logic ---
+let versionClickCount = 0;
+function logDebug(msg, data = null) {
+    const out = document.getElementById('debugOutput');
+    if (!out) return;
+    const timestamp = new Date().toLocaleTimeString();
+    out.innerHTML = `[${timestamp}] ${msg}\n` + (data ? JSON.stringify(data, null, 2) + '\n' : '') + out.innerHTML;
+}
+
+async function fetchWfsDetails(featureId) {
+    if (!featureId) return null;
+    const layerName = featureId.split('.')[0];
+    const url = `https://uas-betrieb.de/geoservices/dipul/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=dipul:${layerName}&featureID=${featureId}&outputFormat=application/json`;
+    
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.features && data.features.length > 0) {
+            return data.features[0].properties;
+        }
+    } catch (e) {
+        console.error("WFS detail fetch failed", e);
+    }
+    return null;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ver = document.querySelector('.app-version');
+    if (ver) {
+        ver.style.cursor = 'pointer';
+        ver.addEventListener('click', () => {
+            versionClickCount++;
+            if (versionClickCount >= 5) {
+                document.getElementById('debugOverlay').style.display = 'block';
+                versionClickCount = 0;
+                logDebug("Debug Modus aktiviert.");
+            }
+        });
+    }
+});
 
 // --- Map & Location State ---
 let map, marker, permanentWms, notamWms, geofenceLayer;
@@ -76,6 +121,7 @@ let isMapInitialized = false;
 // --- App Initialization ---
 // --- App Initialization ---
 async function initApp() {
+    updateMetadata(); // Initial call
     updateLocationSourceBadge();
     updateProjectBanner();
     document.querySelector('.app-version').innerText = `App Version: ${APP_VERSION}`;
@@ -84,6 +130,7 @@ async function initApp() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 currentCoords = { lat: position.coords.latitude, lon: position.coords.longitude };
+                updateMetadata(); // Update immediately once position is found
                 if (activeSource === "geolocation") {
                     refreshAllData();
                 }
@@ -112,6 +159,132 @@ async function initApp() {
     initOfflineStorage();
     initSignaturePads();
     initPilotLogic();
+
+    // --- Network Status ---
+    window.addEventListener('online', () => {
+        isOnline = true;
+        updateOfflineBadge();
+        refreshAllData(); // Auto-refresh when back online
+    });
+    window.addEventListener('offline', () => {
+        isOnline = false;
+        updateOfflineBadge();
+    });
+    updateOfflineBadge();
+
+    // --- Forecast Time Logic ---
+    const datePicker = document.getElementById('forecastDatePicker');
+    const resetBtn = document.getElementById('resetDateBtn');
+    const prevDayBtn = document.getElementById('prevDayBtn');
+    const nextDayBtn = document.getElementById('nextDayBtn');
+    
+    // Set initial date
+    if (datePicker) {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        datePicker.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        updateDatePickerBorder();
+    }
+    
+    if (datePicker) {
+        datePicker.addEventListener('change', (e) => {
+            selectedDateTime = e.target.value;
+            updateDatePickerBorder();
+            refreshAllData();
+        });
+    }
+    
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            selectedDateTime = null;
+            if (datePicker) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                datePicker.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+            updateDatePickerBorder();
+            refreshAllData();
+        });
+    }
+
+    if (prevDayBtn) {
+        prevDayBtn.addEventListener('click', () => adjustDate(-1));
+    }
+    if (nextDayBtn) {
+        nextDayBtn.addEventListener('click', () => adjustDate(1));
+    }
+}
+
+function adjustDate(days) {
+    const datePicker = document.getElementById('forecastDatePicker');
+    if (!datePicker) return;
+
+    let current = selectedDateTime ? new Date(selectedDateTime) : new Date();
+    current.setDate(current.getDate() + days);
+    
+    const year = current.getFullYear();
+    const month = String(current.getMonth() + 1).padStart(2, '0');
+    const day = String(current.getDate()).padStart(2, '0');
+    const hours = String(current.getHours()).padStart(2, '0');
+    const minutes = String(current.getMinutes()).padStart(2, '0');
+    
+    const newVal = `${year}-${month}-${day}T${hours}:${minutes}`;
+    datePicker.value = newVal;
+    selectedDateTime = newVal;
+    updateDatePickerBorder();
+    refreshAllData();
+}
+
+function updateDatePickerBorder() {
+    const datePicker = document.getElementById('forecastDatePicker');
+    if (!datePicker) return;
+
+    if (!selectedDateTime) {
+        datePicker.style.borderColor = '#22c55e'; // Green for "Now"
+        return;
+    }
+
+    const selected = new Date(selectedDateTime);
+    const now = new Date();
+    
+    const isToday = selected.toDateString() === now.toDateString();
+    
+    // Calculate difference in days
+    const diffTime = selected.getTime() - now.getTime();
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+    if (isToday) {
+        datePicker.style.borderColor = '#22c55e'; // Green
+    } else if (diffDays > 0 && diffDays <= 7) {
+        datePicker.style.borderColor = '#f59e0b'; // Orange
+    } else if (diffDays > 7) {
+        datePicker.style.borderColor = '#ef4444'; // Red
+    } else {
+        datePicker.style.borderColor = 'var(--card-border)'; // Default for past or other
+    }
+}
+
+function updateOfflineBadge() {
+    let badge = document.getElementById('offline-map-badge');
+    if (!badge) {
+        badge = document.createElement('div');
+        badge.id = 'offline-map-badge';
+        badge.innerHTML = '<span>⚠️ Offline-Daten (Luftraum)</span>';
+        const mapContainer = document.getElementById('map');
+        if (mapContainer) mapContainer.appendChild(badge);
+    }
+    
+    if (badge) {
+        badge.style.display = isOnline ? 'none' : 'flex';
+    }
 }
 
 function initPilotLogic() {
@@ -139,26 +312,20 @@ function initPilotLogic() {
 }
 
 async function initOfflineStorage() {
+    // Main Log Store
     localforage.config({
         name: 'UAV_FlightForecast',
         storeName: 'offline_logs'
     });
 
+    // Secondary Airspace Cache
+    window.airspaceCache = localforage.createInstance({
+        name: "UAV_FlightForecast",
+        storeName: "dipul_cache"
+    });
+
     // Check for pending logs on startup
     checkPendingLogs();
-}
-
-async function fetchLocationName(lat, lon) {
-    try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
-        const data = await response.json();
-        const city = data.address.city || data.address.town || data.address.village || data.address.county || "Unbekannter Ort";
-        currentCityName = city;
-        updateLocationText(city);
-    } catch (e) {
-        currentCityName = "Standort";
-        updateLocationText(`${lat.toFixed(2)}, ${lon.toFixed(2)}`);
-    }
 }
 
 function updateLocationText(text) {
@@ -170,18 +337,25 @@ function updateMetadata() {
     const timeEl = document.getElementById('dateTime');
 
     if (coordsEl) {
-        const lat = currentCoords.lat;
-        const lon = currentCoords.lon;
-        const latDir = lat >= 0 ? 'N' : 'S';
-        const lonDir = lon >= 0 ? 'E' : 'W';
-        coordsEl.innerText = `GPS: ${Math.abs(lat).toFixed(4)}° ${latDir}, ${Math.abs(lon).toFixed(4)}° ${lonDir}`;
+        // Use activeCoords if available (manual or polygon), otherwise device coords
+        const lat = activeCoords.lat || currentCoords.lat;
+        const lon = activeCoords.lon || currentCoords.lon;
+        
+        if (lat !== 0 || lon !== 0) {
+            const latDir = lat >= 0 ? 'N' : 'S';
+            const lonDir = lon >= 0 ? 'E' : 'W';
+            coordsEl.innerText = `GPS: ${Math.abs(lat).toFixed(4)}° ${latDir}, ${Math.abs(lon).toFixed(4)}° ${lonDir}`;
+        } else {
+            coordsEl.innerText = `GPS: Suche Standort...`;
+        }
     }
 
     if (timeEl) {
-        const now = new Date();
+        const now = selectedDateTime ? new Date(selectedDateTime) : new Date();
         const formattedDate = now.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
-        const formattedTime = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        timeEl.innerText = `Log vom: ${formattedDate}, ${formattedTime} Uhr`;
+        const formattedTime = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+        const prefix = selectedDateTime ? "Vorhersage für" : "Log vom";
+        timeEl.innerText = `${prefix}: ${formattedDate}, ${formattedTime} Uhr`;
     }
 }
 
@@ -205,11 +379,13 @@ async function fetchLocationName(lat, lon) {
 
 // --- Fetch Orchestration ---
 async function refreshAllData() {
+    updateMetadata(); // Always update metadata first (local)
+
     // 1. Determine active coordinates
     if (activeProject.geofence) {
         activeSource = "polygon";
         const center = calculateCentroid(activeProject.geofence);
-        activeCoords = { lat: center.lat, lon: center.lng };
+        activeCoords = { lat: center.lat, lon: center.lon };
     } else if (manualCoords) {
         activeSource = "manual";
         activeCoords = manualCoords;
@@ -228,9 +404,58 @@ async function refreshAllData() {
     const lat = activeCoords.lat;
     const lon = activeCoords.lon;
 
-    const pWeather = fetch(`https://api.brightsky.dev/current_weather?lat=${lat}&lon=${lon}`).then(r => r.json());
+    let pWeather;
+    // Open-Meteo with best_match (includes ICON for DE) to ensure 14 days availability
+    const omUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,precipitation,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,wind_direction_10m,shortwave_radiation,weather_code&timezone=auto&forecast_days=14`;
+
+    pWeather = fetch(omUrl)
+        .then(r => r.json())
+        .then(data => {
+            if (!data.hourly) throw new Error("Keine stündlichen Daten von Open-Meteo erhalten");
+            
+            let idx = 0;
+            const target = selectedDateTime ? new Date(selectedDateTime).getTime() : new Date().getTime();
+            
+            // Find index closest to target time
+            let minDiff = Infinity;
+            data.hourly.time.forEach((t, i) => {
+                const diff = Math.abs(new Date(t).getTime() - target);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    idx = i;
+                }
+            });
+
+            // Threshold for "stale" data (3 hours) OR missing data at that index
+            const isStale = minDiff > 3 * 3600 * 1000 || data.hourly.temperature_2m[idx] === null;
+
+            // Map Open-Meteo response to internal format
+            return {
+                isStale,
+                temperature: data.hourly.temperature_2m[idx],
+                icon: wmoToCondition(data.hourly.weather_code[idx]),
+                cloud_cover: data.hourly.cloud_cover[idx] ?? 0,
+                wind_speed_10: data.hourly.wind_speed_10m[idx] ?? 0,
+                wind_gusts_10: data.hourly.wind_gusts_10m[idx] ?? 0,
+                wind_direction_10: data.hourly.wind_direction_10m[idx] ?? 0,
+                solar_60: data.hourly.shortwave_radiation[idx] ?? 0,
+                relative_humidity: data.hourly.relative_humidity_2m[idx] ?? 0,
+                precipitation_60: data.hourly.precipitation[idx] ?? 0,
+                visibility: data.hourly.visibility[idx] ?? 0
+            };
+        })
+        .catch(err => {
+            console.warn("Open-Meteo Fehler, wechsle zu Bright Sky Fallback:", err);
+            if (selectedDateTime) {
+                const dateIso = new Date(selectedDateTime).toISOString();
+                return fetch(`https://api.brightsky.dev/weather?lat=${lat}&lon=${lon}&date=${dateIso}`).then(r => r.json()).then(d => d.weather[0]);
+            } else {
+                return fetch(`https://api.brightsky.dev/current_weather?lat=${lat}&lon=${lon}`).then(r => r.json()).then(d => d.weather);
+            }
+        });
+
     const pAlerts = fetch(`https://api.brightsky.dev/alerts?lat=${lat}&lon=${lon}`).then(r => r.json()).catch(() => ({ alerts: [] }));
-    const pKp = fetchKpIndex();
+    const pKp = fetchKpIndex(selectedDateTime);
 
     // Trigger ERP search proactively
     initErpData();
@@ -253,18 +478,40 @@ async function refreshAllData() {
 
     try {
         const [weatherData, alertsData, kpIndex, dipulData] = await Promise.all([pWeather, pAlerts, pKp, pDipul]);
-        currentWeatherData = weatherData.weather;
-        const alerts = alertsData.alerts || [];
-        updateMetadata();
+        
+        // Ensure we have currentWeatherData (from Open-Meteo or Fallback)
+        currentWeatherData = weatherData;
+
+        let alerts = alertsData.alerts || [];
+
+        // Filter alerts by time/date to ensure they only show when active for the selected forecast period
+        const targetTime = selectedDateTime ? new Date(selectedDateTime).getTime() : new Date().getTime();
+        alerts = alerts.filter(a => {
+            const onset = new Date(a.onset).getTime();
+            const expires = new Date(a.expires).getTime();
+            return targetTime >= onset && targetTime <= expires;
+        });
+
         renderApp(currentWeatherData, kpIndex, dipulData, alerts);
     } catch (error) {
         console.error("Data Load Error:", error);
-        document.getElementById('flight-status').className = "status-banner danger";
-        document.getElementById('flight-status').innerHTML = "<h2>Fehler</h2><p>Daten konnten nicht geladen werden.</p>";
+        const banner = document.getElementById('flight-status');
+        const sub = document.getElementById('flight-status-sub');
+        banner.className = "status-banner danger";
+        banner.querySelector('h2').innerText = "Fehler";
+        if (sub) {
+            sub.innerText = "Daten konnten nicht geladen werden.";
+        } else {
+            banner.innerHTML = "<h2>Fehler</h2><p id='flight-status-sub'>Daten konnten nicht geladen werden.</p>";
+        }
     }
 }
 
-async function fetchKpIndex() {
+async function fetchKpIndex(targetDate = null) {
+    if (targetDate) {
+        return await fetchKpForecast(targetDate);
+    }
+
     try {
         const res = await fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json');
         const data = await res.json();
@@ -273,6 +520,36 @@ async function fetchKpIndex() {
             return parseFloat(data[data.length - 1][1]);
         }
     } catch (e) { console.warn("Kp fetch failed", e); }
+    return null;
+}
+
+async function fetchKpForecast(targetDate) {
+    try {
+        const target = new Date(targetDate).getTime();
+        const res = await fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json');
+        const data = await res.json();
+        
+        if (!data || data.length <= 1) return null;
+        
+        // Header: ["time_tag", "kp", "observed", "noaa_scale"]
+        // We look for the entry closest to our target time
+        let closestEntry = null;
+        let minDiff = Infinity;
+        
+        for (let i = 1; i < data.length; i++) {
+            const entryTime = new Date(data[i][0]).getTime();
+            const diff = Math.abs(target - entryTime);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestEntry = data[i];
+            }
+        }
+        
+        // Return if it's reasonably close (within 4 hours, as Kp is 3h resolution)
+        if (minDiff < 4 * 60 * 60 * 1000) {
+            return parseFloat(closestEntry[1]);
+        }
+    } catch (e) { console.warn("Kp forecast fetch failed", e); }
     return null;
 }
 
@@ -340,6 +617,21 @@ function translateCondition(iconName) {
     return conditionTranslations[iconName] || iconName;
 }
 
+const wmoMapping = {
+    0: 'clear-day',
+    1: 'partly-cloudy-day', 2: 'partly-cloudy-day', 3: 'partly-cloudy-day',
+    45: 'fog', 48: 'fog',
+    51: 'rain', 53: 'rain', 55: 'rain',
+    61: 'rain', 63: 'rain', 65: 'rain',
+    71: 'snow', 73: 'snow', 75: 'snow',
+    80: 'rain', 81: 'rain', 82: 'rain',
+    95: 'thunderstorm', 96: 'thunderstorm', 99: 'thunderstorm'
+};
+
+function wmoToCondition(code) {
+    return wmoMapping[code] || 'cloudy';
+}
+
 const weatherIcons = {
     'clear-day': '☀️', 'clear-night': '🌙', 'partly-cloudy-day': '⛅', 'partly-cloudy-night': '☁️',
     'cloudy': '☁️', 'fog': '🌫️', 'wind': '💨', 'rain': '🌧️', 'sleet': '🌨️', 'snow': '❄️', 'hail': '🧊', 'thunderstorm': '⛈️'
@@ -353,6 +645,64 @@ function getCompassDirection(degrees) {
     if (degrees === null || degrees === undefined) return "-";
     const dirs = ["N", "NNO", "NO", "ONO", "O", "OSO", "SO", "SSO", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
     return dirs[Math.round(degrees / 22.5) % 16];
+}
+
+function formatDipulHeight(p, prefix) {
+    if (!p) return null;
+    
+    const keys = Object.keys(p);
+    // Find keys that start with prefix and have a non-null value
+    const candidateKeys = keys.filter(k => {
+        const kl = k.toLowerCase();
+        return kl.startsWith(prefix) && (
+            kl.includes('limit_altitude') || 
+            kl.includes('limit_value') || 
+            kl.endsWith('limit') ||
+            kl.includes('altitude')
+        );
+    });
+
+    // Pick the first key that actually has a value (including 0)
+    const valKey = candidateKeys.find(k => p[k] !== null && p[k] !== undefined && p[k] !== "");
+    if (!valKey) return null;
+
+    let val = p[valKey];
+    let num = parseFloat(val);
+    if (isNaN(num)) return val;
+
+    const kl = valKey.toLowerCase();
+    
+    // Determine reference
+    let ref = '';
+    if (kl.includes('_msl')) ref = 'MSL';
+    else if (kl.includes('_agl')) ref = 'GND';
+    else if (kl.includes('_pa')) ref = 'STD';
+    else {
+        const refKey = keys.find(k => k.toLowerCase().includes(prefix) && (k.toLowerCase().includes('ref') || k.toLowerCase().includes('reference')));
+        if (refKey) {
+            const r = String(p[refKey]).toUpperCase();
+            ref = (r === 'AGL' || r === 'SURFACE') ? 'GND' : r;
+        }
+    }
+
+    // Determine unit (aviation default is feet if not specified in altitude fields)
+    let unit = 'm';
+    const unitKey = keys.find(k => k.toLowerCase().includes(prefix) && (k.toLowerCase().includes('unit') || k.toLowerCase().includes('uom')));
+    
+    if (unitKey && p[unitKey]) {
+        unit = String(p[unitKey]).toLowerCase();
+    } else if (kl.includes('altitude') || kl.includes('limit')) {
+        unit = 'ft';
+    }
+
+    let displayValue = num;
+    if (unit.includes('ft') || unit === 'f') {
+        displayValue = Math.round(num * 0.3048);
+    } else {
+        displayValue = Math.round(num);
+    }
+    
+    return `${displayValue}m ${ref}`.trim();
 }
 
 // --- Map & dipul Logic ---
@@ -485,19 +835,43 @@ async function fetchDipulData(bboxOrPoint, type) {
     ].map(l => 'dipul:' + l).join(',');
 
     let url;
+    let cacheKey;
+
     if (type === 'bbox' || type === 'point') {
         const bbox = type === 'point'
             ? `${bboxOrPoint.lat - 0.0001},${bboxOrPoint.lon - 0.0001},${bboxOrPoint.lat + 0.0001},${bboxOrPoint.lon + 0.0001}`
             : bboxOrPoint;
 
         url = `https://uas-betrieb.de/geoservices/dipul/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&LAYERS=${layers}&QUERY_LAYERS=${layers}&BBOX=${bbox}&FEATURE_COUNT=50&HEIGHT=1000&WIDTH=1000&INFO_FORMAT=application/json&I=500&J=500&CRS=EPSG:4326`;
+        
+        // Cache Key based on rounded coords for points or raw string for bbox
+        cacheKey = type === 'point' 
+            ? `pt_${bboxOrPoint.lat.toFixed(4)}_${bboxOrPoint.lon.toFixed(4)}`
+            : `bbox_${bbox}`;
+    }
+
+    // Try cache first if offline
+    if (!isOnline && cacheKey && window.airspaceCache) {
+        const cached = await window.airspaceCache.getItem(cacheKey);
+        if (cached) return cached;
     }
 
     try {
         const res = await fetch(url);
-        return await res.json();
+        const data = await res.json();
+        
+        // Save to cache if successful
+        if (data && cacheKey && window.airspaceCache) {
+            window.airspaceCache.setItem(cacheKey, data);
+        }
+        
+        return data;
     } catch (e) {
         console.error("dipul check failed", e);
+        // Fallback to cache even if online fetch fails
+        if (cacheKey && window.airspaceCache) {
+            return await window.airspaceCache.getItem(cacheKey);
+        }
         return null;
     }
 }
@@ -525,13 +899,13 @@ async function fetchDipulMultiPoints(points) {
 }
 
 function calculateCentroid(polygon) {
-    if (!polygon || polygon.length === 0) return { lat: 0, lng: 0 };
+    if (!polygon || polygon.length === 0) return { lat: 0, lon: 0 };
     let lat = 0, lon = 0;
     polygon.forEach(p => {
         lat += p[0];
         lon += p[1];
     });
-    return { lat: lat / polygon.length, lng: lon / polygon.length };
+    return { lat: lat / polygon.length, lon: lon / polygon.length };
 }
 
 function getPolygonBBox(polygon) {
@@ -568,16 +942,49 @@ async function identifyFeature(latlng) {
     try {
         const res = await fetch(url);
         const data = await res.json();
+        
+        logDebug(`IDENTIFY (${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)})`, data);
+
         if (data.features && data.features.length > 0) {
             let content = '<div style="min-width: 200px; color: white; background: #1e293b; padding: 10px; border-radius: 8px;">';
-            data.features.forEach(f => {
-                const p = f.properties;
+            
+            // Parallel fetch details for all clicked features
+            const detailedPropsList = await Promise.all(
+                data.features.map(f => fetchWfsDetails(f.id))
+            );
+
+            logDebug(`ENRICHED PROPS`, detailedPropsList);
+
+            data.features.forEach((f, idx) => {
+                // Merge WMS properties with WFS details (WFS is more complete)
+                const p = { ...f.properties, ...(detailedPropsList[idx] || {}) };
+                const keys = Object.keys(p);
+                const nameKey = keys.find(k => k.toLowerCase() === 'name');
+                const name = p[nameKey] || p.name || p.NAME || '';
+
                 const layerId = f.id.split('.')[0].replace('dipul:', '');
                 const mapping = dipulLayerMapping[layerId] || { category: 'Luftraum', isPersistent: true };
 
+                const lower = formatDipulHeight(p, 'lower');
+                const upper = formatDipulHeight(p, 'upper') || 'unbegrenzt';
+                const heightInfo = lower ? `${lower} - ${upper}` : upper;
+
+                let timeInfo = '';
+                const beginKey = keys.find(k => k.toLowerCase().includes('begin') || k.toLowerCase().includes('valid_from') || k.toLowerCase().includes('start'));
+                const endKey = keys.find(k => k.toLowerCase().includes('end') || k.toLowerCase().includes('valid_to'));
+                
+                if (p[beginKey]) {
+                    const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                    const start = new Date(p[beginKey]).toLocaleString('de-DE', options);
+                    const end = p[endKey] ? new Date(p[endKey]).toLocaleString('de-DE', options) : 'unbekannt';
+                    timeInfo = `<div style="font-size:0.75rem; opacity:0.7; margin-top:4px;">📅 Start: ${start}<br>📅 Ende: ${end}</div>`;
+                }
+
                 content += `<div style="margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">
-                    <strong style="color:var(--accent-color);">${layerId.includes('temporaere') ? 'NOTAM: ' : ''}${p.name || mapping.category}</strong><br>
-                    <span style="font-size:0.8rem; opacity:0.8;">Kategorie: ${mapping.category}</span>
+                    <strong style="color:var(--accent-color);">${layerId.includes('temporaere') ? '⚠️ ' : ''}${name || mapping.category}</strong><br>
+                    <div style="font-size:0.8rem; opacity:0.9;">↕️ ${heightInfo}</div>
+                    <div style="font-size:0.8rem; opacity:0.8;">Kategorie: ${mapping.category}</div>
+                    ${timeInfo}
                 </div>`;
             });
             content += '</div>';
@@ -589,9 +996,34 @@ async function identifyFeature(latlng) {
 // --- Render Logic ---
 function renderApp(weather, kpIndex, dipulData, alerts = []) {
     const grid = document.getElementById('weatherGrid');
+    
+    // Check for stale or missing data (requested time outside forecast range)
+    if (!weather || weather.isStale) {
+        const banner = document.getElementById('flight-status');
+        const sub = document.getElementById('flight-status-sub');
+        banner.className = 'status-banner danger';
+        banner.querySelector('h2').innerText = 'Keine Vorhersagedaten';
+        sub.innerText = 'Der gewählte Zeitraum liegt außerhalb der verfügbaren Vorhersage (max. 14 Tage).';
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; opacity: 0.6;">Wetterdaten für diesen Zeitpunkt nicht verfügbar.</div>';
+        return;
+    }
+
     const windSpeed = weather.wind_speed || weather.wind_speed_10 || 0;
+    const windGusts = weather.wind_gusts_10 || 0;
     const precipitation = weather.precipitation_60 || weather.precipitation_30 || weather.precipitation_10 || 0;
     const solarRad = weather.solar_60 || weather.solar_30 || weather.solar_10 || 0;
+
+    // Wind Logic with Gusts and Color-Thresholds
+    let windColorClass = getTileColor('wind_speed', windSpeed);
+    const windMaxThreshold = 35; // Red limit for normal wind speed
+
+    if (windColorClass !== 'status-red') {
+        if (windGusts > windMaxThreshold * 1.5) {
+            windColorClass = 'status-red';
+        } else if (windGusts > windMaxThreshold) {
+            windColorClass = 'status-yellow';
+        }
+    }
 
     // Process Kp Text
     let kpText = "k.A.";
@@ -620,6 +1052,9 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
         let hasCritical = false;
         dipulData.features.forEach(f => {
             const p = f.properties;
+            const keys = Object.keys(p);
+            const nameKey = keys.find(k => k.toLowerCase() === 'name');
+            
             const layerId = f.id.split('.')[0].replace('dipul:', '');
             const mapping = dipulLayerMapping[layerId] || { category: 'Luftraum', isPersistent: true };
 
@@ -628,10 +1063,14 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
 
             if (isCritical) hasCritical = true;
 
-            const name = p.name || mapping.category;
+            const lower = formatDipulHeight(p, 'lower');
+            const upper = formatDipulHeight(p, 'upper') || 'unbegrenzt';
+            const hStr = lower ? `${lower}-${upper}` : upper;
+
+            const name = p[nameKey] || p.name || p.NAME || mapping.category;
             const label = isCritical
-                ? `⚠️ <strong>${isNotam ? 'NOTAM: ' : ''}${name}</strong>`
-                : `• ${name} (${mapping.category})`;
+                ? `⚠️ <strong>${isNotam ? 'NOTAM: ' : ''}${name}</strong> (${hStr})`
+                : `• ${name} (${hStr})`;
             details.push(label);
         });
         airStatusText = [...new Set(details)].join('<br>');
@@ -643,7 +1082,14 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
         { label: 'Zustand', value: translateCondition(weather.icon), unit: '', icon: getIcon(weather.icon), colorClass: getTileColor('condition', weather.icon) },
         { label: 'Bewölkung', value: `${weather.cloud_cover}`, unit: '%', icon: '☁️', colorClass: 'status-green' },
 
-        { label: 'Windgeschw.', value: `${Math.round(windSpeed)}`, unit: 'km/h', icon: '💨', extra: getCompassDirection(weather.wind_direction_10), colorClass: getTileColor('wind_speed', windSpeed) },
+        { 
+            label: 'Windgeschw.', 
+            value: `${Math.round(windSpeed)}`, 
+            unit: 'km/h', 
+            icon: '💨', 
+            extra: `${getCompassDirection(weather.wind_direction_10)}<br><span style="font-size: 0.8rem; opacity: 0.9;">Böen: ${Math.round(windGusts)} km/h</span>`, 
+            colorClass: windColorClass 
+        },
         { label: 'Solarstrahlung', value: `${Math.round(solarRad)}`, unit: 'W/m²', icon: '☀️', colorClass: getTileColor('solar', solarRad) },
         { label: 'Luftfeuchte', value: `${Math.round(weather.relative_humidity)}`, unit: '%', icon: '💧', colorClass: getTileColor('humidity', weather.relative_humidity) },
 
@@ -683,7 +1129,8 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
     autoFillLogbookWeather(
         translateCondition(weather.icon),
         Math.round(weather.temperature),
-        windSpeed, // Use calculated windSpeed instead of weather.wind_speed
+        windSpeed,
+        windGusts,
         precipitation,
         kpIndex,
         weather.visibility
@@ -716,12 +1163,12 @@ function autoFillLogbookMisc(airStatusHtml) {
     }
 }
 
-function autoFillLogbookWeather(condition, temp, wind, precip, kp, visibility) {
+function autoFillLogbookWeather(condition, temp, wind, gusts, precip, kp, visibility) {
     const weatherField = document.getElementById('lb_weather');
     if (weatherField) {
         const kpText = kp !== null ? `Kp: ${kp.toFixed(1)}` : "Kp: k.A.";
         const visText = visibility !== null ? `Sicht: ${Math.round(visibility / 1000)}km` : "Sicht: k.A.";
-        const windText = `Wind: ${Math.round(wind)}km/h`;
+        const windText = `Wind: ${Math.round(wind)} (${Math.round(gusts)}) km/h`;
         const precipText = `Regen: ${precip.toFixed(1)}mm`;
 
         const fullText = `${condition}, ${temp}°C, ${windText}, ${precipText}, ${kpText}, ${visText}`;
@@ -955,9 +1402,7 @@ document.getElementById('manualCoordsInput').addEventListener('change', function
 });
 
 // --- Refresh Button ---
-document.getElementById('refreshBtn').addEventListener('click', () => {
-    refreshAllData();
-});
+// (Entfernt, da nicht mehr benötigt)
 
 // --- Export Logic ---
 async function triggerExport() {
@@ -1052,7 +1497,7 @@ async function generateScreenshotCanvas(onProgress) {
 
     window.getSelection().removeAllRanges();
 
-    const buttonsToHide = document.querySelectorAll('#exportBtn, #refreshBtn, #historyBtn, #planImportBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small');
+    const buttonsToHide = document.querySelectorAll('#exportBtn, #historyBtn, #planImportBtn, .nav-btn, .bottom-nav, .signature-tools, .btn-small, #prevDayBtn, #nextDayBtn, #resetDateBtn');
     const originalOpacities = Array.from(buttonsToHide).map(b => b.style.opacity);
     buttonsToHide.forEach(b => b.style.opacity = '0');
 
@@ -1066,7 +1511,7 @@ async function generateScreenshotCanvas(onProgress) {
         .tile.status-red { background: #3c202f !important; border-color: rgba(239, 68, 68, 0.5) !important; }
         header h1 { background: none !important; -webkit-text-fill-color: #f8fafc !important; color: #f8fafc !important; }
         .title, .value, .unit, .icon, header p, .log-input { opacity: 1 !important; color: white !important; }
-        .log-input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+        .log-input { background: rgba(255,255,255,0.05) !important; }
         .status-banner.good { background: #133a34 !important; }
         .status-banner.warning { background: #3b3623 !important; }
         .status-banner.danger { background: #3c202f !important; }
@@ -1103,22 +1548,14 @@ async function generateScreenshotCanvas(onProgress) {
         }
 
         // Get map dimensions for proper rendering
-        const mapSize = map ? map.getSize() : { x: 900, y: 320 };
-        const mapWidth = mapSize.x || 900;
-        const mapHeight = mapSize.y || 320;
-
         const mapCanvas = await html2canvas(liveMap, { 
             useCORS: true, 
             logging: false,
             allowTaint: true,
-            scale: 1,
+            scale: 1, // Höhere Auflösung für den Export
             scrollX: 0,
             scrollY: 0,
-            backgroundColor: null,
-            width: mapWidth,
-            height: mapHeight,
-            windowWidth: mapWidth,
-            windowHeight: mapHeight
+            backgroundColor: null
         });
         mapDataUrl = mapCanvas.toDataURL('image/png');
     } catch (e) { console.warn("Karte konnte nicht gerendert werden", e); }
@@ -1141,6 +1578,9 @@ async function generateScreenshotCanvas(onProgress) {
     try {
         if (onProgress) onProgress("Baue Dokument zusammen...", 50);
         const headerClone = document.querySelector('header').cloneNode(true);
+        
+        // Remove interactive elements from header clone
+        headerClone.querySelectorAll('button, label, #manualInputContainer').forEach(el => el.remove());
         wrapper.appendChild(headerClone);
 
         const statusTitle = document.createElement('div');
@@ -1152,10 +1592,48 @@ async function generateScreenshotCanvas(onProgress) {
         dashboardView.style.display = 'block';
         dashboardView.style.opacity = '1';
 
+        // Improve date display in export
+        const dateInput = dashboardView.querySelector('#forecastDatePicker');
+        if (dateInput) {
+            const originalInput = document.getElementById('forecastDatePicker');
+            const dateValue = originalInput.value;
+            const borderColor = originalInput.style.borderColor;
+            
+            let displayText = "Live-Daten / Jetzt";
+            if (dateValue) {
+                const d = new Date(dateValue);
+                displayText = d.toLocaleString('de-DE', { 
+                    day: '2-digit', month: '2-digit', year: 'numeric', 
+                    hour: '2-digit', minute: '2-digit' 
+                }) + " Uhr";
+            }
+            
+            const replacement = document.createElement('div');
+            replacement.className = 'log-input';
+            replacement.style.cssText = dateInput.style.cssText;
+            replacement.style.borderColor = borderColor;
+            replacement.style.display = 'flex';
+            replacement.style.alignItems = 'center';
+            replacement.style.paddingLeft = '2.5rem';
+            replacement.style.color = 'white';
+            replacement.style.width = '100%';
+            replacement.innerText = displayText;
+            
+            // Remove the +/- buttons and "Jetzt" button from the clone in its new location
+            const buttonsInClone = dateInput.parentNode.querySelectorAll('button');
+            buttonsInClone.forEach(b => b.remove());
+            
+            dateInput.parentNode.replaceChild(replacement, dateInput);
+        }
+
         // FIX: Die fehlerhafte geklonte Map durch unser statisches Bild ersetzen
         const clonedMap = dashboardView.querySelector('#map');
         if (clonedMap && mapDataUrl) {
-            clonedMap.innerHTML = `<img src="${mapDataUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem;" />`;
+            clonedMap.style.height = '360px'; // Deutlich tiefer für den Export
+            clonedMap.style.width = '100%';
+            clonedMap.style.border = 'none';
+            clonedMap.style.margin = '1.5rem 0';
+            clonedMap.innerHTML = `<img src="${mapDataUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; display: block;" />`;
             clonedMap.style.background = 'none';
             clonedMap.className = ""; // Remove leaflet classes
         }
@@ -1766,6 +2244,7 @@ async function saveLogbook() {
 
         const formData = {
             project: activeProject.name,
+            geofence: activeProject.geofence, // Save polygon coordinates
             rpic1: document.getElementById('lb_rpic1').value,
             rpic2: document.getElementById('lb_rpic2').value,
             copter: document.getElementById('lb_copter').value,
@@ -1950,13 +2429,38 @@ async function loadHistoricalData(index) {
             document.getElementById('lb_weather').value = log.weather || '';
             document.getElementById('lb_misc').value = log.misc || '';
 
-            // Bestehenden Geofence/Projekt löschen, um Fokus auf den Log-Standort zu setzen
-            if (geofenceLayer) {
-                map.removeLayer(geofenceLayer);
-                geofenceLayer = null;
+            // Restore geofence if available in the log
+            if (log.geofence) {
+                if (geofenceLayer) map.removeLayer(geofenceLayer);
+                
+                geofenceLayer = L.polygon(log.geofence, {
+                    color: '#38bdf8',
+                    weight: 3,
+                    fillOpacity: 0.2,
+                    dashArray: '5, 10'
+                }).addTo(map);
+
+                activeProject.geofence = log.geofence;
+                activeProject.name = log.project || "Historischer Eintrag";
+                activeSource = "polygon";
+                
+                // Show centering button
+                const polyBtn = document.getElementById('polyCenterBtn');
+                if (polyBtn) polyBtn.style.display = 'block';
+                
+                map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
+            } else {
+                // Bestehenden Geofence/Projekt löschen, wenn keiner im Log ist
+                if (geofenceLayer) {
+                    map.removeLayer(geofenceLayer);
+                    geofenceLayer = null;
+                }
+                activeProject.geofence = null;
+                activeProject.name = "Historischer Eintrag";
+                
+                const polyBtn = document.getElementById('polyCenterBtn');
+                if (polyBtn) polyBtn.style.display = 'none';
             }
-            activeProject.geofence = null;
-            activeProject.name = "Historischer Eintrag";
 
             // Update map if coordinates are available
             if (log.lat && log.lon) {
@@ -1964,6 +2468,9 @@ async function loadHistoricalData(index) {
                 activeSource = "manual";
                 updateMap(log.lat, log.lon);
             }
+
+            // Metadata aktualisieren, um die Koordinaten in der Fußzeile zu zeigen
+            updateMetadata();
 
             // Switch tab first so canvases are visible and have proper dimensions
             switchTab('logbook-view');
@@ -2097,6 +2604,7 @@ async function deleteHistoricalLog(index) {
         console.error("Failed to delete log", err);
     }
 }
+
 
 // Global scope injection
 window.saveLogbook = saveLogbook;

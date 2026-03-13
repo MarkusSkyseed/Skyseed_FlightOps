@@ -99,6 +99,16 @@ header {
     align-items: center;
 }
 
+.forecast-container input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.forecast-container input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
 header h1 {
     font-size: 3rem;
     font-weight: 700;
@@ -196,7 +206,29 @@ header p {
     border-radius: 1rem;
     margin-top: 1.5rem;
     border: 1px solid var(--card-border);
+    position: relative;
     z-index: 1;
+}
+
+#offline-map-badge {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.85);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 @media (max-width: 1024px) {
