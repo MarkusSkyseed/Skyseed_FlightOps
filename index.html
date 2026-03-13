@@ -115,8 +115,9 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
                         <div class="input-group">
                             <label for="lb_rpic1">RPIC 1:</label>
-                            <input type="text" id="lb_rpic1" class="log-input" list="pilot-list-1" placeholder="Pilot 1"
-                                required>
+                            <input type="text" id="lb_rpic1" class="log-input" list="pilot-list-1" placeholder="Pilot 1" required
+                                onfocus="this.oldValue = this.value; this.value = '';" 
+                                onblur="if(this.value === '') this.value = this.oldValue;">
                             <datalist id="pilot-list-1">
                                 <option value="Markus">
                                 <option value="Daniel">
@@ -126,20 +127,24 @@
                         </div>
                         <div class="input-group">
                             <label for="lb_rpic2">RPIC 2:</label>
-                            <input type="text" id="lb_rpic2" class="log-input" list="pilot-list-2" placeholder="Pilot 2"
-                                disabled>
+                            <input type="text" id="lb_rpic2" class="log-input" list="pilot-list-2" placeholder="Pilot 2" disabled
+                                onfocus="this.oldValue = this.value; this.value = '';" 
+                                onblur="if(this.value === '') this.value = this.oldValue;">
                             <datalist id="pilot-list-2">
                                 <option value="Markus">
                                 <option value="Daniel">
                                 <option value="Raphael">
                                 <option value="Leonard">
+                                <option value="N/A">
                             </datalist>
                         </div>
                     </div>
                     <div class="form-grid">
                         <div class="input-group">
                             <label for="lb_copter">Copter Name:</label>
-                            <input type="text" id="lb_copter" class="log-input" list="copter-list" required>
+                            <input type="text" id="lb_copter" class="log-input" list="copter-list" required
+                                onfocus="this.oldValue = this.value; this.value = '';" 
+                                onblur="if(this.value === '') this.value = this.oldValue;">
                             <datalist id="copter-list">
                                 <option value="Alta X - Iron Man">
                                 <option value="Alta X - Hulk">
@@ -188,6 +193,9 @@
                                 <input type="number" id="lb_flights" class="log-input" min="0" required style="flex: 1; text-align: center; font-size: 1.25rem;">
                                 <button type="button" class="btn btn-secondary" style="font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0;" onclick="incrementValue('lb_flights', 1)">+</button>
                             </div>
+                            <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 0.5rem; line-height: 1.2;">
+                                ℹ️ Mit der Eintragung wird bestätigt, dass für jeden Flug die Start- und Lande-Checklisten befolgt wurden.
+                            </p>
                         </div>
                         <div class="input-group">
                             <label for="lb_total_time">Gesamte Flugzeit (in Minuten):</label>
@@ -203,16 +211,33 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="input-group">
+                            <label for="lb_operation">Betriebsform:</label>
+                            <input type="text" id="lb_operation" class="log-input" list="operation-list" value="VLOS" required
+                                onfocus="this.oldValue = this.value; this.value = '';" 
+                                onblur="if(this.value === '') this.value = this.oldValue;">
+                            <datalist id="operation-list">
+                                <option value="VLOS">
+                                <option value="Dual Operator VLOS">
+                                <option value="BVLOS">
+                            </datalist>
+                        </div>
+                        <div class="input-group">
+                            <label for="lb_area_type">Art des Fluggebiets:</label>
+                            <input type="text" id="lb_area_type" class="log-input" list="area-type-list" value="60m AGL" required
+                                onfocus="this.oldValue = this.value; this.value = '';" 
+                                onblur="if(this.value === '') this.value = this.oldValue;">
+                            <datalist id="area-type-list">
+                                <option value="60m AGL">
+                                <option value="15m AGL">
+                            </datalist>
+                        </div>
                     </div>
 
                     <div class="input-group" style="margin-top: 1.5rem;">
                         <label for="lb_events">Besondere Ereignisse (Schäden / Defekte):</label>
                         <textarea id="lb_events" class="log-input" rows="3" placeholder="Keine"></textarea>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="lb_operation">Besondere Betriebsform (BVLOS / DUAL Operator):</label>
-                        <textarea id="lb_operation" class="log-input" rows="2" placeholder="Keine"></textarea>
                     </div>
 
                     <div class="input-group">

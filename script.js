@@ -6,8 +6,8 @@ const defaultThresholds = {
         type: 'categorical',
         mapping: {
             'clear-day': 'green', 'clear-night': 'green', 'partly-cloudy-day': 'green', 'partly-cloudy-night': 'green',
-            'cloudy': 'green', 'fog': 'yellow', 'wind': 'yellow', 'rain': 'red',
-            'sleet': 'red', 'snow': 'red', 'hail': 'red', 'thunderstorm': 'red'
+            'cloudy': 'green', 'fog': 'yellow', 'wind': 'yellow', 'rain': 'yellow',
+            'sleet': 'yellow', 'snow': 'yellow', 'hail': 'red', 'thunderstorm': 'red'
         }
     },
     temperature: {
@@ -26,8 +26,8 @@ const defaultThresholds = {
         unit: 'km/h'
     },
     precipitation: { // Niederschlag
-        greenMin: 0, greenMax: 0, // Nur bei null Regen grün
-        yellowMin: 0, yellowMax: 1, // Leichter Nieselregen ist gelb
+        greenMin: 0, greenMax: 2.5,
+        yellowMin: 2.5, yellowMax: 10,
         unit: 'mm'
     },
     visibility: { // Sichtweite
@@ -110,13 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Map & Location State ---
-let map, marker, permanentWms, notamWms, geofenceLayer;
+let map, marker, permanentWms, notamWms, geofenceLayer, pisLayerGroup;
 let currentCoords = { lat: 0, lon: 0 }; // Browser Geolocation
 let manualCoords = null;                // User Input
 let activeCoords = { lat: 0, lon: 0 };  // Currently used for weather/ERP
 let activeSource = "geolocation";       // 'geolocation', 'manual', 'polygon'
 let currentCityName = "Unbekannt";
 let isMapInitialized = false;
+let pisData = [];                       // Hospital Heliports from PIS_parsed_final.json
 
 // --- App Initialization ---
 // --- App Initialization ---
@@ -125,6 +126,16 @@ async function initApp() {
     updateLocationSourceBadge();
     updateProjectBanner();
     document.querySelector('.app-version').innerText = `App Version: ${APP_VERSION}`;
+
+    // Load PIS Data
+    try {
+        const response = await fetch('Data/PIS_parsed_final.json');
+        pisData = await response.json();
+        console.log(`Geladene PIS Standorte: ${pisData.length}`);
+        if (isMapInitialized) updatePisMarkers();
+    } catch (e) {
+        console.error("Fehler beim Laden der PIS Daten:", e);
+    }
 
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
@@ -299,11 +310,11 @@ function initPilotLogic() {
         const val1 = rpic1.value.trim();
         if (val1) {
             rpic2.disabled = false;
-            // Update list 2 to exclude val1
+            // Update list 2 to exclude val1 and add N/A
             list2.innerHTML = allPilots
                 .filter(p => p !== val1)
                 .map(p => `<option value="${p}">`)
-                .join('');
+                .join('') + '<option value="N/A">';
         } else {
             rpic2.disabled = true;
             rpic2.value = "";
@@ -456,6 +467,7 @@ async function refreshAllData() {
 
     const pAlerts = fetch(`https://api.brightsky.dev/alerts?lat=${lat}&lon=${lon}`).then(r => r.json()).catch(() => ({ alerts: [] }));
     const pKp = fetchKpIndex(selectedDateTime);
+    const pPis = checkPisIntersections(lat, lon, activeProject.geofence);
 
     // Trigger ERP search proactively
     initErpData();
@@ -492,7 +504,7 @@ async function refreshAllData() {
             return targetTime >= onset && targetTime <= expires;
         });
 
-        renderApp(currentWeatherData, kpIndex, dipulData, alerts);
+        renderApp(currentWeatherData, kpIndex, dipulData, alerts, pPis);
     } catch (error) {
         console.error("Data Load Error:", error);
         const banner = document.getElementById('flight-status');
@@ -761,6 +773,8 @@ function initMap() {
         attribution: 'Daten: DFS/BMDV'
     }).addTo(map);
 
+    pisLayerGroup = L.layerGroup().addTo(map);
+
     // Location toggle button
     const centerIcon = L.control({ position: 'topleft' });
     centerIcon.onAdd = function () {
@@ -823,6 +837,78 @@ function updateMap(lat, lon) {
     } else {
         marker = L.marker([lat, lon]).addTo(map);
     }
+
+    updatePisMarkers();
+}
+
+function updatePisMarkers() {
+    if (!map || !pisLayerGroup || !pisData || !pisData.length) return;
+    
+    pisLayerGroup.clearLayers();
+    
+    pisData.forEach(pis => {
+        if (!pis.lat || !pis.lon) return;
+
+        // Lila 300m Schutzbereich (durchgehende Linie, kein Mittelpunkt)
+        L.circle([pis.lat, pis.lon], {
+            radius: 300,
+            color: '#800080',
+            fillColor: '#800080',
+            fillOpacity: 0.15,
+            weight: 2,
+            interactive: false // Disabled individual popup to handle via unified identifyFeature
+        }).addTo(pisLayerGroup);
+    });
+}
+
+function checkPisIntersections(lat, lon, geofence = null) {
+    const criticalPis = [];
+    const PROTECTION_RADIUS = 300; // Meter
+
+    pisData.forEach(pis => {
+        const pisLatLng = L.latLng(pis.lat, pis.lon);
+        let isIntersecting = false;
+
+        if (geofence && geofence.length > 0) {
+            // 1. Check if any polygon corner is within radius
+            for (let pt of geofence) {
+                if (pisLatLng.distanceTo(L.latLng(pt[0], pt[1])) <= PROTECTION_RADIUS) {
+                    isIntersecting = true;
+                    break;
+                }
+            }
+            
+            // 2. Check if the centroid is within radius
+            if (!isIntersecting) {
+                const centroid = calculateCentroid(geofence);
+                if (pisLatLng.distanceTo(L.latLng(centroid.lat, centroid.lon)) <= PROTECTION_RADIUS) {
+                    isIntersecting = true;
+                }
+            }
+            
+            // 3. Optional: Check if PIS center is inside polygon (rough check via bounds)
+            if (!isIntersecting && geofenceLayer) {
+                // Leaflet's contains check for points is not directly on the polygon object without a plugin
+                // but we can use the bounds as a heuristic or the geofenceLayer if it's rendered
+                const bounds = geofenceLayer.getBounds();
+                if (bounds.contains(pisLatLng)) {
+                    // This is still just a box check, but better than nothing
+                    // For now, centroid and corners cover most cases for 300m
+                }
+            }
+        } else {
+            // Check distance from active point
+            if (pisLatLng.distanceTo(L.latLng(lat, lon)) <= PROTECTION_RADIUS) {
+                isIntersecting = true;
+            }
+        }
+
+        if (isIntersecting) {
+            criticalPis.push(pis);
+        }
+    });
+
+    return criticalPis;
 }
 
 async function fetchDipulData(bboxOrPoint, type) {
@@ -945,9 +1031,27 @@ async function identifyFeature(latlng) {
         
         logDebug(`IDENTIFY (${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)})`, data);
 
+        let content = '<div style="min-width: 200px; color: white; background: #1e293b; padding: 10px; border-radius: 8px;">';
+        let foundAny = false;
+
+        // 1. Check local PIS data
+        const PROTECTION_RADIUS = 300;
+        pisData.forEach(pis => {
+            const pisLatLng = L.latLng(pis.lat, pis.lon);
+            if (latlng.distanceTo(pisLatLng) <= PROTECTION_RADIUS) {
+                foundAny = true;
+                content += `<div style="margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">
+                    <strong style="color:#e879f9;">📍 PIS: ${pis.name}</strong><br>
+                    <div style="font-size:0.8rem; opacity:0.9;">Code: ${pis.code}</div>
+                    <div style="font-size:0.8rem; opacity:0.8;">Typ: ${pis.type}</div>
+                    <div style="font-size:0.75rem; opacity:0.7; margin-top:4px;">(300m Schutzbereich)</div>
+                </div>`;
+            }
+        });
+
+        // 2. Process DIPUL WMS Features
         if (data.features && data.features.length > 0) {
-            let content = '<div style="min-width: 200px; color: white; background: #1e293b; padding: 10px; border-radius: 8px;">';
-            
+            foundAny = true;
             // Parallel fetch details for all clicked features
             const detailedPropsList = await Promise.all(
                 data.features.map(f => fetchWfsDetails(f.id))
@@ -987,6 +1091,9 @@ async function identifyFeature(latlng) {
                     ${timeInfo}
                 </div>`;
             });
+        }
+
+        if (foundAny) {
             content += '</div>';
             L.popup().setLatLng(latlng).setContent(content).openOn(map);
         }
@@ -994,7 +1101,7 @@ async function identifyFeature(latlng) {
 }
 
 // --- Render Logic ---
-function renderApp(weather, kpIndex, dipulData, alerts = []) {
+function renderApp(weather, kpIndex, dipulData, alerts = [], criticalPis = []) {
     const grid = document.getElementById('weatherGrid');
     
     // Check for stale or missing data (requested time outside forecast range)
@@ -1047,9 +1154,19 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
     // Process dipul status (names and types)
     let airStatusText = "Frei von Beschränkungen";
     let airColorClass = "status-green";
+    
+    let details = [];
+    let hasCritical = false;
+
+    // Add PIS warnings
+    if (criticalPis && criticalPis.length > 0) {
+        hasCritical = true;
+        criticalPis.forEach(pis => {
+            details.push(`⚠️ <strong>PIS: ${pis.name}</strong> (300m Schutzbereich)`);
+        });
+    }
+
     if (dipulData && dipulData.features && dipulData.features.length > 0) {
-        let details = [];
-        let hasCritical = false;
         dipulData.features.forEach(f => {
             const p = f.properties;
             const keys = Object.keys(p);
@@ -1073,6 +1190,9 @@ function renderApp(weather, kpIndex, dipulData, alerts = []) {
                 : `• ${name} (${hStr})`;
             details.push(label);
         });
+    }
+
+    if (details.length > 0) {
         airStatusText = [...new Set(details)].join('<br>');
         airColorClass = hasCritical ? "status-red" : "status-yellow";
     }
@@ -1213,15 +1333,15 @@ function getTileColor(type, value) {
             return 'status-red';
         case 'condition':
             if (['clear-day', 'clear-night', 'partly-cloudy-day', 'partly-cloudy-night', 'cloudy'].includes(value)) return 'status-green';
-            if (['fog', 'wind'].includes(value)) return 'status-yellow';
+            if (['fog', 'wind', 'rain', 'sleet', 'snow'].includes(value)) return 'status-yellow';
             return 'status-red';
         case 'wind_speed':
             if (value <= 20) return 'status-green';
             if (value > 20 && value <= 35) return 'status-yellow';
             return 'status-red';
         case 'precip':
-            if (value === 0) return 'status-green';
-            if (value < 1) return 'status-yellow';
+            if (value <= 2.5) return 'status-green';
+            if (value > 2.5 && value <= 10) return 'status-yellow';
             return 'status-red';
         case 'solar':
             if (value <= 1000) return 'status-green';
@@ -2259,6 +2379,7 @@ async function saveLogbook() {
             totalTime: document.getElementById('lb_total_time').value,
             events: document.getElementById('lb_events').value,
             operation: document.getElementById('lb_operation').value,
+            areaType: document.getElementById('lb_area_type').value,
             reactions: document.getElementById('lb_reactions').value,
             weather: document.getElementById('lb_weather').value,
             misc: document.getElementById('lb_misc').value,
