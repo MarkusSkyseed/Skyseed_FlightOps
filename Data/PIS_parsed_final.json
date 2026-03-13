@@ -1,0 +1,4403 @@
+[
+  {
+    "name": "Achern Ortenau Klinikum",
+    "lat": 48.62533333333333,
+    "lon": 8.063833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW301",
+    "city": "Unbekannt",
+    "plz": "77785"
+  },
+  {
+    "name": "Allensbach Schmieder Kliniken",
+    "lat": 47.714666666666666,
+    "lon": 9.085,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW302",
+    "city": "Unbekannt",
+    "plz": "87847"
+  },
+  {
+    "name": "Baden-Baden Klinikum Mittelbaden",
+    "lat": 48.784666666666666,
+    "lon": 8.215833333333332,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW309",
+    "city": "Unbekannt",
+    "plz": "50765"
+  },
+  {
+    "name": "Breisach am Rhein HELIOS Rosmann-Klinik",
+    "lat": 48.031,
+    "lon": 7.587,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW405",
+    "city": "Unbekannt",
+    "plz": "37792"
+  },
+  {
+    "name": "Buchen (Odenwald)Kreiskrankenhaus",
+    "lat": 49.524166666666666,
+    "lon": 9.308,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW317",
+    "city": "Buchen (Odenwald)",
+    "plz": "74722"
+  },
+  {
+    "name": "Calw Klinikum Nordschwarzwald",
+    "lat": 48.74666666666667,
+    "lon": 8.747833333333332,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW320",
+    "city": "Calw",
+    "plz": "75365"
+  },
+  {
+    "name": "Crailsheim Klinikum",
+    "lat": 49.13966666666666,
+    "lon": 10.093,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW321",
+    "city": "Unbekannt",
+    "plz": "21745"
+  },
+  {
+    "name": "Filderstadt Die Filderklinik",
+    "lat": 48.647,
+    "lon": 9.202833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW328",
+    "city": "Unbekannt",
+    "plz": "77079"
+  },
+  {
+    "name": "Göppingen Klinikum Christophsbad",
+    "lat": 48.7005,
+    "lon": 9.642166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW336",
+    "city": "Unbekannt",
+    "plz": "28730"
+  },
+  {
+    "name": "Lahr/Schwarzwald Herzzentum",
+    "lat": 48.339666666666666,
+    "lon": 7.8895,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW406",
+    "city": "Unbekannt",
+    "plz": "27793"
+  },
+  {
+    "name": "Enzkreis Kliniken Mühlacker",
+    "lat": 48.950833333333335,
+    "lon": 8.861666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW409",
+    "city": "Mühlacker",
+    "plz": "75417"
+  },
+  {
+    "name": "Müllheim HELIOS Klinik",
+    "lat": 47.810833333333335,
+    "lon": 7.634666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW359",
+    "city": "Unbekannt",
+    "plz": "17937"
+  },
+  {
+    "name": "Öhringen Hohenloher Krankenhaus",
+    "lat": 49.20466666666667,
+    "lon": 9.498333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW361",
+    "city": "Unbekannt",
+    "plz": "57461"
+  },
+  {
+    "name": "Schorndorf Rems-Murr Klinik",
+    "lat": 48.79666666666667,
+    "lon": 9.5295,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW372",
+    "city": "Unbekannt",
+    "plz": "10573"
+  },
+  {
+    "name": "Sigmaringen SRH Kliniken",
+    "lat": 48.0975,
+    "lon": 9.227,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW374",
+    "city": "Unbekannt",
+    "plz": "40724"
+  },
+  {
+    "name": "Sinsheim Kreiskrankenhaus",
+    "lat": 49.25183333333333,
+    "lon": 8.890166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW376",
+    "city": "Unbekannt",
+    "plz": "27488"
+  },
+  {
+    "name": "Titisee-Neustadt Helios Klinik",
+    "lat": 47.92633333333333,
+    "lon": 8.187666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW384",
+    "city": "Unbekannt",
+    "plz": "12798"
+  },
+  {
+    "name": "Überlingen Helios Spital",
+    "lat": 47.774,
+    "lon": 9.150666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW385",
+    "city": "Unbekannt",
+    "plz": "18866"
+  },
+  {
+    "name": "Waldshut-Tiengen Spital",
+    "lat": 47.6225,
+    "lon": 8.209333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW408",
+    "city": "Unbekannt",
+    "plz": "10179"
+  },
+  {
+    "name": "Wangen im Allgäu Oberschwabenklinik",
+    "lat": 47.695,
+    "lon": 9.845533333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW394",
+    "city": "Unbekannt",
+    "plz": "29882"
+  },
+  {
+    "name": "Wertheim Rotkreuzklinik",
+    "lat": 49.76133333333333,
+    "lon": 9.498666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BW399",
+    "city": "Unbekannt",
+    "plz": "29787"
+  },
+  {
+    "name": "Kreiskliniken Altötting",
+    "lat": 48.235,
+    "lon": 12.676666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY304",
+    "city": "Altötting",
+    "plz": "84503"
+  },
+  {
+    "name": "Alzenau Kreiskrankenhaus",
+    "lat": 50.06933333333333,
+    "lon": 9.0765,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY305",
+    "city": "Unbekannt",
+    "plz": "16375"
+  },
+  {
+    "name": "Ansbach Klinikum",
+    "lat": 49.32033333333333,
+    "lon": 10.5605,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY308",
+    "city": "Unbekannt",
+    "plz": "19152"
+  },
+  {
+    "name": "Aschaffenburg Klinikum",
+    "lat": 49.97666666666667,
+    "lon": 9.1885,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY310",
+    "city": "Unbekannt",
+    "plz": "16373"
+  },
+  {
+    "name": "Auerbach i.d.OPf.St. Johannes Klinik",
+    "lat": 49.69833333333333,
+    "lon": 11.620166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY312",
+    "city": "Unbekannt",
+    "plz": "19127"
+  },
+  {
+    "name": "Bad Aibling Ro Med Klinik",
+    "lat": 47.8655,
+    "lon": 12.017833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY319",
+    "city": "Unbekannt",
+    "plz": "16830"
+  },
+  {
+    "name": "Bad Kötzting Krankenhaus",
+    "lat": 49.184333333333335,
+    "lon": 12.860333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY327",
+    "city": "Unbekannt",
+    "plz": "42934"
+  },
+  {
+    "name": "Bad Neustadt a.d.Saale Rhön Klinikum - Boden",
+    "lat": 50.322,
+    "lon": 10.233333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY328",
+    "city": "Unbekannt",
+    "plz": "19761"
+  },
+  {
+    "name": "Bad Reichenhall Kreisklinik",
+    "lat": 47.72866666666667,
+    "lon": 12.872833333333332,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY330",
+    "city": "Unbekannt",
+    "plz": "58343"
+  },
+  {
+    "name": "Bad Tölz Asklepios Stadtklinik",
+    "lat": 47.755833333333335,
+    "lon": 11.551666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY332",
+    "city": "Unbekannt",
+    "plz": "15836"
+  },
+  {
+    "name": "Bad Windsheim Klinik",
+    "lat": 49.51466666666666,
+    "lon": 10.4105,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY334",
+    "city": "Unbekannt",
+    "plz": "45914"
+  },
+  {
+    "name": "Bamberg Klinikum am Bruderwald",
+    "lat": 49.8675,
+    "lon": 10.888,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY336",
+    "city": "Unbekannt",
+    "plz": "80960"
+  },
+  {
+    "name": "Bayreuth Hohe Warte Krankenhaus",
+    "lat": 49.9675,
+    "lon": 11.585833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY338",
+    "city": "Unbekannt",
+    "plz": "89544"
+  },
+  {
+    "name": "Berchtesgaden Kreisklinik",
+    "lat": 47.64033333333333,
+    "lon": 13.006166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY341",
+    "city": "Unbekannt",
+    "plz": "16834"
+  },
+  {
+    "name": "Bernried am Starnberger See Höhenried Reha-Klinik",
+    "lat": 47.879666666666665,
+    "lon": 11.281166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY343",
+    "city": "Bernried am Starnberger See",
+    "plz": "82347"
+  },
+  {
+    "name": "Bobingen Wertach Klinik",
+    "lat": 48.281333333333336,
+    "lon": 10.823666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY346",
+    "city": "Unbekannt",
+    "plz": "55863"
+  },
+  {
+    "name": "Bogen Klinik",
+    "lat": 48.91,
+    "lon": 12.698,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY348",
+    "city": "Unbekannt",
+    "plz": "89432"
+  },
+  {
+    "name": "Kliniken Ostallgäu Kaufbeuren, Klinik Buchloe",
+    "lat": 48.033,
+    "lon": 10.724166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY349",
+    "city": "Buchloe",
+    "plz": "86807"
+  },
+  {
+    "name": "Burgebrach Steigerwald Klinik",
+    "lat": 49.818333333333335,
+    "lon": 10.73,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY350",
+    "city": "Unbekannt",
+    "plz": "19613"
+  },
+  {
+    "name": "Burghausen Kreiskliniken",
+    "lat": 48.1675,
+    "lon": 12.848,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY351",
+    "city": "Unbekannt",
+    "plz": "18448"
+  },
+  {
+    "name": "Burglengenfeld Asklepios Klinik",
+    "lat": 49.204166666666666,
+    "lon": 12.034,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY352",
+    "city": "Unbekannt",
+    "plz": "19313"
+  },
+  {
+    "name": "Cham Klinikum",
+    "lat": 49.22666666666667,
+    "lon": 12.659166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY354",
+    "city": "Unbekannt",
+    "plz": "49341"
+  },
+  {
+    "name": "Coburg Klinikum",
+    "lat": 50.24666666666667,
+    "lon": 10.975,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY355",
+    "city": "Unbekannt",
+    "plz": "33964"
+  },
+  {
+    "name": "Deggendorf Bezirksklinikum Mainkofen",
+    "lat": 48.805,
+    "lon": 12.893333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY356",
+    "city": "Unbekannt",
+    "plz": "39446"
+  },
+  {
+    "name": "Dillingen a.d.Donau St.-Elisabeth-Kreisklinik",
+    "lat": 48.57416666666667,
+    "lon": 10.480833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY358",
+    "city": "Unbekannt",
+    "plz": "88894"
+  },
+  {
+    "name": "Dingolfing DOANAUISAR Klinikum",
+    "lat": 48.62116666666667,
+    "lon": 12.4895,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY359",
+    "city": "Unbekannt",
+    "plz": "18413"
+  },
+  {
+    "name": "Dinkelsbühl Klinik",
+    "lat": 49.08116666666667,
+    "lon": 10.317833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY360",
+    "city": "Unbekannt",
+    "plz": "69155"
+  },
+  {
+    "name": "Eggenfelden Krankenhaus",
+    "lat": 48.412333333333336,
+    "lon": 12.760166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY366",
+    "city": "Unbekannt",
+    "plz": "20843"
+  },
+  {
+    "name": "Eichstätt Freifläche",
+    "lat": 48.8875,
+    "lon": 11.1895,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY635",
+    "city": "Unbekannt",
+    "plz": "98507"
+  },
+  {
+    "name": "Erding Klinikum",
+    "lat": 48.29416666666667,
+    "lon": 11.8955,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY370",
+    "city": "Unbekannt",
+    "plz": "58543"
+  },
+  {
+    "name": "Erlangen Universitätsklinikum Erlangen",
+    "lat": 49.60216666666667,
+    "lon": 11.0225,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY569",
+    "city": "Unbekannt",
+    "plz": "19105"
+  },
+  {
+    "name": "Erlenbach (Main)Helios-Klinik",
+    "lat": 49.81033333333333,
+    "lon": 9.166166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY372",
+    "city": "Unbekannt",
+    "plz": "41639"
+  },
+  {
+    "name": "Freilassing Kreisklinik",
+    "lat": 47.8485,
+    "lon": 12.979833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY374",
+    "city": "Unbekannt",
+    "plz": "56833"
+  },
+  {
+    "name": "Freising Klinikum",
+    "lat": 48.4045,
+    "lon": 11.744166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY375",
+    "city": "Unbekannt",
+    "plz": "18853"
+  },
+  {
+    "name": "Freyung Krankenhaus",
+    "lat": 48.8055,
+    "lon": 13.545333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY376",
+    "city": "Unbekannt",
+    "plz": "69407"
+  },
+  {
+    "name": "Fürth Klinikum",
+    "lat": 49.48416666666667,
+    "lon": 10.975,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY380",
+    "city": "Unbekannt",
+    "plz": "19076"
+  },
+  {
+    "name": "Füssen Klinik",
+    "lat": 47.567,
+    "lon": 10.707,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY382",
+    "city": "Unbekannt",
+    "plz": "18762"
+  },
+  {
+    "name": "Gauting Asklepios Lungenfachklinik",
+    "lat": 48.067,
+    "lon": 11.3525,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY384",
+    "city": "Unbekannt",
+    "plz": "28213"
+  },
+  {
+    "name": "Grafenau Kliniken am goldenen Steig",
+    "lat": 48.8585,
+    "lon": 13.392833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY387",
+    "city": "Unbekannt",
+    "plz": "21944"
+  },
+  {
+    "name": "Gunzenhausen Klinikum Altmühlfranken",
+    "lat": 49.108333333333334,
+    "lon": 10.774666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY390",
+    "city": "Gunzenhausen",
+    "plz": "91710"
+  },
+  {
+    "name": "Haar Isar-Amper-Klinikum",
+    "lat": 48.11783333333333,
+    "lon": 11.747833333333332,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY391",
+    "city": "Unbekannt",
+    "plz": "72855"
+  },
+  {
+    "name": "Hof Klinikum",
+    "lat": 50.30133333333333,
+    "lon": 11.915333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY399",
+    "city": "Unbekannt",
+    "plz": "99503"
+  },
+  {
+    "name": "Kaufbeuren Ostallgäu Klinikum",
+    "lat": 47.8875,
+    "lon": 10.609666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY414",
+    "city": "Unbekannt",
+    "plz": "28760"
+  },
+  {
+    "name": "Kliniken Nordoberpfalz AG - Krankenhaus Kemnath",
+    "lat": 49.86866666666667,
+    "lon": 11.8905,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY416",
+    "city": "Kemnath",
+    "plz": "95478"
+  },
+  {
+    "name": "Kipfenberg Helios Klinik",
+    "lat": 48.9525,
+    "lon": 11.393333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY418",
+    "city": "Unbekannt",
+    "plz": "18511"
+  },
+  {
+    "name": "Kitzingen Klinik",
+    "lat": 49.741,
+    "lon": 10.139166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY420",
+    "city": "Unbekannt",
+    "plz": "67973"
+  },
+  {
+    "name": "Kösching Klinik",
+    "lat": 48.8155,
+    "lon": 11.507833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY421",
+    "city": "Unbekannt",
+    "plz": "19850"
+  },
+  {
+    "name": "Kronach Helios Frankenwaldklinik",
+    "lat": 50.247,
+    "lon": 11.335,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY423",
+    "city": "Unbekannt",
+    "plz": "41963"
+  },
+  {
+    "name": "Krumbach (Schwaben)Klinik",
+    "lat": 48.236666666666665,
+    "lon": 10.366833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY424",
+    "city": "Unbekannt",
+    "plz": "69863"
+  },
+  {
+    "name": "Klinikum Kulmbach",
+    "lat": 50.1175,
+    "lon": 11.466666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY425",
+    "city": "Kulmbach",
+    "plz": "95326"
+  },
+  {
+    "name": "Landau a.d.Isar DONAUISAR Klinikum",
+    "lat": 48.666333333333334,
+    "lon": 12.703,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY428",
+    "city": "Unbekannt",
+    "plz": "17944"
+  },
+  {
+    "name": "Landsberg am Lech Klinikum",
+    "lat": 48.0475,
+    "lon": 10.856333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY429",
+    "city": "Landsberg am Lech",
+    "plz": "86899"
+  },
+  {
+    "name": "Landshut Lu Ka Med Klinikum",
+    "lat": 48.524166666666666,
+    "lon": 12.151166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY430",
+    "city": "Unbekannt",
+    "plz": "38403"
+  },
+  {
+    "name": "Landshut Klinikum",
+    "lat": 48.5375,
+    "lon": 12.138666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY433",
+    "city": "Unbekannt",
+    "plz": "16840"
+  },
+  {
+    "name": "Lauf a.d.Pegnitz Kunigundenwiese",
+    "lat": 49.515166666666666,
+    "lon": 11.277833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY434",
+    "city": "Unbekannt",
+    "plz": "55912"
+  },
+  {
+    "name": "Lohr a.Main Krankenhaus Gesundheitszentrum",
+    "lat": 49.99583333333333,
+    "lon": 9.571333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY441",
+    "city": "Lohr a.Main",
+    "plz": "97816"
+  },
+  {
+    "name": "Mallersdorf-Pfaffenberg Klinik",
+    "lat": 48.777833333333334,
+    "lon": 12.2475,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY444",
+    "city": "Unbekannt",
+    "plz": "68406"
+  },
+  {
+    "name": "Marktheidenfeld Krankenhaus",
+    "lat": 49.8495,
+    "lon": 9.625833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY446",
+    "city": "Unbekannt",
+    "plz": "93978"
+  },
+  {
+    "name": "Marktredwitz Klinikum Fichtelgebirge",
+    "lat": 50.00116666666667,
+    "lon": 12.065333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY447",
+    "city": "Unbekannt",
+    "plz": "89561"
+  },
+  {
+    "name": "München Helios Klinik",
+    "lat": 48.101333333333336,
+    "lon": 11.624,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY456",
+    "city": "Unbekannt",
+    "plz": "44817"
+  },
+  {
+    "name": "München Helios Klinikum München West",
+    "lat": 48.14533333333333,
+    "lon": 11.453833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY457",
+    "city": "Unbekannt",
+    "plz": "58124"
+  },
+  {
+    "name": "München Klinik Augustinum - Sportplatz",
+    "lat": 48.12283333333333,
+    "lon": 11.485666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY618",
+    "city": "Unbekannt",
+    "plz": "16813"
+  },
+  {
+    "name": "München Klinikum Dritter Orden - Wiese \"in den Kirschen\"",
+    "lat": 48.167833333333334,
+    "lon": 11.503833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY619",
+    "city": "Unbekannt",
+    "plz": "44806"
+  },
+  {
+    "name": "Münnerstadt Thoraxzentrum",
+    "lat": 50.251333333333335,
+    "lon": 10.181166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY458",
+    "city": "Unbekannt",
+    "plz": "19770"
+  },
+  {
+    "name": "Neuburg a.d.Donau Klinik St. Elisabeth - Oberer Schanzweg",
+    "lat": 48.72966666666667,
+    "lon": 11.173166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY461",
+    "city": "Neuburg a.d.Donau",
+    "plz": "86633"
+  },
+  {
+    "name": "Neuendettelsau Klinik",
+    "lat": 49.293,
+    "lon": 10.795,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY462",
+    "city": "Unbekannt",
+    "plz": "44915"
+  },
+  {
+    "name": "Neumarkt i.d.OPf.EDP",
+    "lat": 49.28616666666667,
+    "lon": 11.447833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "OBY639",
+    "city": "Unbekannt",
+    "plz": "12923"
+  },
+  {
+    "name": "Neustadt an der Aisch Klinik",
+    "lat": 49.582,
+    "lon": 10.624166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY467",
+    "city": "Neustadt a.d.Aisch",
+    "plz": "91413"
+  },
+  {
+    "name": "Nördlingen Stiftungskrankenhaus",
+    "lat": 48.836666666666666,
+    "lon": 10.501333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY471",
+    "city": "Unbekannt",
+    "plz": "48672"
+  },
+  {
+    "name": "Nürnberg Klinikum Nürnberg Süd",
+    "lat": 49.41416666666667,
+    "lon": 11.147833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY474",
+    "city": "Unbekannt",
+    "plz": "20190"
+  },
+  {
+    "name": "Nürnberg Krankenhaus Martha-Maria",
+    "lat": 49.482,
+    "lon": 11.135833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY475",
+    "city": "Unbekannt",
+    "plz": "58904"
+  },
+  {
+    "name": "Oberstdorf Klinik",
+    "lat": 47.410333333333334,
+    "lon": 10.282,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY477",
+    "city": "Unbekannt",
+    "plz": "16875"
+  },
+  {
+    "name": "Oettingen i.Bay.Klinik",
+    "lat": 48.95616666666667,
+    "lon": 10.597333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY479",
+    "city": "Unbekannt",
+    "plz": "15867"
+  },
+  {
+    "name": "Pegnitz Sana Klinik",
+    "lat": 49.75783333333333,
+    "lon": 11.5265,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY484",
+    "city": "Unbekannt",
+    "plz": "12912"
+  },
+  {
+    "name": "Pfaffenhofen a.d.Ilm Ilmtalklinik",
+    "lat": 48.51866666666667,
+    "lon": 11.500333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY487",
+    "city": "Unbekannt",
+    "plz": "70852"
+  },
+  {
+    "name": "Pfronten St. Vinzenz Klinik",
+    "lat": 47.58383333333333,
+    "lon": 10.557166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY489",
+    "city": "Unbekannt",
+    "plz": "15874"
+  },
+  {
+    "name": "Prien a.Chiemsee Ro Med Klinik",
+    "lat": 47.85033333333333,
+    "lon": 12.3695,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY490",
+    "city": "Unbekannt",
+    "plz": "63832"
+  },
+  {
+    "name": "Roding Krankenhaus",
+    "lat": 49.18866666666667,
+    "lon": 12.520666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY500",
+    "city": "Unbekannt",
+    "plz": "19342"
+  },
+  {
+    "name": "Rothenburg ob der Tauber Klinik",
+    "lat": 49.37833333333333,
+    "lon": 10.199166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY570",
+    "city": "Unbekannt",
+    "plz": "13191"
+  },
+  {
+    "name": "Rotthalmünster Krankenhaus",
+    "lat": 48.352833333333336,
+    "lon": 13.203,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY504",
+    "city": "Unbekannt",
+    "plz": "35940"
+  },
+  {
+    "name": "Scheßlitz Juraklinik",
+    "lat": 49.98,
+    "lon": 11.0395,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY507",
+    "city": "Unbekannt",
+    "plz": "29961"
+  },
+  {
+    "name": "Schongau Krankenhaus",
+    "lat": 47.8255,
+    "lon": 10.8975,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY509",
+    "city": "Unbekannt",
+    "plz": "68695"
+  },
+  {
+    "name": "Schrobenhausen Krankenhaus",
+    "lat": 48.57216666666667,
+    "lon": 11.263,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY510",
+    "city": "Unbekannt",
+    "plz": "58652"
+  },
+  {
+    "name": "Schwabmünchen Wertach Klinik",
+    "lat": 48.17666666666667,
+    "lon": 10.746166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY512",
+    "city": "Unbekannt",
+    "plz": "35868"
+  },
+  {
+    "name": "Schwandorf St. Barbara Krankenhaus",
+    "lat": 49.31616666666667,
+    "lon": 12.112833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY516",
+    "city": "Unbekannt",
+    "plz": "24924"
+  },
+  {
+    "name": "Schwarzenbruck Rummelsberg Krankenhaus",
+    "lat": 49.361333333333334,
+    "lon": 11.265,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY519",
+    "city": "Unbekannt",
+    "plz": "71905"
+  },
+  {
+    "name": "Schweinfurt Leopoldina Krankenhaus",
+    "lat": 50.05116666666667,
+    "lon": 10.244166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY520",
+    "city": "Unbekannt",
+    "plz": "89742"
+  },
+  {
+    "name": "Seeshaupt Lauterbacher Mühle Klinik",
+    "lat": 47.7925,
+    "lon": 11.291666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY522",
+    "city": "Unbekannt",
+    "plz": "18240"
+  },
+  {
+    "name": "Selb Klinikum",
+    "lat": 50.169666666666664,
+    "lon": 12.1175,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY523",
+    "city": "Unbekannt",
+    "plz": "62951"
+  },
+  {
+    "name": "Sonthofen Klinik Sonthofen",
+    "lat": 47.50833333333333,
+    "lon": 10.2775,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY524",
+    "city": "Unbekannt",
+    "plz": "18752"
+  },
+  {
+    "name": "Sulzbach-Rosenberg St. Anna-Krankenhaus",
+    "lat": 49.50633333333333,
+    "lon": 11.729833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY532",
+    "city": "Unbekannt",
+    "plz": "16922"
+  },
+  {
+    "name": "Tirschenreuth Krankenhaus",
+    "lat": 49.8845,
+    "lon": 12.332333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY534",
+    "city": "Unbekannt",
+    "plz": "31956"
+  },
+  {
+    "name": "Trostberg Kreisklinik",
+    "lat": 48.02916666666667,
+    "lon": 12.543,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY536",
+    "city": "Unbekannt",
+    "plz": "18330"
+  },
+  {
+    "name": "Tutzing Benedictus Krankenhaus",
+    "lat": 47.906333333333336,
+    "lon": 11.276333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY537",
+    "city": "Unbekannt",
+    "plz": "58232"
+  },
+  {
+    "name": "Vilsbiburg Klinikum",
+    "lat": 48.44466666666667,
+    "lon": 12.360833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY540",
+    "city": "Unbekannt",
+    "plz": "28413"
+  },
+  {
+    "name": "Vilshofen an der Donau Krankenhaus",
+    "lat": 48.62716666666667,
+    "lon": 13.198333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY541",
+    "city": "Unbekannt",
+    "plz": "32944"
+  },
+  {
+    "name": "Wasserburg am Inn Klinikum",
+    "lat": 48.06333333333333,
+    "lon": 12.213,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY548",
+    "city": "Unbekannt",
+    "plz": "78351"
+  },
+  {
+    "name": "Wegscheid Krankenhaus",
+    "lat": 48.6005,
+    "lon": 13.7955,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY550",
+    "city": "Unbekannt",
+    "plz": "50944"
+  },
+  {
+    "name": "Weilheim i.OBWiese",
+    "lat": 47.8255,
+    "lon": 11.143,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY631",
+    "city": "Unbekannt",
+    "plz": "48236"
+  },
+  {
+    "name": "Weißenburg i.Bay.Klinikum",
+    "lat": 49.03483333333333,
+    "lon": 10.987,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY553",
+    "city": "Unbekannt",
+    "plz": "19178"
+  },
+  {
+    "name": "Wolfratshausen Kreisklinik",
+    "lat": 47.91166666666667,
+    "lon": 11.4295,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY559",
+    "city": "Unbekannt",
+    "plz": "58251"
+  },
+  {
+    "name": "Wörth a.d.Donau Kreisklinik",
+    "lat": 48.99816666666667,
+    "lon": 12.4005,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY558",
+    "city": "Unbekannt",
+    "plz": "29308"
+  },
+  {
+    "name": "Würzburg Uni-Klinik, Boden",
+    "lat": 49.80983333333333,
+    "lon": 9.956,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY564",
+    "city": "Unbekannt",
+    "plz": "29708"
+  },
+  {
+    "name": "Zwiesel Arberlandklinik",
+    "lat": 49.00833333333333,
+    "lon": 13.2175,
+    "type": "Klinik (mit Heliport)",
+    "code": "BY568",
+    "city": "Unbekannt",
+    "plz": "19422"
+  },
+  {
+    "name": "Berlin DRK-Kliniken Köpenick",
+    "lat": 52.440666666666665,
+    "lon": 13.597166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE302",
+    "city": "Berlin",
+    "plz": "12559"
+  },
+  {
+    "name": "Berlin Gemeinschaftskrankenhaus Havelhöhe",
+    "lat": 52.461166666666664,
+    "lon": 13.162833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE303",
+    "city": "Unbekannt",
+    "plz": "22114"
+  },
+  {
+    "name": "Berlin Helios Klinikum",
+    "lat": 52.4225,
+    "lon": 13.254166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE304",
+    "city": "Unbekannt",
+    "plz": "11141"
+  },
+  {
+    "name": "Berlin Spandau Klinikum (Vivantes)",
+    "lat": 52.5495,
+    "lon": 13.205,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE308",
+    "city": "Unbekannt",
+    "plz": "61358"
+  },
+  {
+    "name": "Berlin Neukölln Krankenhaus (Vivantes Klinikum Neukölln)",
+    "lat": 52.43833333333333,
+    "lon": 13.459166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE312",
+    "city": "Unbekannt",
+    "plz": "48123"
+  },
+  {
+    "name": "Berlin Bundeswehr Krankenhaus",
+    "lat": 52.5355,
+    "lon": 13.368,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE313",
+    "city": "Unbekannt",
+    "plz": "13101"
+  },
+  {
+    "name": "Berlin Vivantes Klinikum im Friedrichshain",
+    "lat": 52.527,
+    "lon": 13.439166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE314",
+    "city": "Unbekannt",
+    "plz": "49102"
+  },
+  {
+    "name": "Berlin Ev. Waldkrankenhaus",
+    "lat": 52.562,
+    "lon": 13.153833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE315",
+    "city": "Unbekannt",
+    "plz": "55513"
+  },
+  {
+    "name": "Berlin Caritas Klinik",
+    "lat": 53.56966666666667,
+    "lon": 13.413833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE316",
+    "city": "Unbekannt",
+    "plz": "47131"
+  },
+  {
+    "name": "Berlin Auguste-Viktoria-Krankenhaus (Wiese hinter Haus 35)",
+    "lat": 52.464166666666664,
+    "lon": 13.346166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BE301",
+    "city": "Unbekannt",
+    "plz": "12512"
+  },
+  {
+    "name": "Cottbus Feuerwehr",
+    "lat": 51.733,
+    "lon": 14.337166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB609",
+    "city": "Unbekannt",
+    "plz": "46030"
+  },
+  {
+    "name": "Elbe-Elster Klinikum Gmb H, Standort Finsterwalde",
+    "lat": 51.63633333333333,
+    "lon": 13.698333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB306",
+    "city": "Finsterwalde",
+    "plz": "03238"
+  },
+  {
+    "name": "Forst (Lausitz)Klinik",
+    "lat": 51.75833333333333,
+    "lon": 14.638333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB307",
+    "city": "Unbekannt",
+    "plz": "35031"
+  },
+  {
+    "name": "Hennigsdorf Oberhavel Klinik",
+    "lat": 52.656333333333336,
+    "lon": 13.192833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB311",
+    "city": "Unbekannt",
+    "plz": "91167"
+  },
+  {
+    "name": "Evangelisches Krankenhaus Ludwigsfelde",
+    "lat": 52.3115,
+    "lon": 13.257,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB319",
+    "city": "Ludwigsfelde",
+    "plz": "14974"
+  },
+  {
+    "name": "Oranienburg Oberhavel Klinik",
+    "lat": 52.743,
+    "lon": 13.243666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB322",
+    "city": "Unbekannt",
+    "plz": "12165"
+  },
+  {
+    "name": "KMG Klinikum Mitte Gmb H Klinikum Pritzwalk",
+    "lat": 53.14666666666667,
+    "lon": 12.1705,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB324",
+    "city": "Pritzwalk",
+    "plz": "16928"
+  },
+  {
+    "name": "Rathenow Haveland Kliniken, Standort Rathenow",
+    "lat": 52.6075,
+    "lon": 12.3495,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB325",
+    "city": "Unbekannt",
+    "plz": "45147"
+  },
+  {
+    "name": "Rüdersdorf bei Berlin Krankenhaus",
+    "lat": 52.4555,
+    "lon": 13.773,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB326",
+    "city": "Unbekannt",
+    "plz": "83155"
+  },
+  {
+    "name": "Seelow Lutherstift Ev. Krankenhaus",
+    "lat": 52.537166666666664,
+    "lon": 14.374666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB328",
+    "city": "Unbekannt",
+    "plz": "15153"
+  },
+  {
+    "name": "Templin Sana Krankenhaus",
+    "lat": 53.105,
+    "lon": 13.5,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB330",
+    "city": "Unbekannt",
+    "plz": "24172"
+  },
+  {
+    "name": "Treuenbrietzen Johanniter-Krankenhaus im Fläming",
+    "lat": 52.080333333333336,
+    "lon": 12.8745,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB331",
+    "city": "Unbekannt",
+    "plz": "11492"
+  },
+  {
+    "name": "Wittstock/Dosse KMK Klinikum Mitte Gmb H, Standort Wittstock",
+    "lat": 53.17033333333333,
+    "lon": 12.486166666666668,
+    "type": "Klinik (mit Heliport)",
+    "code": "BB334",
+    "city": "Wittstock/Dosse",
+    "plz": "16909"
+  },
+  {
+    "name": "Hamburg-Altona Asklepios Klinik Altona",
+    "lat": 53.55533333333333,
+    "lon": 9.902166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH301",
+    "city": "Unbekannt",
+    "plz": "12276"
+  },
+  {
+    "name": "Hamburg-Bergedorf Bethesda Krankenhaus",
+    "lat": 53.48616666666667,
+    "lon": 10.234666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH302",
+    "city": "Unbekannt",
+    "plz": "80210"
+  },
+  {
+    "name": "Hamburg-Langenhorn Heidberg Asklepios Klinik Nord",
+    "lat": 53.675333333333334,
+    "lon": 10.030833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH305",
+    "city": "Hamburg-Langenhorn",
+    "plz": "22417"
+  },
+  {
+    "name": "Hamburg-Rahlstedt Katholisches Kinderkrankenhaus Wilhelmstift",
+    "lat": 53.587833333333336,
+    "lon": 10.1645,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH306",
+    "city": "Unbekannt",
+    "plz": "13022"
+  },
+  {
+    "name": "Hamburg-Volksdorf Amalie Sieveking Ev. Krankenhaus",
+    "lat": 53.641333333333336,
+    "lon": 10.153166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH307",
+    "city": "Unbekannt",
+    "plz": "33223"
+  },
+  {
+    "name": "Hamburg-Wandsbek Asklepios Klinik",
+    "lat": 53.5695,
+    "lon": 10.089666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HH308",
+    "city": "Unbekannt",
+    "plz": "14220"
+  },
+  {
+    "name": "Bremen Diakonie",
+    "lat": 53.12466666666667,
+    "lon": 8.743666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HB301",
+    "city": "Bremen",
+    "plz": "28239"
+  },
+  {
+    "name": "Bremen Klinikum Ost",
+    "lat": 53.0645,
+    "lon": 8.941666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HB302",
+    "city": "Unbekannt",
+    "plz": "40283"
+  },
+  {
+    "name": "Bremen Bremen Mitte (Boden)",
+    "lat": 53.074666666666666,
+    "lon": 8.841166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HB311",
+    "city": "Unbekannt",
+    "plz": "12817"
+  },
+  {
+    "name": "Alsfeld Kreiskrankenhaus",
+    "lat": 50.763666666666666,
+    "lon": 9.269666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE301",
+    "city": "Unbekannt",
+    "plz": "81363"
+  },
+  {
+    "name": "Bad Arolsen Krankenhaus (nur §25 Abs. 2 Nr. 3 Luft VG sonst HE623)",
+    "lat": 51.37916666666667,
+    "lon": 9.0075,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE302",
+    "city": "Unbekannt",
+    "plz": "50344"
+  },
+  {
+    "name": "Bad Hersfeld Klinikum",
+    "lat": 50.877,
+    "lon": 9.714666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE303",
+    "city": "Unbekannt",
+    "plz": "29362"
+  },
+  {
+    "name": "Bad Nauheim Feuerwehr",
+    "lat": 50.35666666666667,
+    "lon": 8.753666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE601",
+    "city": "Unbekannt",
+    "plz": "86123"
+  },
+  {
+    "name": "Bad Wildungen Feuerwehr",
+    "lat": 51.119166666666665,
+    "lon": 9.140333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE611",
+    "city": "Unbekannt",
+    "plz": "19345"
+  },
+  {
+    "name": "Bad Zwesten Werner Wicker Hardtwaldklinik",
+    "lat": 51.06133333333333,
+    "lon": 9.1735,
+    "type": "Klinik (mit Heliport)",
+    "code": "IHE305",
+    "city": "Unbekannt",
+    "plz": "31345"
+  },
+  {
+    "name": "Dillenburg Klinikum (Landestelle gesperrt)",
+    "lat": 50.74733333333333,
+    "lon": 8.285833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE306",
+    "city": "Unbekannt",
+    "plz": "23568"
+  },
+  {
+    "name": "Eschwege Klinikum",
+    "lat": 51.18216666666667,
+    "lon": 10.049166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE307",
+    "city": "Unbekannt",
+    "plz": "13726"
+  },
+  {
+    "name": "Frankenberg (Eder)Kreiskrankenhaus",
+    "lat": 51.06133333333333,
+    "lon": 8.788,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE308",
+    "city": "Unbekannt",
+    "plz": "93506"
+  },
+  {
+    "name": "Frankfurt am Main Klinikum Höchst (Boden)",
+    "lat": 50.108333333333334,
+    "lon": 8.547,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE309",
+    "city": "Unbekannt",
+    "plz": "86592"
+  },
+  {
+    "name": "Frankfurt am Main Uni-Klinik, Haus 95 Neurologie/Neurochirurgie",
+    "lat": 50.09133333333333,
+    "lon": 8.6475,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE310",
+    "city": "Unbekannt",
+    "plz": "76059"
+  },
+  {
+    "name": "Fulda Herz-Jesu-Krankenhaus",
+    "lat": 50.56366666666667,
+    "lon": 9.6725,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE311",
+    "city": "Unbekannt",
+    "plz": "74360"
+  },
+  {
+    "name": "Fulda Klinikum Boden",
+    "lat": 50.54533333333333,
+    "lon": 9.7055,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE312",
+    "city": "Unbekannt",
+    "plz": "43604"
+  },
+  {
+    "name": "Gelnhausen Kreiskrankenhaus - Freifläche Genaral-Colin-Powell-Straße",
+    "lat": 50.20666666666666,
+    "lon": 9.172,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE608",
+    "city": "Unbekannt",
+    "plz": "14635"
+  },
+  {
+    "name": "Groß-Gerau Kreisklinik",
+    "lat": 49.9125,
+    "lon": 8.475,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE315",
+    "city": "Unbekannt",
+    "plz": "36452"
+  },
+  {
+    "name": "Groß-Umstadt Kreisklinik",
+    "lat": 49.8675,
+    "lon": 8.937,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE316",
+    "city": "Unbekannt",
+    "plz": "11648"
+  },
+  {
+    "name": "Hanau Feuerwache",
+    "lat": 50.14533333333333,
+    "lon": 8.942833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE610",
+    "city": "Unbekannt",
+    "plz": "20634"
+  },
+  {
+    "name": "Heppenheim (Bergstraße)Kreiskrankenhaus",
+    "lat": 49.629333333333335,
+    "lon": 8.6235,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE317",
+    "city": "Unbekannt",
+    "plz": "26464"
+  },
+  {
+    "name": "Orthopädische Klinik Hessisch Lichtenau",
+    "lat": 51.21216666666667,
+    "lon": 9.706,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE318",
+    "city": "Hessisch Lichtenau",
+    "plz": "37235"
+  },
+  {
+    "name": "Hofgeismar Kreisklinik Hofgeismar",
+    "lat": 51.496833333333335,
+    "lon": 9.368166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE319",
+    "city": "Unbekannt",
+    "plz": "13436"
+  },
+  {
+    "name": "Hünfeld HELIOS Klinik",
+    "lat": 50.6625,
+    "lon": 9.767833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE320",
+    "city": "Unbekannt",
+    "plz": "22360"
+  },
+  {
+    "name": "Immenhausen Lungenfachklinik",
+    "lat": 51.42366666666667,
+    "lon": 9.476833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE321",
+    "city": "Unbekannt",
+    "plz": "33437"
+  },
+  {
+    "name": "Kassel Elisabeth Krankenhaus (nur §25 Abs.2 Nr. 3 Luft VG)",
+    "lat": 51.306,
+    "lon": 9.491666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE150",
+    "city": "Unbekannt",
+    "plz": "73411"
+  },
+  {
+    "name": "Klinikum Kassel",
+    "lat": 51.33,
+    "lon": 9.510833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE322",
+    "city": "Kassel",
+    "plz": "34125"
+  },
+  {
+    "name": "Korbach Stadtkrankenhaus",
+    "lat": 51.25033333333333,
+    "lon": 8.8705,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE324",
+    "city": "Unbekannt",
+    "plz": "19344"
+  },
+  {
+    "name": "Langen (Hessen)Asklepios Klinik",
+    "lat": 49.997166666666665,
+    "lon": 8.6845,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE325",
+    "city": "Unbekannt",
+    "plz": "20632"
+  },
+  {
+    "name": "Lauterbach Eichhof Krankenhaus / Dirlammer Str./ Einmündung Eichhofstr.",
+    "lat": 50.63066666666667,
+    "lon": 9.380333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE326",
+    "city": "Unbekannt",
+    "plz": "13634"
+  },
+  {
+    "name": "Lich Asklepios Klinik",
+    "lat": 50.5255,
+    "lon": 8.804166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE327",
+    "city": "Unbekannt",
+    "plz": "43542"
+  },
+  {
+    "name": "Rotenburg a. d. Fulda Herz- und Kreislaufzentrum (Dachlandestelle PIS)",
+    "lat": 51.00333333333333,
+    "lon": 9.738333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE152",
+    "city": "Rotenburg a. d. Fulda",
+    "plz": "36199"
+  },
+  {
+    "name": "Rüsselsheim am Main Gesundheits- und Pflegezentrum",
+    "lat": 49.98283333333333,
+    "lon": 8.425666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE331",
+    "city": "Unbekannt",
+    "plz": "59654"
+  },
+  {
+    "name": "Schlüchtern Kreiskrankenhaus",
+    "lat": 50.35466666666667,
+    "lon": 9.528666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE332",
+    "city": "Unbekannt",
+    "plz": "17363"
+  },
+  {
+    "name": "Weilburg Kreiskrankenhaus",
+    "lat": 50.48616666666667,
+    "lon": 8.253166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE335",
+    "city": "Unbekannt",
+    "plz": "23578"
+  },
+  {
+    "name": "Weilmünster Vitos Klinik",
+    "lat": 50.4255,
+    "lon": 8.39,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE336",
+    "city": "Unbekannt",
+    "plz": "10357"
+  },
+  {
+    "name": "Wiesbaden HELIOS Dr. Horst-Schmidt Klinik",
+    "lat": 50.06366666666667,
+    "lon": 8.1895,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE339",
+    "city": "Wiesbaden",
+    "plz": "65199"
+  },
+  {
+    "name": "Wolfhagen Kreisklinik",
+    "lat": 51.321,
+    "lon": 9.1915,
+    "type": "Klinik (mit Heliport)",
+    "code": "HE344",
+    "city": "Unbekannt",
+    "plz": "13446"
+  },
+  {
+    "name": "AMEOS Klinikum Anklam",
+    "lat": 53.84883333333333,
+    "lon": 13.699166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV303",
+    "city": "Anklam",
+    "plz": "17389"
+  },
+  {
+    "name": "Bergen auf Rügen Kat Schutz Zentrum LK V",
+    "lat": 54.42283333333334,
+    "lon": 13.438833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RMV305",
+    "city": "Unbekannt",
+    "plz": "81852"
+  },
+  {
+    "name": "Hagenow Klinikum",
+    "lat": 53.434666666666665,
+    "lon": 11.1805,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV313",
+    "city": "Unbekannt",
+    "plz": "12192"
+  },
+  {
+    "name": "Leezen Helios Klinik",
+    "lat": 53.660666666666664,
+    "lon": 11.489666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV317",
+    "city": "Unbekannt",
+    "plz": "11906"
+  },
+  {
+    "name": "Ludwigslust Helene-von-Bülow-Straße",
+    "lat": 53.318666666666665,
+    "lon": 11.506333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV318",
+    "city": "Unbekannt",
+    "plz": "11928"
+  },
+  {
+    "name": "Neustrelitz DRK Krankenhaus Mecklenbrg-Strelitz",
+    "lat": 53.381166666666665,
+    "lon": 13.052166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV332",
+    "city": "Unbekannt",
+    "plz": "56172"
+  },
+  {
+    "name": "Asklepios Klinik Parchim",
+    "lat": 53.42283333333334,
+    "lon": 11.8595,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV322",
+    "city": "Parchim",
+    "plz": "19370"
+  },
+  {
+    "name": "Ribnitz-Damgarten Bodden Kliniken Ribnitz-Damgarten",
+    "lat": 54.238,
+    "lon": 12.443666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV324",
+    "city": "Unbekannt",
+    "plz": "21831"
+  },
+  {
+    "name": "Rostock Universitätsmedizin - Ernst-Heydemann-Str.",
+    "lat": 54.083,
+    "lon": 12.100333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV326",
+    "city": "Unbekannt",
+    "plz": "35180"
+  },
+  {
+    "name": "Schwaan Fachklinik",
+    "lat": 53.928333333333335,
+    "lon": 12.119666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV327",
+    "city": "Schwaan",
+    "plz": "18258"
+  },
+  {
+    "name": "Ueckermünde Haus 1 Rondel",
+    "lat": 53.739666666666665,
+    "lon": 14.022833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV330",
+    "city": "Unbekannt",
+    "plz": "23173"
+  },
+  {
+    "name": "Waren (Müritz)Medi Clin Müritz-Klinikum",
+    "lat": 53.52316666666667,
+    "lon": 12.686,
+    "type": "Klinik (mit Heliport)",
+    "code": "MV333",
+    "city": "Unbekannt",
+    "plz": "19171"
+  },
+  {
+    "name": "Achim Aller-Weser-Klinik",
+    "lat": 53.018,
+    "lon": 9.005833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI301",
+    "city": "Unbekannt",
+    "plz": "22883"
+  },
+  {
+    "name": "Alfeld (Leine)AMEOS Klinikum",
+    "lat": 51.994166666666665,
+    "lon": 9.8345,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI302",
+    "city": "Alfeld (Leine)",
+    "plz": "31061"
+  },
+  {
+    "name": "Ankum Marienhospital",
+    "lat": 52.539833333333334,
+    "lon": 7.875,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI304",
+    "city": "Unbekannt",
+    "plz": "11495"
+  },
+  {
+    "name": "Ubbo-Emmius-Klinik Aurich",
+    "lat": 53.46783333333333,
+    "lon": 7.4995,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI305",
+    "city": "Aurich",
+    "plz": "26603"
+  },
+  {
+    "name": "Bad Bevensen Herz Gefäß Zentrum",
+    "lat": 53.084666666666664,
+    "lon": 10.603666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI309",
+    "city": "Unbekannt",
+    "plz": "25295"
+  },
+  {
+    "name": "Bad Gandersheim Helios Klinik",
+    "lat": 51.873666666666665,
+    "lon": 10.025833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI312",
+    "city": "Unbekannt",
+    "plz": "23758"
+  },
+  {
+    "name": "Bad Pyrmont Ev. Bathildiskrankenhaus",
+    "lat": 51.98533333333334,
+    "lon": 9.275333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI444",
+    "city": "Unbekannt",
+    "plz": "43181"
+  },
+  {
+    "name": "Bassum Klinik",
+    "lat": 52.843833333333336,
+    "lon": 8.729666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI320",
+    "city": "Unbekannt",
+    "plz": "62721"
+  },
+  {
+    "name": "Bramsche Niels-Stensen-Klinik",
+    "lat": 52.40866666666667,
+    "lon": 7.986166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI325",
+    "city": "Unbekannt",
+    "plz": "16495"
+  },
+  {
+    "name": "Braunschweig Holwedestraße",
+    "lat": 52.26683333333333,
+    "lon": 10.505666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI327",
+    "city": "Unbekannt",
+    "plz": "10381"
+  },
+  {
+    "name": "Bremervörde Ostemed Klinik",
+    "lat": 53.4705,
+    "lon": 9.1355,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI329",
+    "city": "Unbekannt",
+    "plz": "11727"
+  },
+  {
+    "name": "Cloppenburg St. Josefs- Hospital",
+    "lat": 52.846333333333334,
+    "lon": 8.038666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI333",
+    "city": "Unbekannt",
+    "plz": "13496"
+  },
+  {
+    "name": "Helios Klinik Cuxhaven",
+    "lat": 53.852,
+    "lon": 8.695,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI336",
+    "city": "Cuxhaven",
+    "plz": "27474"
+  },
+  {
+    "name": "Dannenberg (Elbe)Capio Elbe-Jeetzel-Klinik",
+    "lat": 53.08166666666666,
+    "lon": 11.08,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI339",
+    "city": "Unbekannt",
+    "plz": "22945"
+  },
+  {
+    "name": "Diepholz Klinik",
+    "lat": 52.61,
+    "lon": 8.376333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI342",
+    "city": "Unbekannt",
+    "plz": "84935"
+  },
+  {
+    "name": "Duderstadt St. Martini Krankenhaus",
+    "lat": 51.517,
+    "lon": 10.248,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI346",
+    "city": "Unbekannt",
+    "plz": "34371"
+  },
+  {
+    "name": "Einbeck Bürgerspital",
+    "lat": 51.833,
+    "lon": 9.869166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI347",
+    "city": "Unbekannt",
+    "plz": "83757"
+  },
+  {
+    "name": "Gehrden Klinikum Robert-Koch",
+    "lat": 52.303333333333335,
+    "lon": 9.596333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI349",
+    "city": "Unbekannt",
+    "plz": "13098"
+  },
+  {
+    "name": "Goslar Harzklinik",
+    "lat": 51.927,
+    "lon": 10.443,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI438",
+    "city": "Unbekannt",
+    "plz": "12386"
+  },
+  {
+    "name": "Göttingen Ev. Krankenhaus",
+    "lat": 51.5545,
+    "lon": 9.9455,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI352",
+    "city": "Unbekannt",
+    "plz": "24370"
+  },
+  {
+    "name": "Göttingen-Weende Ev. Krankenhaus",
+    "lat": 51.5905,
+    "lon": 9.8755,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI323",
+    "city": "Unbekannt",
+    "plz": "24370"
+  },
+  {
+    "name": "Gronau (Leine)Johanniter-Krankenhaus",
+    "lat": 52.0825,
+    "lon": 9.7665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI355",
+    "city": "Unbekannt",
+    "plz": "33102"
+  },
+  {
+    "name": "Hannover Friederikenstift",
+    "lat": 52.3705,
+    "lon": 9.724333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI445",
+    "city": "Unbekannt",
+    "plz": "53016"
+  },
+  {
+    "name": "Herzberg am Harz Helios Klinik",
+    "lat": 51.67016666666667,
+    "lon": 10.342666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI440",
+    "city": "Herzberg am Harz",
+    "plz": "37412"
+  },
+  {
+    "name": "Hildesheim St. Bernward Krankenhaus",
+    "lat": 52.14633333333333,
+    "lon": 9.948,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI369",
+    "city": "Unbekannt",
+    "plz": "93113"
+  },
+  {
+    "name": "Jesteburg Waldklinik",
+    "lat": 53.3205,
+    "lon": 9.9505,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI373",
+    "city": "Unbekannt",
+    "plz": "14521"
+  },
+  {
+    "name": "Leer (Ostfriesland)Hospital",
+    "lat": 53.228,
+    "lon": 7.445,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI378",
+    "city": "Unbekannt",
+    "plz": "67267"
+  },
+  {
+    "name": "Lehrte Klinikum",
+    "lat": 52.381,
+    "lon": 9.984166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI380",
+    "city": "Unbekannt",
+    "plz": "22312"
+  },
+  {
+    "name": "Melle Christliches Klinikum Wirtschaftshof",
+    "lat": 52.19866666666667,
+    "lon": 8.335166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI386",
+    "city": "Unbekannt",
+    "plz": "34932"
+  },
+  {
+    "name": "Norden Klinik",
+    "lat": 53.60033333333333,
+    "lon": 7.2195,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI392",
+    "city": "Unbekannt",
+    "plz": "11026"
+  },
+  {
+    "name": "Norderney Krankenhaus",
+    "lat": 53.715833333333336,
+    "lon": 7.171333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI394",
+    "city": "Unbekannt",
+    "plz": "11265"
+  },
+  {
+    "name": "Nordhorn Euregio Klinik",
+    "lat": 52.44383333333333,
+    "lon": 7.0655,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI395",
+    "city": "Nordhorn",
+    "plz": "48527"
+  },
+  {
+    "name": "Osnabrück Paracelsus Klinik",
+    "lat": 52.29,
+    "lon": 8.012,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI402",
+    "city": "Unbekannt",
+    "plz": "69490"
+  },
+  {
+    "name": "Ostercappeln Klinikum St. Georg",
+    "lat": 52.344166666666666,
+    "lon": 8.228833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI403",
+    "city": "Unbekannt",
+    "plz": "31491"
+  },
+  {
+    "name": "Osterholz-Scharmbeck Kreiskrankenhaus",
+    "lat": 53.23383333333334,
+    "lon": 8.793333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI404",
+    "city": "Unbekannt",
+    "plz": "42771"
+  },
+  {
+    "name": "Quakenbrück Christliches Krankenhaus",
+    "lat": 52.66716666666667,
+    "lon": 7.935833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI407",
+    "city": "Unbekannt",
+    "plz": "24961"
+  },
+  {
+    "name": "Salzgitter Helios Klinikum",
+    "lat": 52.153333333333336,
+    "lon": 10.317,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI442",
+    "city": "Unbekannt",
+    "plz": "19138"
+  },
+  {
+    "name": "Seesen Schildauklinik",
+    "lat": 51.8825,
+    "lon": 10.214666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI412",
+    "city": "Unbekannt",
+    "plz": "13872"
+  },
+  {
+    "name": "Sulingen Klinik",
+    "lat": 52.68383333333333,
+    "lon": 8.804666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI421",
+    "city": "Unbekannt",
+    "plz": "47272"
+  },
+  {
+    "name": "Vechta St. Marienhospital",
+    "lat": 52.7225,
+    "lon": 8.288833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI426",
+    "city": "Unbekannt",
+    "plz": "84937"
+  },
+  {
+    "name": "Verden (Aller)Aller-Weser-Klinik",
+    "lat": 52.913666666666664,
+    "lon": 9.233,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI427",
+    "city": "Unbekannt",
+    "plz": "20272"
+  },
+  {
+    "name": "Walsrode Klinikum",
+    "lat": 52.858666666666664,
+    "lon": 9.587833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NI429",
+    "city": "Unbekannt",
+    "plz": "42966"
+  },
+  {
+    "name": "Ahlen Feuerwehr",
+    "lat": 51.769666666666666,
+    "lon": 7.903833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW683",
+    "city": "Unbekannt",
+    "plz": "55592"
+  },
+  {
+    "name": "Attendorn Feuerwehr",
+    "lat": 51.12383333333333,
+    "lon": 7.897833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW690",
+    "city": "Unbekannt",
+    "plz": "95743"
+  },
+  {
+    "name": "Bad Berleburg Helios Klinik Bad Berleburg",
+    "lat": 51.062,
+    "lon": 8.405333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW309",
+    "city": "Unbekannt",
+    "plz": "75731"
+  },
+  {
+    "name": "Bad Driburg Sankt Josef Hospital",
+    "lat": 51.74183333333333,
+    "lon": 9.012,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW310",
+    "city": "Unbekannt",
+    "plz": "38330"
+  },
+  {
+    "name": "St. Elisabeth-Hospital Beckum",
+    "lat": 51.75216666666667,
+    "lon": 8.038666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW318",
+    "city": "Beckum",
+    "plz": "59269"
+  },
+  {
+    "name": "Bergisch Gladbach Krankenhaus",
+    "lat": 50.9895,
+    "lon": 7.136333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW688",
+    "city": "Unbekannt",
+    "plz": "24514"
+  },
+  {
+    "name": "Bergisch Gladbach-Bensberg Vinzenz-Palotti-Hospital",
+    "lat": 50.961333333333336,
+    "lon": 7.1754999999999995,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW321",
+    "city": "Unbekannt",
+    "plz": "20514"
+  },
+  {
+    "name": "St. Agnes-Hospital Bocholt",
+    "lat": 51.85616666666667,
+    "lon": 6.6258333333333335,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW328",
+    "city": "Bocholt",
+    "plz": "46397"
+  },
+  {
+    "name": "Bochum Krankenhaus",
+    "lat": 51.465333333333334,
+    "lon": 7.3275,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW330",
+    "city": "Unbekannt",
+    "plz": "25448"
+  },
+  {
+    "name": "Bonn Helios Klinikum",
+    "lat": 50.7075,
+    "lon": 7.033,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW331",
+    "city": "Bonnjax",
+    "plz": "53123"
+  },
+  {
+    "name": "Borken St. Marien-Hospital Borken",
+    "lat": 51.840833333333336,
+    "lon": 6.862,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW333",
+    "city": "Unbekannt",
+    "plz": "74632"
+  },
+  {
+    "name": "Bottrop Knappschaftskrankenhaus",
+    "lat": 51.51566666666667,
+    "lon": 6.906,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW334",
+    "city": "Unbekannt",
+    "plz": "15746"
+  },
+  {
+    "name": "Bottrop Marienhospital",
+    "lat": 51.53366666666667,
+    "lon": 6.917166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW335",
+    "city": "Unbekannt",
+    "plz": "70462"
+  },
+  {
+    "name": "Brakel St.Vincenz-Hospital",
+    "lat": 51.72716666666667,
+    "lon": 9.182,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW336",
+    "city": "Unbekannt",
+    "plz": "17330"
+  },
+  {
+    "name": "Brilon Städtisches Krankenhaus Maria-Hilf",
+    "lat": 51.386,
+    "lon": 8.582,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW337",
+    "city": "Unbekannt",
+    "plz": "15992"
+  },
+  {
+    "name": "Datteln Uniper Kraftwerke, Im Löringsfof 10",
+    "lat": 51.633,
+    "lon": 7.347166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW339",
+    "city": "Datteln",
+    "plz": "45711"
+  },
+  {
+    "name": "Datteln Uniper Kraftwerke, Im Löringsfof 10",
+    "lat": 51.633,
+    "lon": 7.347166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW339",
+    "city": "Unbekannt",
+    "plz": "11457"
+  },
+  {
+    "name": "Dorsten St. Elisabeth Krankenhaus",
+    "lat": 51.656666666666666,
+    "lon": 6.956166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW343",
+    "city": "Dorsten",
+    "plz": "46282"
+  },
+  {
+    "name": "Klinikum Dortmund",
+    "lat": 51.51883333333333,
+    "lon": 7.533333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW344",
+    "city": "Dortmund",
+    "plz": "44309"
+  },
+  {
+    "name": "Dortmund Knappschaftskrankenhaus",
+    "lat": 51.501333333333335,
+    "lon": 7.33,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW507",
+    "city": "Unbekannt",
+    "plz": "40443"
+  },
+  {
+    "name": "Duisburg Herzzentrum",
+    "lat": 51.463166666666666,
+    "lon": 6.7755,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW355",
+    "city": "Unbekannt",
+    "plz": "21471"
+  },
+  {
+    "name": "Duisburg Malteser Krankenhaus St. Anna",
+    "lat": 51.3655,
+    "lon": 6.756166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW358",
+    "city": "Unbekannt",
+    "plz": "33472"
+  },
+  {
+    "name": "Düren Krankenhaus Düren",
+    "lat": 50.80833333333333,
+    "lon": 6.497,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW346",
+    "city": "Unbekannt",
+    "plz": "30523"
+  },
+  {
+    "name": "Düren St. Augustinus Krankenhaus",
+    "lat": 50.7695,
+    "lon": 6.487333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW347",
+    "city": "Unbekannt",
+    "plz": "45523"
+  },
+  {
+    "name": "Düren St. Marien-Hospital",
+    "lat": 50.822833333333335,
+    "lon": 6.465833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW348",
+    "city": "Unbekannt",
+    "plz": "44523"
+  },
+  {
+    "name": "Düsseldorf Sana Krankenhaus Benrath",
+    "lat": 51.152,
+    "lon": 6.872,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW351",
+    "city": "Unbekannt",
+    "plz": "83405"
+  },
+  {
+    "name": "Düsseldorf Florence-Nightingale-Krankenhaus",
+    "lat": 51.3005,
+    "lon": 6.7505,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW352",
+    "city": "Unbekannt",
+    "plz": "79404"
+  },
+  {
+    "name": "Eitorf St. Franziskus Krankenhaus",
+    "lat": 50.76833333333333,
+    "lon": 7.4525,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW359",
+    "city": "Unbekannt",
+    "plz": "75378"
+  },
+  {
+    "name": "Emmerich am Rhein St. Willibrord-Spital (LP ETV Sportplatz, Zur Ladestraße, 46446 Emmerich)",
+    "lat": 51.831833333333336,
+    "lon": 6.245833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW623",
+    "city": "Unbekannt",
+    "plz": "94644"
+  },
+  {
+    "name": "Erftstadt Marien Hospital",
+    "lat": 50.806666666666665,
+    "lon": 6.809666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW361",
+    "city": "Unbekannt",
+    "plz": "35037"
+  },
+  {
+    "name": "Erkelenz Hermann-Josef-Krankenhaus",
+    "lat": 51.074666666666666,
+    "lon": 6.3133333333333335,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW362",
+    "city": "Unbekannt",
+    "plz": "43418"
+  },
+  {
+    "name": "Essen Alfried Krupp von Bohzlen und Halbach Krankenhaus",
+    "lat": 51.4255,
+    "lon": 7.008666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW365",
+    "city": "Unbekannt",
+    "plz": "21451"
+  },
+  {
+    "name": "Essen Landeplatz im Hof der Feuerwache 1",
+    "lat": 51.4605,
+    "lon": 7.0275,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW625",
+    "city": "Unbekannt",
+    "plz": "14513"
+  },
+  {
+    "name": "Euskirchen Marien-Hospital",
+    "lat": 50.64216666666667,
+    "lon": 6.792833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW368",
+    "city": "Unbekannt",
+    "plz": "40538"
+  },
+  {
+    "name": "Freudenberg (Siegen-Wittgenstein) Diakonie Klinikum Krankenhaus Bethesda",
+    "lat": 50.898833333333336,
+    "lon": 7.865,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW370",
+    "city": "Unbekannt",
+    "plz": "39572"
+  },
+  {
+    "name": "Fröndenberg/Ruhr Justizvollzugskrankenhaus",
+    "lat": 51.47966666666667,
+    "lon": 7.783833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW371",
+    "city": "Unbekannt",
+    "plz": "95873"
+  },
+  {
+    "name": "Geldern St.-Clemens-Hospital",
+    "lat": 51.53,
+    "lon": 6.3261666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW373",
+    "city": "Unbekannt",
+    "plz": "64760"
+  },
+  {
+    "name": "Marienhospital",
+    "lat": 51.49633333333333,
+    "lon": 7.101166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW375",
+    "city": "Unbekannt",
+    "plz": "12245"
+  },
+  {
+    "name": "Goch Katholisches Karl-Leisner-Klinikum",
+    "lat": 51.67666666666667,
+    "lon": 6.1825,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW377",
+    "city": "Unbekannt",
+    "plz": "21447"
+  },
+  {
+    "name": "Greven Maria-Josef-Hospital",
+    "lat": 52.087833333333336,
+    "lon": 7.610833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW379",
+    "city": "Unbekannt",
+    "plz": "29482"
+  },
+  {
+    "name": "Gronau (Westf.)St. Antonius-Hospital",
+    "lat": 52.208,
+    "lon": 7.019666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW380",
+    "city": "Unbekannt",
+    "plz": "22485"
+  },
+  {
+    "name": "Gütersloh Klinikum Gütersloh",
+    "lat": 51.897,
+    "lon": 8.386166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW381",
+    "city": "Unbekannt",
+    "plz": "19333"
+  },
+  {
+    "name": "St. Elisabeth Hospital Gütersloh",
+    "lat": 51.883,
+    "lon": 8.383666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW383",
+    "city": "Gütersloh",
+    "plz": "33332"
+  },
+  {
+    "name": "Hagen Allgemeines Krankenhaus",
+    "lat": 51.355,
+    "lon": 7.4675,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW385",
+    "city": "Unbekannt",
+    "plz": "35580"
+  },
+  {
+    "name": "Hagen HELIOS Klinik Hagen – Ambrock",
+    "lat": 51.3145,
+    "lon": 7.516166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW387",
+    "city": "Unbekannt",
+    "plz": "60580"
+  },
+  {
+    "name": "Hagen St. Johannes Hospital",
+    "lat": 51.39633333333333,
+    "lon": 7.473333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW388",
+    "city": "Unbekannt",
+    "plz": "65809"
+  },
+  {
+    "name": "Haltern am See St.-Sixtus-Hospital",
+    "lat": 51.745,
+    "lon": 7.1945,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW390",
+    "city": "Unbekannt",
+    "plz": "24572"
+  },
+  {
+    "name": "Hamm Evangelisches Krankenhaus",
+    "lat": 51.66916666666667,
+    "lon": 7.827833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW391",
+    "city": "Unbekannt",
+    "plz": "11059"
+  },
+  {
+    "name": "Hattingen Helios Klinik Holthausen",
+    "lat": 51.39,
+    "lon": 7.217,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW394",
+    "city": "Unbekannt",
+    "plz": "20455"
+  },
+  {
+    "name": "Heinsberg Städtisches Krankenhaus",
+    "lat": 51.0655,
+    "lon": 6.094666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW396",
+    "city": "Unbekannt",
+    "plz": "15252"
+  },
+  {
+    "name": "Hemer Lungenklinik",
+    "lat": 51.39366666666667,
+    "lon": 7.765,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW397",
+    "city": "Unbekannt",
+    "plz": "15867"
+  },
+  {
+    "name": "Herdecke Gemeinschaftskrankenhaus Herdecke",
+    "lat": 51.410333333333334,
+    "lon": 7.3995,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW508",
+    "city": "Unbekannt",
+    "plz": "45831"
+  },
+  {
+    "name": "Herford Klinikum",
+    "lat": 52.12583333333333,
+    "lon": 8.698333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW399",
+    "city": "Unbekannt",
+    "plz": "70320"
+  },
+  {
+    "name": "Herten St.-Elisabeth-Hospital",
+    "lat": 51.593,
+    "lon": 7.1241666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW400",
+    "city": "Unbekannt",
+    "plz": "12456"
+  },
+  {
+    "name": "Hilden Feuerwache Hilden",
+    "lat": 51.1805,
+    "lon": 6.941666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW638",
+    "city": "Unbekannt",
+    "plz": "38407"
+  },
+  {
+    "name": "Höxter St. Ansgar Krankenhaus",
+    "lat": 51.785833333333336,
+    "lon": 9.3645,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW402",
+    "city": "Unbekannt",
+    "plz": "71376"
+  },
+  {
+    "name": "Iserlohn St.-Elisabeth-Hospital",
+    "lat": 51.38033333333333,
+    "lon": 7.6905,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW404",
+    "city": "Unbekannt",
+    "plz": "63586"
+  },
+  {
+    "name": "Kamen Krankenhaus",
+    "lat": 51.5955,
+    "lon": 7.661333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW405",
+    "city": "Unbekannt",
+    "plz": "34591"
+  },
+  {
+    "name": "St. Bernhard-Hospital Kamp-Lintfort",
+    "lat": 51.49133333333333,
+    "lon": 6.516333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW406",
+    "city": "Kamp-Lintfort",
+    "plz": "47475"
+  },
+  {
+    "name": "Kevelaer Marien Hospital",
+    "lat": 51.5845,
+    "lon": 6.248833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW407",
+    "city": "Unbekannt",
+    "plz": "55475"
+  },
+  {
+    "name": "Kleve St. Antonius Hospital",
+    "lat": 51.772,
+    "lon": 6.1353333333333335,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW408",
+    "city": "Unbekannt",
+    "plz": "74753"
+  },
+  {
+    "name": "Köln Eduardus-Krankenhaus",
+    "lat": 50.932,
+    "lon": 6.980833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW409",
+    "city": "Unbekannt",
+    "plz": "17506"
+  },
+  {
+    "name": "Köln Heilig Geist-Krankenhaus",
+    "lat": 50.99166666666667,
+    "lon": 6.926333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW411",
+    "city": "Unbekannt",
+    "plz": "10550"
+  },
+  {
+    "name": "Köln Krankenhaus Porz am Rhein",
+    "lat": 50.891666666666666,
+    "lon": 7.051166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW414",
+    "city": "Unbekannt",
+    "plz": "19511"
+  },
+  {
+    "name": "Krefeld Alexianer Krankenhaus",
+    "lat": 51.326166666666666,
+    "lon": 6.586333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW417",
+    "city": "Unbekannt",
+    "plz": "81478"
+  },
+  {
+    "name": "Lemgo Klinikum-Lippe",
+    "lat": 52.03783333333333,
+    "lon": 8.899166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW421",
+    "city": "Unbekannt",
+    "plz": "85326"
+  },
+  {
+    "name": "HELIOS Klinik Lengerich",
+    "lat": 52.19916666666666,
+    "lon": 7.844666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW422",
+    "city": "Lengerich",
+    "plz": "49525"
+  },
+  {
+    "name": "Klinikum Leverkusen",
+    "lat": 51.023,
+    "lon": 7.013833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW646",
+    "city": "Leverkusen",
+    "plz": "51375"
+  },
+  {
+    "name": "Lippstadt Ev. Krankenhaus",
+    "lat": 51.6845,
+    "lon": 8.342,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW427",
+    "city": "Unbekannt",
+    "plz": "33595"
+  },
+  {
+    "name": "Klinikum Lüdenscheid",
+    "lat": 51.207166666666666,
+    "lon": 7.663666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW428",
+    "city": "Lüdenscheid",
+    "plz": "58515"
+  },
+  {
+    "name": "Lünen Klinikum Westfalen g Gmb H, Klinik am Park (Brambauer)",
+    "lat": 51.59016666666667,
+    "lon": 7.443,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW505",
+    "city": "Unbekannt",
+    "plz": "59445"
+  },
+  {
+    "name": "Marl Paracelsus Klinik",
+    "lat": 51.663833333333336,
+    "lon": 7.123833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW429",
+    "city": "Unbekannt",
+    "plz": "11457"
+  },
+  {
+    "name": "Marl Marien-Hospital Marl",
+    "lat": 51.65133333333333,
+    "lon": 7.0841666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW430",
+    "city": "Unbekannt",
+    "plz": "57457"
+  },
+  {
+    "name": "Marsberg St. Marien Hospital",
+    "lat": 51.4645,
+    "lon": 8.8425,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW431",
+    "city": "Unbekannt",
+    "plz": "23443"
+  },
+  {
+    "name": "Evangelisches Krankenhaus Mettmann",
+    "lat": 51.2475,
+    "lon": 6.9719999999999995,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW652",
+    "city": "Mettmann",
+    "plz": "40822"
+  },
+  {
+    "name": "Moers Krankenhaus Bethanien",
+    "lat": 51.461666666666666,
+    "lon": 6.634166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW439",
+    "city": "Unbekannt",
+    "plz": "21474"
+  },
+  {
+    "name": "Mönchengladbach Elisabeth Krankenhaus Rheydt-Städtische Kliniken Mönchengladbach",
+    "lat": 51.157,
+    "lon": 6.418166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW438",
+    "city": "Unbekannt",
+    "plz": "10041"
+  },
+  {
+    "name": "Münster Uni-Jungeblodplatz",
+    "lat": 51.95883333333333,
+    "lon": 7.602,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW441",
+    "city": "Unbekannt",
+    "plz": "14816"
+  },
+  {
+    "name": "Münster-Hiltrup Herz-Jesu-Krankenhaus",
+    "lat": 51.910833333333336,
+    "lon": 7.633666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW506",
+    "city": "Unbekannt",
+    "plz": "10948"
+  },
+  {
+    "name": "Nettetal Städtisches Krankenhaus",
+    "lat": 51.30866666666667,
+    "lon": 6.271166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW443",
+    "city": "Nettetal",
+    "plz": "41334"
+  },
+  {
+    "name": "Neuss Krankenhaus",
+    "lat": 51.212833333333336,
+    "lon": 6.66,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW444",
+    "city": "Unbekannt",
+    "plz": "46414"
+  },
+  {
+    "name": "Neuss Gelände KPB, Jülicher Landstraße 178",
+    "lat": 51.186166666666665,
+    "lon": 6.6786666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW654",
+    "city": "Unbekannt",
+    "plz": "84414"
+  },
+  {
+    "name": "Olpe St.-Martinus-Hospital (nur bei Vorliegen §25 Abs.2 Nr. 3 Luft VG)",
+    "lat": 51.028333333333336,
+    "lon": 7.847166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW448",
+    "city": "Unbekannt",
+    "plz": "65746"
+  },
+  {
+    "name": "Olsberg Elisabeth-Klinik",
+    "lat": 51.35633333333333,
+    "lon": 8.475,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW449",
+    "city": "Unbekannt",
+    "plz": "45993"
+  },
+  {
+    "name": "Paderborn Brüderkrankenhaus St. Josef",
+    "lat": 51.7125,
+    "lon": 8.759666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW450",
+    "city": "Unbekannt",
+    "plz": "46330"
+  },
+  {
+    "name": "Paderborn St. Johannisstift Ev. Krankenhaus",
+    "lat": 51.723333333333336,
+    "lon": 8.747166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW452",
+    "city": "Unbekannt",
+    "plz": "28331"
+  },
+  {
+    "name": "Paderborn St. Louise Krankenhaus Frauen und Kinderklinik",
+    "lat": 51.7095,
+    "lon": 8.764666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW453",
+    "city": "Unbekannt",
+    "plz": "81330"
+  },
+  {
+    "name": "Paderborn St. Vincenz Krankenhaus Haupthaus",
+    "lat": 51.718,
+    "lon": 8.760833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW454",
+    "city": "Unbekannt",
+    "plz": "23309"
+  },
+  {
+    "name": "Plettenberg",
+    "lat": 51.21333333333333,
+    "lon": 7.886666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW455",
+    "city": "Plettenberg",
+    "plz": "58840"
+  },
+  {
+    "name": "Radevormwald Sana Krankenhaus",
+    "lat": 51.19883333333333,
+    "lon": 7.352,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW456",
+    "city": "Unbekannt",
+    "plz": "33424"
+  },
+  {
+    "name": "Ratingen Schützenplatz",
+    "lat": 51.30416666666667,
+    "lon": 6.861166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW666",
+    "city": "Unbekannt",
+    "plz": "34087"
+  },
+  {
+    "name": "Recklinghausen Knappschafts Krankenhaus",
+    "lat": 51.61866666666667,
+    "lon": 7.175833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW459",
+    "city": "Unbekannt",
+    "plz": "15145"
+  },
+  {
+    "name": "Recklinghausen Prosper-Hospital",
+    "lat": 51.607,
+    "lon": 7.193666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW460",
+    "city": "Unbekannt",
+    "plz": "27456"
+  },
+  {
+    "name": "Rheda-Wiedenbrueck St.-Vinzenz-Hospital",
+    "lat": 51.83283333333333,
+    "lon": 8.3305,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW463",
+    "city": "Unbekannt",
+    "plz": "13337"
+  },
+  {
+    "name": "Salzkotten St. Josefs Krankenhaus",
+    "lat": 51.67883333333333,
+    "lon": 8.6175,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW465",
+    "city": "Unbekannt",
+    "plz": "12331"
+  },
+  {
+    "name": "Sankt Augustin Asklepios Kinderherzzentrum",
+    "lat": 50.77633333333333,
+    "lon": 7.1803333333333335,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW466",
+    "city": "Unbekannt",
+    "plz": "29537"
+  },
+  {
+    "name": "Schmallenberg Fachkrankenhaus Kloster Grafschaft",
+    "lat": 51.1445,
+    "lon": 8.323333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW468",
+    "city": "Unbekannt",
+    "plz": "15739"
+  },
+  {
+    "name": "Schwelm Helios Klinikum Schwelm",
+    "lat": 51.294666666666664,
+    "lon": 7.3125,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW469",
+    "city": "Unbekannt",
+    "plz": "15583"
+  },
+  {
+    "name": "Klinikum Stadt Soest",
+    "lat": 51.56616666666667,
+    "lon": 8.077,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW475",
+    "city": "Soest",
+    "plz": "56494"
+  },
+  {
+    "name": "Soest Marienkrankenhaus",
+    "lat": 51.574666666666666,
+    "lon": 8.1125,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW476",
+    "city": "Unbekannt",
+    "plz": "55949"
+  },
+  {
+    "name": "Solingen Feuerwache 3",
+    "lat": 51.185833333333335,
+    "lon": 7.0525,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW672",
+    "city": "Solingen",
+    "plz": "42699"
+  },
+  {
+    "name": "Solingen Feuerwache 3",
+    "lat": 51.185833333333335,
+    "lon": 7.0525,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW672",
+    "city": "Unbekannt",
+    "plz": "14265"
+  },
+  {
+    "name": "Solingen Feuerwache 3",
+    "lat": 51.185833333333335,
+    "lon": 7.0525,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW672",
+    "city": "Unbekannt",
+    "plz": "13242"
+  },
+  {
+    "name": "Stolberg (Rhld.)Bethlehem Gesundheitszentrum Stolberg",
+    "lat": 50.773833333333336,
+    "lon": 6.2316666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW479",
+    "city": "Unbekannt",
+    "plz": "55222"
+  },
+  {
+    "name": "Unna Evangelisches Krankenhaus",
+    "lat": 51.532833333333336,
+    "lon": 7.676333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW480",
+    "city": "Unbekannt",
+    "plz": "10594"
+  },
+  {
+    "name": "Unna Katharinen-Hospital",
+    "lat": 51.537,
+    "lon": 7.683,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW481",
+    "city": "Unbekannt",
+    "plz": "25942"
+  },
+  {
+    "name": "Velbert Helios Klinik Niederberg",
+    "lat": 51.351166666666664,
+    "lon": 7.0125,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW483",
+    "city": "Unbekannt",
+    "plz": "24254"
+  },
+  {
+    "name": "Viersen Allg. Krankenhaus Viersen",
+    "lat": 51.251333333333335,
+    "lon": 6.381333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW485",
+    "city": "Unbekannt",
+    "plz": "63417"
+  },
+  {
+    "name": "Warendorf Josephs-Hospital",
+    "lat": 51.961666666666666,
+    "lon": 8.003333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW488",
+    "city": "Unbekannt",
+    "plz": "24823"
+  },
+  {
+    "name": "Warstein Krankenhaus Maria Hilf",
+    "lat": 51.44133333333333,
+    "lon": 8.355833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW489",
+    "city": "Unbekannt",
+    "plz": "75958"
+  },
+  {
+    "name": "Werl Mariannen-Hospital",
+    "lat": 51.55083333333333,
+    "lon": 7.907,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW490",
+    "city": "Unbekannt",
+    "plz": "15594"
+  },
+  {
+    "name": "Wermelskirchen Krankenhaus",
+    "lat": 51.134166666666665,
+    "lon": 7.2205,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW491",
+    "city": "Unbekannt",
+    "plz": "10042"
+  },
+  {
+    "name": "Werne St. Christophorus-Krankenhaus",
+    "lat": 51.6755,
+    "lon": 7.619166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW492",
+    "city": "Unbekannt",
+    "plz": "15936"
+  },
+  {
+    "name": "Evangelisches Krankenhaus Wesel",
+    "lat": 51.6605,
+    "lon": 6.656333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW493",
+    "city": "Wesel",
+    "plz": "46485"
+  },
+  {
+    "name": "Westerholt Feuerwehr",
+    "lat": 51.60033333333333,
+    "lon": 7.0841666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW691",
+    "city": "Unbekannt",
+    "plz": "23457"
+  },
+  {
+    "name": "Winterberg St. Franziskus-Hospital (nur §25 Abs.2 Nr. 3 Luft VG)",
+    "lat": 51.193333333333335,
+    "lon": 8.536666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW496",
+    "city": "Unbekannt",
+    "plz": "25995"
+  },
+  {
+    "name": "Wipperfürth HELIOS Klinik",
+    "lat": 51.11216666666667,
+    "lon": 7.3845,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW497",
+    "city": "Wipperfürth",
+    "plz": "51688"
+  },
+  {
+    "name": "Wuppertal Helios Klinikum Wuppertal",
+    "lat": 51.27633333333333,
+    "lon": 7.175833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW501",
+    "city": "Unbekannt",
+    "plz": "40422"
+  },
+  {
+    "name": "Xanten Sankt Josef Hospital",
+    "lat": 51.642833333333336,
+    "lon": 6.453833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "NW504",
+    "city": "Unbekannt",
+    "plz": "44650"
+  },
+  {
+    "name": "Adenau St. Josef Krankenhaus",
+    "lat": 50.383833333333335,
+    "lon": 6.9271666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP301",
+    "city": "Unbekannt",
+    "plz": "31535"
+  },
+  {
+    "name": "Altenkirchen (Westerwald)DRK Krankenhaus",
+    "lat": 50.6825,
+    "lon": 7.6295,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP303",
+    "city": "Unbekannt",
+    "plz": "21576"
+  },
+  {
+    "name": "Andernach Rhein-Mosel Fachklinik",
+    "lat": 50.428666666666665,
+    "lon": 7.398333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP305",
+    "city": "Unbekannt",
+    "plz": "58566"
+  },
+  {
+    "name": "Andernach St. Nikolaus-Stiftshospital",
+    "lat": 50.44166666666667,
+    "lon": 7.403333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP616",
+    "city": "Unbekannt",
+    "plz": "15662"
+  },
+  {
+    "name": "Asbach DRK Kamillus Klinik",
+    "lat": 50.66833333333334,
+    "lon": 7.4245,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP307",
+    "city": "Unbekannt",
+    "plz": "65356"
+  },
+  {
+    "name": "Bad Bergzabern Klinikum",
+    "lat": 49.10666666666667,
+    "lon": 7.9995,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP309",
+    "city": "Unbekannt",
+    "plz": "25768"
+  },
+  {
+    "name": "Bad Neuenahr-Ahrweiler Krankenhaus",
+    "lat": 50.54083333333333,
+    "lon": 7.126166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP314",
+    "city": "Unbekannt",
+    "plz": "35347"
+  },
+  {
+    "name": "Birkenfeld Birkenfeld",
+    "lat": 49.64783333333333,
+    "lon": 7.158333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP323",
+    "city": "Birkenfeld",
+    "plz": "55765"
+  },
+  {
+    "name": "Bitburg Feuerwache",
+    "lat": 49.967166666666664,
+    "lon": 6.5275,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP324",
+    "city": "Unbekannt",
+    "plz": "15463"
+  },
+  {
+    "name": "Cochem Marienkrankenhaus",
+    "lat": 50.155,
+    "lon": 7.1786666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP328",
+    "city": "Unbekannt",
+    "plz": "32568"
+  },
+  {
+    "name": "Daun Krankenhaus Daun",
+    "lat": 50.19283333333333,
+    "lon": 6.835833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP330",
+    "city": "Unbekannt",
+    "plz": "25455"
+  },
+  {
+    "name": "Dernbach (Westerwald)Herz-Jesu-Krankenhaus",
+    "lat": 50.45366666666666,
+    "lon": 7.7861666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP331",
+    "city": "Unbekannt",
+    "plz": "85642"
+  },
+  {
+    "name": "Frankenthal (Pfalz)Stadtklinik",
+    "lat": 49.542833333333334,
+    "lon": 8.3325,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP334",
+    "city": "Unbekannt",
+    "plz": "16722"
+  },
+  {
+    "name": "Hachenburg DRK Krankenhaus",
+    "lat": 50.657,
+    "lon": 7.8295,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP338",
+    "city": "Unbekannt",
+    "plz": "12576"
+  },
+  {
+    "name": "Hermeskeil St. Josef-Krankenhaus",
+    "lat": 49.657333333333334,
+    "lon": 6.947166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP339",
+    "city": "Unbekannt",
+    "plz": "23544"
+  },
+  {
+    "name": "Klinikum Idar-Oberstein",
+    "lat": 49.7165,
+    "lon": 7.3196666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP340",
+    "city": "Idar-Oberstein",
+    "plz": "55743"
+  },
+  {
+    "name": "Kandel Südpfalzkliniken",
+    "lat": 49.086666666666666,
+    "lon": 8.201833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP343",
+    "city": "Unbekannt",
+    "plz": "14768"
+  },
+  {
+    "name": "Kirchen (Sieg)DRK Krankenhaus",
+    "lat": 50.8055,
+    "lon": 7.878666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP345",
+    "city": "Unbekannt",
+    "plz": "24575"
+  },
+  {
+    "name": "Kirchheimbolanden Westpfalz-Klinikum",
+    "lat": 49.65833333333333,
+    "lon": 8.006666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP346",
+    "city": "Unbekannt",
+    "plz": "36675"
+  },
+  {
+    "name": "Koblenz Stiftungsklinikum Mittelrhein",
+    "lat": 50.348,
+    "lon": 7.593,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP150",
+    "city": "Unbekannt",
+    "plz": "75606"
+  },
+  {
+    "name": "Koblenz Marienhof Kath. Klinikum",
+    "lat": 50.35966666666667,
+    "lon": 7.571166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP349",
+    "city": "Unbekannt",
+    "plz": "95607"
+  },
+  {
+    "name": "Koblenz Klinikum Kemperhof",
+    "lat": 50.35633333333333,
+    "lon": 7.565833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP395",
+    "city": "Unbekannt",
+    "plz": "15656"
+  },
+  {
+    "name": "Kusel Westpfalz-Klinikum",
+    "lat": 49.546,
+    "lon": 7.377666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP351",
+    "city": "Unbekannt",
+    "plz": "16686"
+  },
+  {
+    "name": "Landau in der Pfalz Vinzentius-Krankenhaus",
+    "lat": 49.19083333333333,
+    "lon": 8.114333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP151",
+    "city": "Unbekannt",
+    "plz": "47682"
+  },
+  {
+    "name": "Landau in der Pfalz Klinikum",
+    "lat": 49.205333333333336,
+    "lon": 8.103666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP354",
+    "city": "Unbekannt",
+    "plz": "11768"
+  },
+  {
+    "name": "Mayen Krankenhaus",
+    "lat": 50.32333333333333,
+    "lon": 7.219833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP361",
+    "city": "Unbekannt",
+    "plz": "22567"
+  },
+  {
+    "name": "Meisenheim Gesundheitszentrum",
+    "lat": 49.70583333333333,
+    "lon": 7.6771666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP362",
+    "city": "Unbekannt",
+    "plz": "32555"
+  },
+  {
+    "name": "Montabaur Brüderkrankenhaus",
+    "lat": 50.431333333333335,
+    "lon": 7.833,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP364",
+    "city": "Unbekannt",
+    "plz": "13564"
+  },
+  {
+    "name": "Nastätten Paulinenstift",
+    "lat": 50.2025,
+    "lon": 7.855333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP366",
+    "city": "Unbekannt",
+    "plz": "14563"
+  },
+  {
+    "name": "Neustadt an der Weinstraße Marienkrankenhaus Hetzelstift",
+    "lat": 49.3455,
+    "lon": 8.148666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP368",
+    "city": "Unbekannt",
+    "plz": "10674"
+  },
+  {
+    "name": "Pirmasens Städt. Krankenhaus",
+    "lat": 49.192,
+    "lon": 7.6175,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP371",
+    "city": "Unbekannt",
+    "plz": "22669"
+  },
+  {
+    "name": "Remagen Krankenhaus",
+    "lat": 50.5735,
+    "lon": 7.234166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP374",
+    "city": "Unbekannt",
+    "plz": "15342"
+  },
+  {
+    "name": "Speyer St. Vincentius Krankenhaus",
+    "lat": 49.31633333333333,
+    "lon": 8.4205,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP380",
+    "city": "Speyer",
+    "plz": "67346"
+  },
+  {
+    "name": "Trier Klinikum",
+    "lat": 49.80866666666667,
+    "lon": 6.690833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP384",
+    "city": "Unbekannt",
+    "plz": "22542"
+  },
+  {
+    "name": "Zell (Mosel)Klinikum Mittelmosel",
+    "lat": 50.025,
+    "lon": 7.168666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "RP394",
+    "city": "Unbekannt",
+    "plz": "95685"
+  },
+  {
+    "name": "Dillingen/ Saar Marienhaus Klinikum",
+    "lat": 49.354,
+    "lon": 6.7316666666666665,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL302",
+    "city": "Unbekannt",
+    "plz": "46676"
+  },
+  {
+    "name": "Homburg Universitätsklinikum Boden",
+    "lat": 49.301833333333335,
+    "lon": 7.346166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL304",
+    "city": "Homburg",
+    "plz": "66421"
+  },
+  {
+    "name": "Lebach Caritas-Krankenhaus",
+    "lat": 49.4195,
+    "lon": 6.888,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL306",
+    "city": "Unbekannt",
+    "plz": "49668"
+  },
+  {
+    "name": "Merzig SHK Klinikum",
+    "lat": 49.45583333333333,
+    "lon": 6.633,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL308",
+    "city": "Unbekannt",
+    "plz": "14866"
+  },
+  {
+    "name": "Neunkirchen Marienhausklinik St. Josef Kohlhof",
+    "lat": 49.3175,
+    "lon": 7.228,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL310",
+    "city": "Unbekannt",
+    "plz": "56653"
+  },
+  {
+    "name": "Püttlingen Krankenhaus Püttlingen",
+    "lat": 49.27616666666667,
+    "lon": 6.866333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL312",
+    "city": "Unbekannt",
+    "plz": "35663"
+  },
+  {
+    "name": "Saarbrücken Klinikum",
+    "lat": 49.222833333333334,
+    "lon": 6.996333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL326",
+    "city": "Unbekannt",
+    "plz": "16611"
+  },
+  {
+    "name": "Saarlouis DRK-Krankenhaus",
+    "lat": 49.313,
+    "lon": 6.744666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL319",
+    "city": "Unbekannt",
+    "plz": "25667"
+  },
+  {
+    "name": "Marienkrankenhaus St. Wendel",
+    "lat": 49.4545,
+    "lon": 7.179666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL321",
+    "city": "St. Wendel",
+    "plz": "66606"
+  },
+  {
+    "name": "Sulzbach/ Saar Knappschaftsklinikum",
+    "lat": 49.2975,
+    "lon": 7.053333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL322",
+    "city": "Unbekannt",
+    "plz": "10662"
+  },
+  {
+    "name": "Völklingen SHG Kliniken",
+    "lat": 49.25666666666667,
+    "lon": 6.854166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SL323",
+    "city": "Unbekannt",
+    "plz": "96633"
+  },
+  {
+    "name": "Adorf/Vogtland Klinik Adorf/Schöneck",
+    "lat": 50.32966666666667,
+    "lon": 12.2905,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN301",
+    "city": "Unbekannt",
+    "plz": "51086"
+  },
+  {
+    "name": "Annaberg-Buchholz Erzgebirgsklinikum",
+    "lat": 50.593666666666664,
+    "lon": 13.003,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN302",
+    "city": "Unbekannt",
+    "plz": "15094"
+  },
+  {
+    "name": "Arnsdorf Sächsisches Krankenhaus",
+    "lat": 51.092166666666664,
+    "lon": 13.998,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN303",
+    "city": "Unbekannt",
+    "plz": "15014"
+  },
+  {
+    "name": "Bischofswerda Klinik",
+    "lat": 51.136833333333335,
+    "lon": 14.1775,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN308",
+    "city": "Unbekannt",
+    "plz": "55018"
+  },
+  {
+    "name": "Chemnitz Kliniken",
+    "lat": 50.8395,
+    "lon": 12.962166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN310",
+    "city": "Unbekannt",
+    "plz": "10109"
+  },
+  {
+    "name": "Delitzsch Platz am Park",
+    "lat": 51.53216666666667,
+    "lon": 12.341833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN318",
+    "city": "Unbekannt",
+    "plz": "90450"
+  },
+  {
+    "name": "Döbeln Verkehrsübungsplatz Fichrtestraße",
+    "lat": 51.117,
+    "lon": 13.129166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN602",
+    "city": "Unbekannt",
+    "plz": "10047"
+  },
+  {
+    "name": "Dresden Städt. Krankenhaus, Heinrich-Cotta-Str. 12",
+    "lat": 51.065,
+    "lon": 13.837,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN323",
+    "city": "Unbekannt",
+    "plz": "12013"
+  },
+  {
+    "name": "Dresden Städt. Krankenhaus, Industriestrasse 40",
+    "lat": 51.09,
+    "lon": 13.7095,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN324",
+    "city": "Unbekannt",
+    "plz": "40011"
+  },
+  {
+    "name": "Dresden Universitätsklinikum Ausweichplatz",
+    "lat": 51.06133333333333,
+    "lon": 13.781166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN606",
+    "city": "Unbekannt",
+    "plz": "74013"
+  },
+  {
+    "name": "Ebersbach-Neugersdorf Klinikum",
+    "lat": 51.00533333333333,
+    "lon": 14.568333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN325",
+    "city": "Unbekannt",
+    "plz": "23027"
+  },
+  {
+    "name": "Glauchau Klinikum Rudolf Virchow",
+    "lat": 50.808,
+    "lon": 12.5545,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN327",
+    "city": "Unbekannt",
+    "plz": "18083"
+  },
+  {
+    "name": "Grimma Krankenhaus",
+    "lat": 51.23716666666667,
+    "lon": 12.719333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN329",
+    "city": "Unbekannt",
+    "plz": "50466"
+  },
+  {
+    "name": "Hartmannsdorf Diakoniekrankenhaus",
+    "lat": 50.883,
+    "lon": 12.7895,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN331",
+    "city": "Hartmannsdorf",
+    "plz": "09232"
+  },
+  {
+    "name": "Kamenz Malteser Krankenhaus",
+    "lat": 51.26416666666667,
+    "lon": 14.125333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN333",
+    "city": "Unbekannt",
+    "plz": "40019"
+  },
+  {
+    "name": "Kirchberg Klinikum",
+    "lat": 50.626333333333335,
+    "lon": 12.563,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN334",
+    "city": "Unbekannt",
+    "plz": "36081"
+  },
+  {
+    "name": "Kreischa Bavaria-Klinik 3 / 5",
+    "lat": 50.95333333333333,
+    "lon": 13.752166666666668,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN335",
+    "city": "Unbekannt",
+    "plz": "30173"
+  },
+  {
+    "name": "Kreischa Bavaria-Klinik 2",
+    "lat": 50.947,
+    "lon": 13.767,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN379",
+    "city": "Unbekannt",
+    "plz": "10173"
+  },
+  {
+    "name": "Leipzig Auf dem Friedhofsgelände",
+    "lat": 51.3425,
+    "lon": 12.3175,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN336",
+    "city": "Unbekannt",
+    "plz": "49041"
+  },
+  {
+    "name": "Leipzig Klinikum St. Georg - ebenerdiger Landeplatz",
+    "lat": 51.38283333333333,
+    "lon": 12.373666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN341",
+    "city": "Unbekannt",
+    "plz": "14104"
+  },
+  {
+    "name": "Leisnig Helios Klinik Leisnig",
+    "lat": 51.155833333333334,
+    "lon": 12.918833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN347",
+    "city": "Unbekannt",
+    "plz": "48047"
+  },
+  {
+    "name": "Lichtenstein Krankenhaus",
+    "lat": 50.74783333333333,
+    "lon": 12.635333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN348",
+    "city": "Unbekannt",
+    "plz": "42093"
+  },
+  {
+    "name": "Plauen Vogtland-Klinikum",
+    "lat": 50.489666666666665,
+    "lon": 12.153666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN356",
+    "city": "Unbekannt",
+    "plz": "20852"
+  },
+  {
+    "name": "Radeberg Klinik",
+    "lat": 51.1245,
+    "lon": 13.930833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN358",
+    "city": "Unbekannt",
+    "plz": "60014"
+  },
+  {
+    "name": "Radebeul Elblandklinikum Radebeul",
+    "lat": 51.108,
+    "lon": 13.650833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN150",
+    "city": "Unbekannt",
+    "plz": "13014"
+  },
+  {
+    "name": "Reichenbach im Vogtland Paracelsus-Klinik",
+    "lat": 50.612833333333334,
+    "lon": 12.312,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN359",
+    "city": "Unbekannt",
+    "plz": "37084"
+  },
+  {
+    "name": "Riesa Elblandklinikum Riesa",
+    "lat": 51.295,
+    "lon": 13.313833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN360",
+    "city": "Unbekannt",
+    "plz": "80158"
+  },
+  {
+    "name": "Rodewisch Klinikum Obergöltzsch/Rodewisch",
+    "lat": 50.52333333333333,
+    "lon": 12.411666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN362",
+    "city": "Unbekannt",
+    "plz": "10082"
+  },
+  {
+    "name": "Schkeuditz HELIOS Klinik",
+    "lat": 51.39533333333333,
+    "lon": 12.229166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN365",
+    "city": "Unbekannt",
+    "plz": "45044"
+  },
+  {
+    "name": "Stollberg/Erzgeb.Kreiskrankenhaus - Jahnsdorfer Str. 2",
+    "lat": 50.714166666666664,
+    "lon": 12.788666666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN369",
+    "city": "Unbekannt",
+    "plz": "70936"
+  },
+  {
+    "name": "Weißwasser/O.L.Kreiskrankenhaus",
+    "lat": 51.50333333333333,
+    "lon": 14.6255,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN371",
+    "city": "Unbekannt",
+    "plz": "10294"
+  },
+  {
+    "name": "Werdau Pleißental Klinik",
+    "lat": 50.7425,
+    "lon": 12.365333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN372",
+    "city": "Unbekannt",
+    "plz": "10608"
+  },
+  {
+    "name": "Wermsdorf Fachkrankenhaus Hubertusburg",
+    "lat": 51.27616666666667,
+    "lon": 12.942833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN373",
+    "city": "Unbekannt",
+    "plz": "63047"
+  },
+  {
+    "name": "Wurzen Krankenhaus",
+    "lat": 51.37916666666667,
+    "lon": 12.732,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN375",
+    "city": "Unbekannt",
+    "plz": "70048"
+  },
+  {
+    "name": "Zittau Klinikum",
+    "lat": 50.8995,
+    "lon": 14.822,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN376",
+    "city": "Unbekannt",
+    "plz": "80276"
+  },
+  {
+    "name": "Zwickau Heinrich-Braun-Klinikum",
+    "lat": 50.723,
+    "lon": 12.471166666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SN378",
+    "city": "Unbekannt",
+    "plz": "68080"
+  },
+  {
+    "name": "Chemnitz Klinikum - Zentralbereich PI",
+    "lat": 50.84616666666667,
+    "lon": 12.883333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SSN315",
+    "city": "Unbekannt",
+    "plz": "20911"
+  },
+  {
+    "name": "AMEOS Klinikum Aschersleben",
+    "lat": 51.74466666666667,
+    "lon": 11.456666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST301",
+    "city": "Aschersleben",
+    "plz": "06449"
+  },
+  {
+    "name": "Gesundheitszentrum Bitterfeld-Wolfen",
+    "lat": 51.633,
+    "lon": 12.333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST305",
+    "city": "Bitterfeld-Wolfen",
+    "plz": "06749"
+  },
+  {
+    "name": "-Anhalt Burg Helios Klinik",
+    "lat": 52.264,
+    "lon": 11.830833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST307",
+    "city": "Burg",
+    "plz": "39288"
+  },
+  {
+    "name": "-Anhalt Dessau-Roßlau Städtisches Klinikum (Boden)",
+    "lat": 51.81583333333333,
+    "lon": 12.197166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST309",
+    "city": "Unbekannt",
+    "plz": "38068"
+  },
+  {
+    "name": "-Anhalt Halberstadt AMEOS Klinikum",
+    "lat": 51.901666666666664,
+    "lon": 11.052166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST315",
+    "city": "Unbekannt",
+    "plz": "53882"
+  },
+  {
+    "name": "-Anhalt Haldensleben AMEOS Klinikum",
+    "lat": 52.28616666666667,
+    "lon": 11.377,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST316",
+    "city": "Unbekannt",
+    "plz": "27393"
+  },
+  {
+    "name": "-Anhalt Hettstedt Helios Klinik",
+    "lat": 51.66116666666667,
+    "lon": 11.493333333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST320",
+    "city": "Unbekannt",
+    "plz": "80633"
+  },
+  {
+    "name": "-Anhalt Köthen (Anhalt)Klinik",
+    "lat": 51.74616666666667,
+    "lon": 11.973833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST324",
+    "city": "Unbekannt",
+    "plz": "29063"
+  },
+  {
+    "name": "-Anhalt Magdeburg Pfeiffersche Stiftungen",
+    "lat": 52.1155,
+    "lon": 11.667833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST328",
+    "city": "Unbekannt",
+    "plz": "10391"
+  },
+  {
+    "name": "-Anhalt Merseburg Klinikum Saalekreis",
+    "lat": 51.36666666666667,
+    "lon": 11.992833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST332",
+    "city": "Unbekannt",
+    "plz": "52062"
+  },
+  {
+    "name": "-Anhalt Möser Lungenklinik Lostau",
+    "lat": 52.216166666666666,
+    "lon": 11.729166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST325",
+    "city": "Unbekannt",
+    "plz": "23929"
+  },
+  {
+    "name": "-Anhalt Naumburg (Saale)Klinikum",
+    "lat": 51.163,
+    "lon": 11.815166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST334",
+    "city": "Unbekannt",
+    "plz": "31068"
+  },
+  {
+    "name": "-Anhalt Oschersleben (Bode)Bördeklinik",
+    "lat": 52.06633333333333,
+    "lon": 11.1925,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST337",
+    "city": "Unbekannt",
+    "plz": "43938"
+  },
+  {
+    "name": "-Anhalt Quedlinburg Harzklinikum",
+    "lat": 51.79333333333334,
+    "lon": 11.162833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST339",
+    "city": "Unbekannt",
+    "plz": "24064"
+  },
+  {
+    "name": "Carl-von-Basedow-Klinikum Merseburg Standort Querfurt",
+    "lat": 51.3705,
+    "lon": 11.606,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST340",
+    "city": "Querfurt",
+    "plz": "06268"
+  },
+  {
+    "name": "-Anhalt Salzwedel Altmark-Klinikum",
+    "lat": 52.857,
+    "lon": 11.145,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST344",
+    "city": "Unbekannt",
+    "plz": "12941"
+  },
+  {
+    "name": "-Anhalt Schönebeck Klinikum",
+    "lat": 52.013333333333335,
+    "lon": 11.738833333333334,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST345",
+    "city": "Unbekannt",
+    "plz": "13391"
+  },
+  {
+    "name": "-Anhalt Seehausen (Altmark)Diakoniekrankenhaus",
+    "lat": 52.879666666666665,
+    "lon": 11.743833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST346",
+    "city": "Seehausen (Altmark)",
+    "plz": "39615"
+  },
+  {
+    "name": "-Anhalt Staßfurt Klinik",
+    "lat": 51.85366666666667,
+    "lon": 11.591666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST347",
+    "city": "Unbekannt",
+    "plz": "11394"
+  },
+  {
+    "name": "-Anhalt Wernigerode Harzklinikum",
+    "lat": 51.83583333333333,
+    "lon": 10.773666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST353",
+    "city": "Unbekannt",
+    "plz": "15388"
+  },
+  {
+    "name": "-Anhalt Wittenberg Ev. Krankenhaus Paul Gerhardt Stift",
+    "lat": 51.8705,
+    "lon": 12.657,
+    "type": "Klinik (mit Heliport)",
+    "code": "ST356",
+    "city": "Wittenberg",
+    "plz": "06886"
+  },
+  {
+    "name": "Damp Helios Ostseeklinik",
+    "lat": 54.58583333333333,
+    "lon": 10.023333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "SH311",
+    "city": "Unbekannt",
+    "plz": "30243"
+  },
+  {
+    "name": "Kiel Lubinus Clinicum",
+    "lat": 54.352,
+    "lon": 10.117166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SH326",
+    "city": "Unbekannt",
+    "plz": "25241"
+  },
+  {
+    "name": "SANA Kliniken Lübeck",
+    "lat": 53.848,
+    "lon": 10.687166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SH329",
+    "city": "Lübeck",
+    "plz": "23560"
+  },
+  {
+    "name": "Reinbek St. Adolf Stift",
+    "lat": 53.508833333333335,
+    "lon": 10.242166666666666,
+    "type": "Klinik (mit Heliport)",
+    "code": "SH351",
+    "city": "Unbekannt",
+    "plz": "41214"
+  },
+  {
+    "name": "Sylt Asklepios Nordseeklinik",
+    "lat": 54.92466666666667,
+    "lon": 8.311666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "SH350",
+    "city": "Unbekannt",
+    "plz": "81259"
+  },
+  {
+    "name": "Altenburg Klinikum",
+    "lat": 50.97416666666667,
+    "lon": 12.442833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH301",
+    "city": "Unbekannt",
+    "plz": "10046"
+  },
+  {
+    "name": "Apolda Robert-Koch-Krankenhaus",
+    "lat": 51.01383333333333,
+    "lon": 11.513,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH302",
+    "city": "Unbekannt",
+    "plz": "66995"
+  },
+  {
+    "name": "Bad Langensalza Hufeland Klinikum",
+    "lat": 51.102,
+    "lon": 10.654,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH304",
+    "city": "Unbekannt",
+    "plz": "59994"
+  },
+  {
+    "name": "Blankenhain Helios Klinik",
+    "lat": 50.8595,
+    "lon": 11.338666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH604",
+    "city": "Unbekannt",
+    "plz": "59944"
+  },
+  {
+    "name": "Eisenberg Waldkrankenhaus Rudolf Elle",
+    "lat": 50.956833333333336,
+    "lon": 11.8815,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH312",
+    "city": "Eisenberg",
+    "plz": "07607"
+  },
+  {
+    "name": "Erfurt Katholisches Krankenhaus",
+    "lat": 50.94616666666667,
+    "lon": 11.0855,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH316",
+    "city": "Unbekannt",
+    "plz": "72990"
+  },
+  {
+    "name": "SRH Wald-Klinikum Gera",
+    "lat": 50.867,
+    "lon": 12.050833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH317",
+    "city": "Gera",
+    "plz": "07548"
+  },
+  {
+    "name": "Greiz Kreiskrankenhaus",
+    "lat": 50.66416666666667,
+    "lon": 12.199666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH318",
+    "city": "Unbekannt",
+    "plz": "12079"
+  },
+  {
+    "name": "Ilmenau Ilm-Kreis-Klinik, Oehrenstöcker Str. 32, 98693 Ilmenau",
+    "lat": 50.67966666666667,
+    "lon": 10.918333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH321",
+    "city": "Unbekannt",
+    "plz": "33993"
+  },
+  {
+    "name": "MühlhausenÖkumenisches Hainich Klinikum",
+    "lat": 51.209666666666664,
+    "lon": 10.403833333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH326",
+    "city": "Unbekannt",
+    "plz": "10299"
+  },
+  {
+    "name": "Pößneck Klinik Pößneck",
+    "lat": 50.698166666666665,
+    "lon": 11.591,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH150",
+    "city": "Unbekannt",
+    "plz": "10073"
+  },
+  {
+    "name": "Rudolstadt Klinikum (Landeplatz nach §6 Luft VG beantragt)",
+    "lat": 50.707166666666666,
+    "lon": 11.317,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH332",
+    "city": "Unbekannt",
+    "plz": "40740"
+  },
+  {
+    "name": "Sternbach-Klinik Schleiz",
+    "lat": 50.57683333333333,
+    "lon": 11.8185,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH334",
+    "city": "Schleiz",
+    "plz": "07907"
+  },
+  {
+    "name": "Schmalkalden Elisabeth Klinikum",
+    "lat": 50.721666666666664,
+    "lon": 10.440333333333333,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH335",
+    "city": "Unbekannt",
+    "plz": "99857"
+  },
+  {
+    "name": "Sondershausen Klinikum",
+    "lat": 51.37383333333333,
+    "lon": 10.879666666666667,
+    "type": "Klinik (mit Heliport)",
+    "code": "TH339",
+    "city": "Unbekannt",
+    "plz": "29970"
+  }
+]
