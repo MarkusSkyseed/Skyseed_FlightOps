@@ -65,7 +65,7 @@ let selectedDateTime = null; // null means "now"
 let activeProject = {
     name: "Kein Projekt geladen",
     area: "",
-    geofence: null // Array of [lat, lon]
+    plans: [] // Array of { name, geofence, areaHa }
 };
 
 // --- Debug Logic ---
@@ -110,7 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Map & Location State ---
-let map, marker, permanentWms, notamWms, geofenceLayer, pisLayerGroup;
+let map, marker, userMarker, userCircle, permanentWms, notamWms, geofenceLayer, pisLayerGroup, planListControl;
+// geofenceLayer will be initialized as a FeatureGroup to hold multiple polygons
+geofenceLayer = L.featureGroup();
 let currentCoords = { lat: 0, lon: 0 }; // Browser Geolocation
 let manualCoords = null;                // User Input
 let activeCoords = { lat: 0, lon: 0 };  // Currently used for weather/ERP
@@ -138,22 +140,29 @@ async function initApp() {
     }
 
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                currentCoords = { lat: position.coords.latitude, lon: position.coords.longitude };
-                updateMetadata(); // Update immediately once position is found
-                if (activeSource === "geolocation") {
-                    refreshAllData();
-                }
-            },
-            (error) => {
-                console.warn("Geolocation Error:", error);
-                if (activeSource === "geolocation") {
-                    updateLocationText("Standortzugriff erforderlich");
-                }
-            },
-            { maximumAge: 15 * 60 * 1000 }
-        );
+        const updateGPS = () => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    currentCoords = { lat: position.coords.latitude, lon: position.coords.longitude };
+                    updateMetadata(); // Update immediately once position is found
+                    updateUserLocationMarker();
+                    if (activeSource === "geolocation") {
+                        refreshAllData();
+                    }
+                },
+                (error) => {
+                    console.warn("Geolocation Error:", error);
+                    if (activeSource === "geolocation") {
+                        updateLocationText("Standortzugriff erforderlich");
+                    }
+                },
+                { maximumAge: 10 * 1000, timeout: 5000, enableHighAccuracy: true }
+            );
+        };
+
+        updateGPS();
+        // Background update every minute
+        setInterval(updateGPS, 60000);
     } else {
         updateLocationText("Browser unterstützt kein GPS");
     }
@@ -393,9 +402,10 @@ async function refreshAllData() {
     updateMetadata(); // Always update metadata first (local)
 
     // 1. Determine active coordinates
-    if (activeProject.geofence) {
+    if (activeProject.plans && activeProject.plans.length > 0) {
         activeSource = "polygon";
-        const center = calculateCentroid(activeProject.geofence);
+        // Use center of the FIRST plan for weather/ERP as requested
+        const center = calculateCentroid(activeProject.plans[0].geofence);
         activeCoords = { lat: center.lat, lon: center.lon };
     } else if (manualCoords) {
         activeSource = "manual";
@@ -467,23 +477,39 @@ async function refreshAllData() {
 
     const pAlerts = fetch(`https://api.brightsky.dev/alerts?lat=${lat}&lon=${lon}`).then(r => r.json()).catch(() => ({ alerts: [] }));
     const pKp = fetchKpIndex(selectedDateTime);
-    const pPis = checkPisIntersections(lat, lon, activeProject.geofence);
+    
+    let pPis = [];
+    if (activeProject.plans && activeProject.plans.length > 0) {
+        const allPis = [];
+        activeProject.plans.forEach(plan => {
+            allPis.push(...checkPisIntersections(lat, lon, plan.geofence));
+        });
+        // Unique PIS by ID
+        pPis = [...new Map(allPis.map(item => [item.id, item])).values()];
+    } else {
+        pPis = checkPisIntersections(lat, lon, null);
+    }
 
     // Trigger ERP search proactively
     initErpData();
 
-    // For dipul: use multipoint check for polygons
+    // For dipul: use combined BBOX check for all polygons
     let pDipul;
-    if (activeSource === "polygon" && activeProject.geofence) {
-        // Sample points: centroid + all corners
-        const points = [
-            calculateCentroid(activeProject.geofence)
-        ];
-        // Add all polygon points (if not too many) or at least the corners
-        activeProject.geofence.forEach(pt => {
-            points.push({ lat: pt[0], lon: pt[1] });
+    if (activeSource === "polygon" && activeProject.plans && activeProject.plans.length > 0) {
+        let minLat = 90, maxLat = -90, minLon = 180, maxLon = -180;
+        
+        activeProject.plans.forEach(plan => {
+            plan.geofence.forEach(pt => {
+                if (pt[0] < minLat) minLat = pt[0];
+                if (pt[0] > maxLat) maxLat = pt[0];
+                if (pt[1] < minLon) minLon = pt[1];
+                if (pt[1] > maxLon) maxLon = pt[1];
+            });
         });
-        pDipul = fetchDipulMultiPoints(points);
+
+        // Use the combined BBOX for the DIPUL request
+        const bboxString = `${minLat},${minLon},${maxLat},${maxLon}`;
+        pDipul = fetchDipulData(bboxString, 'bbox');
     } else {
         pDipul = fetchDipulData(activeCoords, 'point');
     }
@@ -750,6 +776,9 @@ function initMap() {
         crossOrigin: true // Ensure CORS for screenshotting
     }).addTo(map);
 
+    // Initialize geofenceLayer as a FeatureGroup and add to map
+    geofenceLayer = L.featureGroup().addTo(map);
+
     const restrictionLayers = [
         'dipul:naturschutzgebiete', 'dipul:nationalparks', 'dipul:industrieanlagen', 'dipul:kraftwerke',
         'dipul:militaerische_anlagen', 'dipul:polizei', 'dipul:justizvollzugsanstalten',
@@ -795,11 +824,11 @@ function initMap() {
     polyCenterIcon.onAdd = function () {
         const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
         div.id = 'polyCenterBtn';
-        div.style.display = activeProject.geofence ? 'block' : 'none';
+        div.style.display = (activeProject.plans && activeProject.plans.length > 0) ? 'block' : 'none';
         div.innerHTML = '<button title="Auf Projekt-Fläche zentrieren" style="background:#1e293b; border:none; color:white; padding:5px 8px; cursor:pointer; font-size:1.2rem; border-radius:4px;">🗺️</button>';
         div.onclick = function (e) {
             e.stopPropagation();
-            if (geofenceLayer) {
+            if (geofenceLayer && geofenceLayer.getLayers().length > 0) {
                 map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
             }
         };
@@ -808,7 +837,37 @@ function initMap() {
     polyCenterIcon.addTo(map);
 
     map.on('click', (e) => identifyFeature(e.latlng));
+    
+    // Initialize Plan List Control
+    initPlanListControl();
+    
     isMapInitialized = true;
+}
+
+/**
+ * Initializes the Plan List Control on the map.
+ */
+function initPlanListControl() {
+    planListControl = L.control({ position: 'bottomleft' });
+    planListControl.onAdd = function () {
+        const div = L.DomUtil.create('div', 'plan-list-overlay');
+        div.id = 'mapPlanList';
+        div.style.backgroundColor = 'rgba(15, 23, 42, 0.85)';
+        div.style.padding = '8px';
+        div.style.borderRadius = '8px';
+        div.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+        div.style.color = 'white';
+        div.style.fontSize = '0.75rem';
+        div.style.maxHeight = '150px';
+        div.style.overflowY = 'auto';
+        div.style.pointerEvents = 'auto';
+        div.style.display = 'none';
+        div.style.marginBottom = '20px';
+        div.style.marginLeft = '10px';
+        div.style.backdropFilter = 'blur(4px)';
+        return div;
+    };
+    planListControl.addTo(map);
 }
 
 // Handle mobile viewport changes (keyboard open/close, rotation, etc.)
@@ -826,7 +885,7 @@ function updateMap(lat, lon) {
     if (!map) return;
 
     // Zentrierung: Geofence hat Priorität, sonst Punkt-Koordinaten
-    if (activeProject.geofence && geofenceLayer) {
+    if (activeProject.plans && activeProject.plans.length > 0 && geofenceLayer) {
         map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
     } else {
         map.setView([lat, lon], 12); // Festgelegter Zoom 12
@@ -838,7 +897,45 @@ function updateMap(lat, lon) {
         marker = L.marker([lat, lon]).addTo(map);
     }
 
+    updateUserLocationMarker();
     updatePisMarkers();
+}
+
+/**
+ * Updates the user's current GPS position marker on the map.
+ * Distinguished by a blue circle style.
+ */
+function updateUserLocationMarker() {
+    if (!map || !currentCoords.lat) return;
+
+    const latlng = [currentCoords.lat, currentCoords.lon];
+
+    if (userMarker) {
+        userMarker.setLatLng(latlng);
+        userCircle.setLatLng(latlng);
+    } else {
+        // User marker (blue dot)
+        userMarker = L.circleMarker(latlng, {
+            radius: 7,
+            fillColor: "#3b82f6",
+            color: "#ffffff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.9,
+            pane: 'markerPane'
+        }).addTo(map);
+
+        // Accuracy circle (faint blue)
+        userCircle = L.circle(latlng, {
+            radius: 20, // Static 20m or dynamic if available
+            fillColor: "#3b82f6",
+            fillOpacity: 0.1,
+            weight: 0,
+            pane: 'markerPane'
+        }).addTo(map);
+        
+        userMarker.bindPopup("Ihr aktueller Standort");
+    }
 }
 
 function updatePisMarkers() {
@@ -992,6 +1089,34 @@ function calculateCentroid(polygon) {
         lon += p[1];
     });
     return { lat: lat / polygon.length, lon: lon / polygon.length };
+}
+
+/**
+ * Calculates the area of a polygon in hectares (ha).
+ * Uses a planar approximation suitable for UAV flight areas.
+ * @param {Array} latlngs Array of [lat, lon] coordinates
+ * @returns {number} Area in hectares
+ */
+function calculatePolygonArea(latlngs) {
+    if (!latlngs || latlngs.length < 3) return 0;
+    
+    let area = 0;
+    const points = latlngs.map(p => {
+        const lat = p[0];
+        const lon = p[1];
+        return {
+            x: lon * Math.cos(lat * Math.PI / 180) * 111320,
+            y: lat * 111320
+        };
+    });
+    
+    for (let i = 0; i < points.length; i++) {
+        const p1 = points[i];
+        const p2 = points[(i + 1) % points.length];
+        area += (p1.x * p2.y) - (p2.x * p1.y);
+    }
+    
+    return Math.abs(area) / 2 / 10000;
 }
 
 function getPolygonBBox(polygon) {
@@ -1516,7 +1641,7 @@ document.getElementById('manualCoordsInput').addEventListener('change', function
         alert("Format: Lat, Lon (z.B. 48.35, 11.73)");
     } else {
         manualCoords = null;
-        activeSource = activeProject.geofence ? "polygon" : "geolocation";
+        activeSource = (activeProject.plans && activeProject.plans.length > 0) ? "polygon" : "geolocation";
         refreshAllData();
     }
 });
@@ -1657,7 +1782,7 @@ async function generateScreenshotCanvas(onProgress) {
         
         // FIX: Karte vor dem Screenshot explizit zentrieren
         if (map) {
-            if (activeProject.geofence && geofenceLayer) {
+            if (activeProject.plans && activeProject.plans.length > 0 && geofenceLayer) {
                 map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50], animate: false });
             } else if (activeCoords.lat !== 0) {
                 map.setView([activeCoords.lat, activeCoords.lon], 11, { animate: false });
@@ -2187,51 +2312,62 @@ function getCompassDirectionFromBearing(lat1, lon1, lat2, lon2) {
 }
 
 // --- Plan File Parsing ---
-document.getElementById('planFileInput').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
+document.getElementById('planFileInput').addEventListener('change', async function (e) {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
 
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        try {
-            const planData = JSON.parse(e.target.result);
+    for (const file of files) {
+        await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                try {
+                    const planData = JSON.parse(event.target.result);
+                    let filename = file.name.replace('.plan', '');
 
-            // Extract from standard QGroundControl .plan format
-            // Often Mission files don't have explicit project names in the root, 
-            // but might be named after the file. We'll use the file name as fallback.
-            let filename = file.name.replace('.plan', '');
-            activeProject.name = filename;
+                    // Check if a plan with the same name is already loaded
+                    if (activeProject.plans.some(p => p.name === filename)) {
+                        resolve();
+                        return;
+                    }
 
-            // Attempt to find a polygon or survey area name if it exists inside the mission items
-            activeProject.area = "";
-            // Extraction of Geofence Polygons from QGroundControl .plan
-            if (planData.geoFence && planData.geoFence.polygons) {
-                if (geofenceLayer) map.removeLayer(geofenceLayer);
+                    // Extraction of Geofence Polygons from QGroundControl .plan
+                    if (planData.geoFence && planData.geoFence.polygons) {
+                        const polygons = planData.geoFence.polygons.filter(p => p.inclusion === true);
+                        if (polygons.length > 0) {
+                            const polyCoords = polygons[0].polygon; // Assuming first inclusion polygon
+                            const areaHa = calculatePolygonArea(polyCoords);
 
-                const polygons = planData.geoFence.polygons.filter(p => p.inclusion === true);
-                if (polygons.length > 0) {
-                    const polyCoords = polygons[0].polygon; // Assuming first inclusion polygon
-                    geofenceLayer = L.polygon(polyCoords, {
-                        color: '#38bdf8',
-                        weight: 3,
-                        fillOpacity: 0.2,
-                        dashArray: '5, 10'
-                    }).addTo(map);
-
-                    // Re-center map to the geofence
-                    map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
-                    activeProject.geofence = polyCoords;
+                            activeProject.plans.push({
+                                name: filename,
+                                geofence: polyCoords,
+                                areaHa: areaHa
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error parsing .plan file:", error);
                 }
-            }
+                resolve();
+            };
+            reader.readAsText(file);
+        });
+    }
 
-            updateProjectBanner();
-            refreshAllData();
-        } catch (error) {
-            console.error("Error parsing .plan file:", error);
-            alert("Fehler beim Einlesen der .plan Datei. Ist es ein gültiges QGroundControl JSON Format?");
+    if (activeProject.plans.length > 0) {
+        // Update project name for logging
+        if (activeProject.plans.length === 1) {
+            activeProject.name = activeProject.plans[0].name;
+        } else {
+            activeProject.name = `${activeProject.plans.length} Teilflächen Projekt`;
         }
-    };
-    reader.readAsText(file);
+        
+        updatePolygonsOnMap();
+        map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
+        updateProjectBanner();
+        refreshAllData();
+    }
+    // Reset to allow re-importing same files if needed
+    e.target.value = "";
 });
 
 document.getElementById('clearProjectBtn').addEventListener('click', clearActiveProject);
@@ -2239,15 +2375,99 @@ document.getElementById('clearProjectBtn').addEventListener('click', clearActive
 function clearActiveProject() {
     activeProject.name = "Kein Projekt geladen";
     activeProject.area = "";
-    activeProject.geofence = null;
-    if (geofenceLayer) {
-        map.removeLayer(geofenceLayer);
-        geofenceLayer = null;
-    }
+    activeProject.plans = [];
+    
+    updatePolygonsOnMap();
     document.getElementById('planFileInput').value = "";
     updateProjectBanner();
     refreshAllData();
 }
+
+/**
+ * Updates the polygons on the map and binds popups with area information.
+ */
+function updatePolygonsOnMap() {
+    if (!geofenceLayer) return;
+    geofenceLayer.clearLayers();
+    
+    const totalArea = activeProject.plans.reduce((sum, p) => sum + p.areaHa, 0);
+    const planListDiv = document.getElementById('mapPlanList');
+    
+    if (planListDiv) {
+        if (activeProject.plans.length > 0) {
+            planListDiv.style.display = 'block';
+            let html = '<div style="font-weight: 600; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px;">Flächen</div>';
+            activeProject.plans.forEach((p, idx) => {
+                html += `<div onclick="jumpToPlan('${p.name.replace(/'/g, "\\'")}')" style="cursor: pointer; padding: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.name} (${p.areaHa.toFixed(2)} ha)">
+                            <span style="color: #38bdf8;">•</span> ${p.name}
+                         </div>`;
+            });
+            planListDiv.innerHTML = html;
+        } else {
+            planListDiv.style.display = 'none';
+        }
+    }
+    
+    activeProject.plans.forEach((p, idx) => {
+        const poly = L.polygon(p.geofence, {
+            color: '#38bdf8', // Unified Sky Blue
+            weight: 3,
+            fillOpacity: 0.2,
+            dashArray: '5, 10' // Unified dashed style for all
+        }).addTo(geofenceLayer);
+
+        const popupContent = `
+            <div style="font-family: inherit; min-width: 150px;">
+                <strong style="display: block; margin-bottom: 0.25rem;">${p.name}</strong>
+                <span style="font-size: 0.9rem; opacity: 0.8;">Teilfläche: ${p.areaHa.toFixed(2)} ha</span><br>
+                ${activeProject.plans.length > 1 ? `<span style="font-size: 0.8rem; opacity: 0.6;">Gesamt: ${totalArea.toFixed(2)} ha</span><br>` : ''}
+                <button onclick="removePlan('${p.name.replace(/'/g, "\\'")}')" class="btn btn-secondary btn-small" style="width: 100%; margin-top: 0.5rem; padding: 0.2rem; font-size: 0.75rem;">🗑️ Entfernen</button>
+            </div>
+        `;
+        poly.bindPopup(popupContent);
+    });
+}
+
+/**
+ * Puts the focus on a specific plan on the map.
+ */
+window.jumpToPlan = function(name) {
+    const plan = activeProject.plans.find(p => p.name === name);
+    if (plan && geofenceLayer) {
+        const bounds = L.polygon(plan.geofence).getBounds();
+        map.fitBounds(bounds, { padding: [100, 100], maxZoom: 16 });
+        
+        // Find and open popup for this plan
+        geofenceLayer.eachLayer(layer => {
+            if (layer instanceof L.Polygon) {
+                const layerBounds = layer.getBounds();
+                if (layerBounds.equals(bounds)) {
+                    layer.openPopup();
+                }
+            }
+        });
+    }
+};
+
+/**
+ * Removes a specific plan from the project.
+ * @param {string} name Name of the plan to remove
+ */
+window.removePlan = function(name) {
+    activeProject.plans = activeProject.plans.filter(p => p.name !== name);
+    
+    if (activeProject.plans.length === 1) {
+        activeProject.name = activeProject.plans[0].name;
+    } else if (activeProject.plans.length > 1) {
+        activeProject.name = `${activeProject.plans.length} Teilflächen Projekt`;
+    } else {
+        activeProject.name = "Kein Projekt geladen";
+    }
+
+    updatePolygonsOnMap();
+    updateProjectBanner();
+    refreshAllData();
+};
 
 function updateProjectBanner() {
     const display = document.getElementById('projectNameDisplay');
@@ -2255,20 +2475,47 @@ function updateProjectBanner() {
     const polyBtn = document.getElementById('polyCenterBtn');
 
     if (display) {
-        display.innerText = activeProject.name;
+        if (activeProject.plans && activeProject.plans.length > 0) {
+            const totalArea = activeProject.plans.reduce((sum, p) => sum + p.areaHa, 0);
+            
+            let html = `<span style="margin-right: 0.25rem; font-weight: 700; color: var(--accent-color);">${activeProject.plans.length} Teile:</span>`;
+            
+            activeProject.plans.forEach(p => {
+                html += `
+                    <div class="plan-tag" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); border-radius: 0.5rem; font-size: 0.85rem; color: var(--text-primary); transition: all 0.2s ease;">
+                        <span onclick="jumpToPlan('${p.name.replace(/'/g, "\\'")}')" style="cursor: pointer;" title="Zu dieser Fläche springen: ${p.areaHa.toFixed(2)} ha">${p.name}</span>
+                        <button onclick="removePlan('${p.name.replace(/'/g, "\\'")}')" style="background: none; border: none; color: var(--danger-color); cursor: pointer; padding: 0; font-size: 1.1rem; line-height: 1; display: flex; align-items: center; justify-content: center; opacity: 0.7;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">×</button>
+                    </div>
+                `;
+            });
+
+            // Add "Clear All" button as a tag
+            html += `
+                <button onclick="clearActiveProject()" class="plan-tag" style="display: flex; align-items: center; justify-content: center; padding: 0.3rem 0.75rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 0.5rem; font-size: 0.85rem; color: var(--danger-color); cursor: pointer; transition: all 0.2s ease; font-weight: bold;" title="Alle Projekte löschen">
+                    Alle löschen ✖
+                </button>
+            `;
+            
+            display.innerHTML = `<div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; width: 100%;">${html}</div>`;
+            display.title = `Gesamtfläche: ${totalArea.toFixed(2)} ha`;
+        } else {
+            display.innerText = "Kein Projekt geladen";
+            display.title = "";
+        }
     }
 
+    // Hide original clearBtn as it's now integrated into the display
     if (clearBtn) {
-        clearBtn.style.display = (activeProject.name !== "Kein Projekt geladen") ? "block" : "none";
+        clearBtn.style.display = "none";
     }
 
     if (polyBtn) {
-        polyBtn.style.display = activeProject.geofence ? "block" : "none";
+        polyBtn.style.display = (activeProject.plans && activeProject.plans.length > 0) ? "block" : "none";
     }
 }
 
 // --- Sync & Drive Export Logic ---
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwegyc60NYs30kiLw2FGKzeZcqn-2LbdNZ8Y0ja_lC34lnqMaWBSRDgI9FaUjpSads/exec"; // Hier kommt die URL des Google Apps Scripts hin
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXwdjzkx3jGk2KItRjCB_EoxSnSYUPxPWeXgbW9FLbQ5HbIXHohtzd6e4Nq34_IbyW/exec"; // Hier kommt die URL des Google Apps Scripts hin
 const AUTH_STORE_KEY = 'uav_sync_auth';
 
 function getStoredPassword() {
@@ -2346,6 +2593,15 @@ async function saveLogbook() {
         return;
     }
 
+    const operationValue = document.getElementById('lb_operation').value;
+    if (operationValue === "Dual Operator VLOS") {
+        if (rpic2Value === "" || rpic2Value === "N/A") {
+            alert("Für die Betriebsform 'Dual Operator VLOS' muss ein RPIC 2 angegeben werden (nicht leer oder N/A).");
+            document.getElementById('lb_rpic2').focus();
+            return;
+        }
+    }
+
     updateStatusProgress("Portfolio wird erstellt...", 5);
     const saveBtn = document.querySelector('button[onclick="saveLogbook()"]');
     const originalBtnText = saveBtn.innerHTML;
@@ -2364,7 +2620,7 @@ async function saveLogbook() {
 
         const formData = {
             project: activeProject.name,
-            geofence: activeProject.geofence, // Save polygon coordinates
+            plans: activeProject.plans, // Save all plans
             rpic1: document.getElementById('lb_rpic1').value,
             rpic2: document.getElementById('lb_rpic2').value,
             copter: document.getElementById('lb_copter').value,
@@ -2377,12 +2633,12 @@ async function saveLogbook() {
             flights: document.getElementById('lb_flights').value,
             teardownTime: document.getElementById('lb_teardown_time').value,
             totalTime: document.getElementById('lb_total_time').value,
-            events: document.getElementById('lb_events').value,
+            events: document.getElementById('lb_events').value.trim() || "keine",
             operation: document.getElementById('lb_operation').value,
             areaType: document.getElementById('lb_area_type').value,
-            reactions: document.getElementById('lb_reactions').value,
+            reactions: document.getElementById('lb_reactions').value.trim() || "keine",
             weather: document.getElementById('lb_weather').value,
-            misc: document.getElementById('lb_misc').value,
+            misc: document.getElementById('lb_misc').value.trim() || "keine",
             signature1: document.getElementById('signaturePad1').toDataURL(),
             signature2: document.getElementById('signaturePad2').toDataURL(),
             screenshot: screenshotDataUrl, // Der Portfolio-Screenshot
@@ -2550,37 +2806,26 @@ async function loadHistoricalData(index) {
             document.getElementById('lb_weather').value = log.weather || '';
             document.getElementById('lb_misc').value = log.misc || '';
 
-            // Restore geofence if available in the log
-            if (log.geofence) {
-                if (geofenceLayer) map.removeLayer(geofenceLayer);
-                
-                geofenceLayer = L.polygon(log.geofence, {
-                    color: '#38bdf8',
-                    weight: 3,
-                    fillOpacity: 0.2,
-                    dashArray: '5, 10'
-                }).addTo(map);
+            // Restore plans if available in the log
+            if (log.plans || log.geofence) {
+                if (geofenceLayer) geofenceLayer.clearLayers();
+                activeProject.plans = [];
 
-                activeProject.geofence = log.geofence;
+                const loadedPlans = log.plans || [{
+                    name: log.project || "Historisches Projekt",
+                    geofence: log.geofence,
+                    areaHa: calculatePolygonArea(log.geofence)
+                }];
+
+                activeProject.plans = loadedPlans;
+                updatePolygonsOnMap();
+
                 activeProject.name = log.project || "Historischer Eintrag";
                 activeSource = "polygon";
-                
-                // Show centering button
-                const polyBtn = document.getElementById('polyCenterBtn');
-                if (polyBtn) polyBtn.style.display = 'block';
-                
+                updateProjectBanner();
                 map.fitBounds(geofenceLayer.getBounds(), { padding: [50, 50] });
             } else {
-                // Bestehenden Geofence/Projekt löschen, wenn keiner im Log ist
-                if (geofenceLayer) {
-                    map.removeLayer(geofenceLayer);
-                    geofenceLayer = null;
-                }
-                activeProject.geofence = null;
-                activeProject.name = "Historischer Eintrag";
-                
-                const polyBtn = document.getElementById('polyCenterBtn');
-                if (polyBtn) polyBtn.style.display = 'none';
+                clearActiveProject();
             }
 
             // Update map if coordinates are available
